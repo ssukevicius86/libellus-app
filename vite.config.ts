@@ -18,16 +18,37 @@ export default defineConfig({
       manifest: {
         name: 'Libellus',
         short_name: 'Libellus',
-        description: 'Libellus app',
+        description: 'Santuario digital de lectura: tu biblioteca, microambientes sonoros, Focus Timer y registro del ánimo.',
         lang: 'es',
-        theme_color: '#ffffff',
-        background_color: '#ffffff',
+        theme_color: '#13122a',
+        background_color: '#13122a',
         display: 'standalone',
         start_url: '/',
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico,webmanifest}'],
         navigateFallback: '/index.html',
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com\/.*/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts',
+              expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 * 365 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
+            // Portadas de Google Books (para ver la biblioteca offline)
+            urlPattern: /^https:\/\/books\.google(usercontent)?\.com\/.*/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'book-covers',
+              expiration: { maxEntries: 300, maxAgeSeconds: 60 * 60 * 24 * 90 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
       },
       devOptions: {
         enabled: false,

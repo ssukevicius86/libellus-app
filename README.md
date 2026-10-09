@@ -1,5 +1,8 @@
 # Libellus
 
+Santuario digital de lectura: registro de libros y lecturas con una experiencia sensorial
+(microambientes sonoros, Focus Timer con atenuación de brillo y registro del ánimo).
+
 PWA con React 19 + TypeScript + Vite 6, Tailwind v4 + shadcn/ui y Firebase (Auth, Firestore, Hosting).
 
 ## Puesta en marcha
@@ -32,13 +35,31 @@ npm run dev
 
 Sin `.env.local` la app arranca con valores `demo-` y el login con Google no funciona.
 
+## Páginas
+
+| Ruta | Página |
+| --- | --- |
+| `/login` | Acceso con Google |
+| `/` | Santuario: libros en curso, racha, minutos de la semana y ánimo de hoy |
+| `/biblioteca` | Estantes Leyendo / Quiero leer / Leídos con buscador |
+| `/biblioteca/agregar` | Búsqueda en Google Books o carga manual |
+| `/libro/:id` | Progreso, valoración, notas, sesiones y borrado |
+| `/sesion` | Focus Timer, microambientes, atenuación, ánimo antes/después |
+| `/animo` | Check-in diario y gráficos de ánimo y minutos (30 días) |
+| `/ajustes` | Tema noche/día, timer y atenuación por defecto, volumen, salir |
+
+Los sonidos (lluvia, piano, bosque) se generan con la Web Audio API en `src/lib/ambience/`:
+no hay archivos de audio y funcionan offline.
+
 ## Estructura
 
 ```
 src/
   components/ui/   componentes shadcn
-  context/         estado global (Context API + listeners de Firebase)
-  lib/             firebase.ts, utils.ts
-  pages/           rutas (React Router)
-firestore.rules    reglas de seguridad por roles (users/{uid}.role)
+  components/      layout, libros, ambientes, ánimo, gráficos y piezas art déco
+  context/         Auth, Preferences (tema/timer, localStorage) y Ambience (motor de audio)
+  hooks/           listeners de Firestore (useFirestore, useLibrary) y Wake Lock
+  lib/             firebase, books, sessions, moods, googleBooks, stats, ambience/
+  pages/           rutas (React Router, secundarias con lazy())
+firestore.rules    users/{uid} por roles + subcolecciones books, sessions y moods solo del dueño
 ```

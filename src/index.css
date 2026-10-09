@@ -43,82 +43,151 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+    --color-gold: var(--gold);
+    --color-gold-foreground: var(--gold-foreground);
+    --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
 }
 
 :root {
-    --radius: 0.625rem;
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --radius: 0.75rem;
+    --background: #f6f2ea;
+    --foreground: #26234a;
+    --card: #fffcf6;
+    --card-foreground: #26234a;
+    --popover: #fffcf6;
+    --popover-foreground: #26234a;
+    --primary: #5f4f9f;
+    --primary-foreground: #fdfbff;
+    --secondary: #ebe5f5;
+    --secondary-foreground: #3a3466;
+    --muted: #eee9f2;
+    --muted-foreground: #6c6886;
+    --accent: #e6def5;
+    --accent-foreground: #3a3466;
+    --destructive: #c2410c;
+    --border: #e2d7c2;
+    --input: #ddd2bd;
+    --ring: #a8823f;
+    --gold: #9c7535;
+    --gold-foreground: #fffcf6;
+    --chart-1: #6c55c4;
+    --chart-2: #b07a1e;
+    --chart-3: #9b8fd0;
+    --chart-4: #c9a66b;
+    --chart-5: #463c7f;
+    --sidebar: #f1ece2;
+    --sidebar-foreground: #26234a;
+    --sidebar-primary: #5f4f9f;
+    --sidebar-primary-foreground: #fdfbff;
+    --sidebar-accent: #e6def5;
+    --sidebar-accent-foreground: #3a3466;
+    --sidebar-border: #e2d7c2;
+    --sidebar-ring: #a8823f;
+    --deco-glow: rgb(95 79 159 / 0.08);
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    --background: #13122a;
+    --foreground: #ece8f7;
+    --card: #1c1a3a;
+    --card-foreground: #ece8f7;
+    --popover: #1c1a3a;
+    --popover-foreground: #ece8f7;
+    --primary: #b9a7e8;
+    --primary-foreground: #17153a;
+    --secondary: #26234a;
+    --secondary-foreground: #ece8f7;
+    --muted: #221f43;
+    --muted-foreground: #a7a2c6;
+    --accent: #2b2852;
+    --accent-foreground: #ece8f7;
+    --destructive: #f0846b;
+    --border: rgb(212 179 122 / 0.2);
+    --input: rgb(212 179 122 / 0.24);
+    --ring: #d4b37a;
+    --gold: #d4b37a;
+    --gold-foreground: #17153a;
+    --chart-1: #8f74e0;
+    --chart-2: #bf8424;
+    --chart-3: #8a78cf;
+    --chart-4: #e8d3a6;
+    --chart-5: #6a5ab0;
+    --sidebar: #17162f;
+    --sidebar-foreground: #ece8f7;
+    --sidebar-primary: #b9a7e8;
+    --sidebar-primary-foreground: #17153a;
+    --sidebar-accent: #2b2852;
+    --sidebar-accent-foreground: #ece8f7;
+    --sidebar-border: rgb(212 179 122 / 0.2);
+    --sidebar-ring: #d4b37a;
+    --deco-glow: rgb(185 167 232 / 0.1);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
   body {
-    @apply bg-background text-foreground;
-    }
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, var(--deco-glow), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 100%, var(--deco-glow), transparent);
+    background-attachment: fixed;
+    min-height: 100svh;
+  }
+}
+
+@layer components {
+  /* Título art déco: mayúsculas espaciadas, ligero + negrita */
+  .deco-title {
+    @apply font-sans uppercase tracking-[0.12em] text-primary;
+  }
+  .deco-eyebrow {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+  }
+  /* Tarjeta con filete dorado interior */
+  .deco-card {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) * 1.4);
+    background-color: color-mix(in oklab, var(--card) 80%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .deco-card::after {
+    content: "";
+    position: absolute;
+    inset: 0.375rem;
+    border: 1px solid color-mix(in oklab, var(--gold) 15%, transparent);
+    border-radius: var(--radius);
+    pointer-events: none;
+  }
+  /* Línea dorada con rombo central */
+  .deco-divider {
+    @apply flex items-center gap-3 text-gold;
+  }
+  .deco-divider::before,
+  .deco-divider::after {
+    content: "";
+    @apply h-px flex-1 bg-gradient-to-r from-transparent via-gold/60 to-transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

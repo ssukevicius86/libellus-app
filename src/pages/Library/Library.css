@@ -1,8 +1,8 @@
 /* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
 
 .library-div-1 {
-  margin-bottom: 1.5rem;
-  gap: 0.75rem;
+  margin-bottom: var(--espacio-6);
+  gap: var(--espacio-3);
   flex-direction: column;
   display: flex;
 }
@@ -26,19 +26,19 @@
 }
 
 .library-tabstrigger-3 {
-  font-size: .75rem;
-  line-height: 1.3333;
+  font-size: var(--texto-xs);
+  line-height: var(--texto-xs-interlineado);
 }
 
 @media (min-width: 40rem) {
   .library-tabstrigger-3 {
-    font-size: .875rem;
-    line-height: 1.4286;
+    font-size: var(--texto-sm);
+    line-height: var(--texto-sm-interlineado);
   }
 }
 
 .library-span-4 {
-  margin-left: .25rem;
+  margin-left: var(--espacio-1);
   color: var(--muted-foreground);
   font-variant-numeric: tabular-nums;
 }
@@ -56,9 +56,9 @@
 .library-search-6 {
   pointer-events: none;
   top: 50%;
-  left: 0.75rem;
-  width: 1rem;
-  height: 1rem;
+  left: var(--espacio-3);
+  width: var(--icono-sm);
+  height: var(--icono-sm);
   translate: 0 -50%;
   color: var(--muted-foreground);
   position: absolute;
@@ -73,8 +73,8 @@
 }
 
 .library-div-9 {
-  column-gap: 1rem;
-  row-gap: 1.5rem;
+  column-gap: var(--espacio-4);
+  row-gap: var(--espacio-6);
   grid-template-columns: repeat(2, minmax(0, 1fr));
   display: grid;
 }
@@ -93,17 +93,9 @@
 
 .library-div-10 {
   align-items: center;
-  gap: 0.75rem;
-  padding: 2.5rem;
+  gap: var(--espacio-3);
+  padding: var(--espacio-10);
   text-align: center;
   flex-direction: column;
   display: flex;
-}
-
-.library-p-11 {
-  font-family: Cormorant Garamond, ui-serif, Georgia, serif;
-  font-size: 1.125rem;
-  line-height: 1.5556;
-  color: var(--muted-foreground);
-  font-style: italic;
 }

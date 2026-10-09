@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+/* Variables (paleta, tipografía, espaciado…) y clases compartidas entre páginas */
+@import "./styles/variables.css";
+@import "./styles/compartidos.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -45,83 +48,8 @@
     --color-sidebar-ring: var(--sidebar-ring);
     --color-gold: var(--gold);
     --color-gold-foreground: var(--gold-foreground);
-    --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
-    --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
-}
-
-:root {
-    --radius: 0.75rem;
-    --background: #f6f2ea;
-    --foreground: #26234a;
-    --card: #fffcf6;
-    --card-foreground: #26234a;
-    --popover: #fffcf6;
-    --popover-foreground: #26234a;
-    --primary: #5f4f9f;
-    --primary-foreground: #fdfbff;
-    --secondary: #ebe5f5;
-    --secondary-foreground: #3a3466;
-    --muted: #eee9f2;
-    --muted-foreground: #6c6886;
-    --accent: #e6def5;
-    --accent-foreground: #3a3466;
-    --destructive: #c2410c;
-    --border: #e2d7c2;
-    --input: #ddd2bd;
-    --ring: #a8823f;
-    --gold: #9c7535;
-    --gold-foreground: #fffcf6;
-    --chart-1: #6c55c4;
-    --chart-2: #b07a1e;
-    --chart-3: #9b8fd0;
-    --chart-4: #c9a66b;
-    --chart-5: #463c7f;
-    --sidebar: #f1ece2;
-    --sidebar-foreground: #26234a;
-    --sidebar-primary: #5f4f9f;
-    --sidebar-primary-foreground: #fdfbff;
-    --sidebar-accent: #e6def5;
-    --sidebar-accent-foreground: #3a3466;
-    --sidebar-border: #e2d7c2;
-    --sidebar-ring: #a8823f;
-    --deco-glow: rgb(95 79 159 / 0.08);
-}
-
-.dark {
-    --background: #13122a;
-    --foreground: #ece8f7;
-    --card: #1c1a3a;
-    --card-foreground: #ece8f7;
-    --popover: #1c1a3a;
-    --popover-foreground: #ece8f7;
-    --primary: #b9a7e8;
-    --primary-foreground: #17153a;
-    --secondary: #26234a;
-    --secondary-foreground: #ece8f7;
-    --muted: #221f43;
-    --muted-foreground: #a7a2c6;
-    --accent: #2b2852;
-    --accent-foreground: #ece8f7;
-    --destructive: #f0846b;
-    --border: rgb(212 179 122 / 0.2);
-    --input: rgb(212 179 122 / 0.24);
-    --ring: #d4b37a;
-    --gold: #d4b37a;
-    --gold-foreground: #17153a;
-    --chart-1: #8f74e0;
-    --chart-2: #bf8424;
-    --chart-3: #8a78cf;
-    --chart-4: #e8d3a6;
-    --chart-5: #6a5ab0;
-    --sidebar: #17162f;
-    --sidebar-foreground: #ece8f7;
-    --sidebar-primary: #b9a7e8;
-    --sidebar-primary-foreground: #17153a;
-    --sidebar-accent: #2b2852;
-    --sidebar-accent-foreground: #ece8f7;
-    --sidebar-border: rgb(212 179 122 / 0.2);
-    --sidebar-ring: #d4b37a;
-    --deco-glow: rgb(185 167 232 / 0.1);
+    --font-sans: var(--fuente-sans);
+    --font-serif: var(--fuente-serif);
 }
 
 @layer base {
@@ -150,9 +78,9 @@
     @apply font-sans uppercase tracking-[0.12em] text-primary;
   }
   .deco-eyebrow {
-    font-size: 0.75rem;
-    line-height: 1rem;
-    font-weight: 600;
+    font-size: var(--texto-xs);
+    line-height: var(--texto-xs-interlineado);
+    font-weight: var(--peso-seminegrita);
     text-transform: uppercase;
     letter-spacing: 0.2em;
     color: var(--gold);
@@ -161,8 +89,8 @@
   .deco-card {
     position: relative;
     border: 1px solid var(--border);
-    border-radius: calc(var(--radius) * 1.4);
-    background-color: color-mix(in oklab, var(--card) 80%, transparent);
+    border-radius: var(--radio-xl);
+    background-color: var(--tarjeta-velada);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
   }
@@ -170,8 +98,8 @@
     content: "";
     position: absolute;
     inset: 0.375rem;
-    border: 1px solid color-mix(in oklab, var(--gold) 15%, transparent);
-    border-radius: var(--radius);
+    border: 1px solid var(--dorado-filete);
+    border-radius: var(--radio-lg);
     pointer-events: none;
   }
   /* Línea dorada con rombo central */

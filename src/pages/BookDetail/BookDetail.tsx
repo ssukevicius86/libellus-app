@@ -19,7 +19,7 @@ import { cn } from '@/lib/utils'
 import { BookCover, Stars, StatusBadge } from '@/components/books'
 import { DecoDivider } from '@/components/deco'
 import { MoodIcon } from '@/components/mood'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button/button'
 import {
   Dialog,
   DialogClose,
@@ -29,11 +29,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Progress } from '@/components/ui/progress'
-import { Textarea } from '@/components/ui/textarea'
+} from '@/components/ui/dialog/dialog'
+import { Input } from '@/components/ui/input/input'
+import { Label } from '@/components/ui/label/label'
+import { Progress } from '@/components/ui/progress/progress'
+import { Textarea } from '@/components/ui/textarea/textarea'
 import './BookDetail.css'
 
 const STATUSES: BookStatus[] = ['want', 'reading', 'read']
@@ -57,7 +57,7 @@ export default function BookDetail() {
   if (!book) {
     return (
       <div className="book-detail-div-2">
-        <p className="book-detail-p-3">Este libro ya no está en tu biblioteca.</p>
+        <p className="texto-vacio">Este libro ya no está en tu biblioteca.</p>
         <Button asChild variant="outline">
           <Link to="/biblioteca">Volver a la biblioteca</Link>
         </Button>
@@ -102,9 +102,9 @@ function BookView({ book }: { book: Book }) {
                 onClick={() => void changeStatus(s)}
                 aria-pressed={book.status === s}
                 className={cn(
-                  'book-detail-button-12',
+                  'chip',
                   book.status === s
-                    ? 'book-detail-button-13'
+                    ? 'chip--activo'
                     : 'book-detail-button-14',
                 )}
               >
@@ -114,7 +114,7 @@ function BookView({ book }: { book: Book }) {
           </div>
 
           <div className="book-detail-div-15">
-            <p className="book-detail-p-16">Tu valoración</p>
+            <p className="texto-nota">Tu valoración</p>
             <Stars value={book.rating} onChange={(rating) => void updateBook(uid, book.id, { rating })} />
           </div>
 
@@ -133,7 +133,7 @@ function BookView({ book }: { book: Book }) {
         </div>
         <Progress value={progress * 100} />
         <ProgressEditor key={`${book.currentPage}-${book.pageCount}`} book={book} onFinished={celebrate} />
-        <p className="book-detail-p-16">
+        <p className="texto-nota">
           {book.startedAt && `Empezado el ${dateFmt.format(book.startedAt.toDate())}`}
           {book.finishedAt && ` · Terminado el ${dateFmt.format(book.finishedAt.toDate())}`}
         </p>
@@ -193,7 +193,7 @@ function ProgressEditor({ book, onFinished }: { book: Book; onFinished: () => vo
         <Input id="total" type="number" min={1} inputMode="numeric" value={total} onChange={(e) => setTotal(e.target.value)} placeholder="total" className="book-detail-input-23" />
       </div>
       <Button type="submit" variant="outline" disabled={!dirty || saving}>
-        {saving && <Loader2 className="book-detail-loader2-24" />} Actualizar
+        {saving && <Loader2 className="girar" />} Actualizar
       </Button>
     </form>
   )
@@ -228,7 +228,7 @@ function NotesEditor({ book }: { book: Book }) {
         aria-label="Notas y citas"
       />
       <Button variant="outline" size="sm" onClick={() => void save()} disabled={notes === saved || saving}>
-        {saving && <Loader2 className="book-detail-loader2-24" />}
+        {saving && <Loader2 className="girar" />}
         {notes === saved ? 'Guardado' : 'Guardar notas'}
       </Button>
     </section>
@@ -244,9 +244,9 @@ function SessionsList({ bookId }: { bookId: string }) {
     <section className="book-detail-section-25">
       <div className="book-detail-div-27">
         <h2 className="deco-eyebrow">Sesiones de lectura</h2>
-        <span className="book-detail-p-16">{formatMinutes(total)} en total</span>
+        <span className="texto-nota">{formatMinutes(total)} en total</span>
       </div>
-      <ul className="book-detail-ul-28">
+      <ul className="lista-tarjeta">
         {sessions.map((s) => (
           <li key={s.id} className="book-detail-li-29">
             <span>{dateFmt.format(s.startedAt.toDate())}</span>
@@ -255,7 +255,7 @@ function SessionsList({ bookId }: { bookId: string }) {
               <span className="book-detail-span-31">{formatMinutes(s.durationMin)}</span>
               {s.moodAfter && (
                 <span className="book-detail-span-32" title={MOOD_LABELS[s.moodAfter as MoodValue]}>
-                  <MoodIcon mood={s.moodAfter as MoodValue} className="book-detail-moodicon-33" />
+                  <MoodIcon mood={s.moodAfter as MoodValue} className="icono-dorado" />
                   <span className="book-detail-span-34">{MOOD_LABELS[s.moodAfter as MoodValue]}</span>
                 </span>
               )}
@@ -302,7 +302,7 @@ function DeleteBook({ book }: { book: Book }) {
             <Button variant="outline">Cancelar</Button>
           </DialogClose>
           <Button variant="destructive" onClick={() => void handleDelete()} disabled={deleting}>
-            {deleting && <Loader2 className="book-detail-loader2-24" />} Quitar
+            {deleting && <Loader2 className="girar" />} Quitar
           </Button>
         </DialogFooter>
       </DialogContent>

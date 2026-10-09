@@ -1,8 +1,8 @@
 /* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
 
 .settings-div-1 {
-  gap: 0.75rem;
-  padding-block: 1.25rem;
+  gap: var(--espacio-3);
+  padding-block: var(--espacio-5);
   flex-direction: column;
   display: flex;
 }
@@ -16,15 +16,9 @@
 }
 
 .settings-p-2 {
-  font-size: .875rem;
-  line-height: 1.4286;
-  font-weight: 500;
-}
-
-.settings-p-3 {
-  font-size: .75rem;
-  line-height: 1.3333;
-  color: var(--muted-foreground);
+  font-size: var(--texto-sm);
+  line-height: var(--texto-sm-interlineado);
+  font-weight: var(--peso-medio);
 }
 
 @media (min-width: 40rem) {
@@ -34,7 +28,7 @@
 }
 
 .settings-div-5 {
-  max-width: 42rem;
+  max-width: var(--contenedor-2xl);
 }
 
 :where(.settings-section-6 > :not(:last-child)) {
@@ -45,17 +39,17 @@
 }
 
 .settings-section-6 {
-  padding-inline: 1.25rem;
+  padding-inline: var(--espacio-5);
 }
 
 @media (min-width: 40rem) {
   .settings-section-6 {
-    padding-inline: 1.5rem;
+    padding-inline: var(--espacio-6);
   }
 }
 
 .settings-div-7 {
-  gap: 0.5rem;
+  gap: var(--espacio-2);
   grid-template-columns: repeat(2, minmax(0, 1fr));
   display: grid;
 }
@@ -63,23 +57,17 @@
 .settings-button-8 {
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  border-radius: calc(var(--radius) * .8);
+  gap: var(--espacio-2);
+  border-radius: var(--radio-md);
   border-style: solid;
-  padding-block: 0.5rem;
-  font-size: .875rem;
-  line-height: 1.4286;
-  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
-  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-  transition-duration: .15s;
+  padding-block: var(--espacio-2);
+  font-size: var(--texto-sm);
+  line-height: var(--texto-sm-interlineado);
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke;
+  transition-timing-function: var(--transicion-curva);
+  transition-duration: var(--transicion-duracion);
   border-width: 1px;
   display: flex;
-}
-
-.settings-button-9 {
-  border-color: var(--gold);
-  background-color: color-mix(in oklab, var(--gold) 10%, transparent);
-  color: var(--gold);
 }
 
 .settings-button-10 {
@@ -93,28 +81,28 @@
 }
 
 .settings-icon-11 {
-  width: 1rem;
-  height: 1rem;
+  width: var(--icono-sm);
+  height: var(--icono-sm);
 }
 
 .settings-div-12 {
   align-items: center;
-  gap: 0.75rem;
+  gap: var(--espacio-3);
   display: flex;
 }
 
 .settings-section-13 {
-  margin-top: 1.5rem;
+  margin-top: var(--espacio-6);
   align-items: center;
-  gap: 1rem;
-  padding: 1.25rem;
+  gap: var(--espacio-4);
+  padding: var(--espacio-5);
   flex-wrap: wrap;
   display: flex;
 }
 
 @media (min-width: 40rem) {
   .settings-section-13 {
-    padding: 1.5rem;
+    padding: var(--espacio-6);
   }
 }
 
@@ -124,7 +112,7 @@
   border-style: solid;
   border-width: 1px;
   border-color: color-mix(in oklab, var(--gold) 40%, transparent);
-  border-radius: 9999px;
+  border-radius: var(--radio-pildora);
 }
 
 .settings-div-15 {
@@ -135,15 +123,15 @@
 .settings-p-16 {
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: var(--peso-medio);
   overflow: hidden;
 }
 
 .settings-p-17 {
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: .875rem;
-  line-height: 1.4286;
+  font-size: var(--texto-sm);
+  line-height: var(--texto-sm-interlineado);
   color: var(--muted-foreground);
   overflow: hidden;
 }

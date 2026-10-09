@@ -6,8 +6,8 @@ import { dailySeries, formatMinutes } from '@/lib/stats'
 import { MinutesBarChart, MoodLineChart } from '@/components/charts'
 import { PageHeader } from '@/components/deco'
 import { MoodIcon, MoodPicker } from '@/components/mood'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import { Button } from '@/components/ui/button/button'
+import { Textarea } from '@/components/ui/textarea/textarea'
 import './Mood.css'
 
 const longDate = new Intl.DateTimeFormat('es', { weekday: 'long', day: 'numeric', month: 'long' })
@@ -67,7 +67,7 @@ export default function Mood() {
             </figure>
           </>
         ) : (
-          <p className="mood-p-6">
+          <p className="texto-secundario">
             Registrá tu ánimo y tus sesiones de lectura para ver cómo evolucionan juntos.
           </p>
         )}
@@ -108,7 +108,7 @@ function TodayCheckIn({ today }: { today: MoodEntry | undefined }) {
         aria-label="Nota del día"
       />
       <Button onClick={() => void save()} disabled={!mood || !dirty || saving}>
-        {saving && <Loader2 className="mood-loader2-8" />}
+        {saving && <Loader2 className="girar" />}
         {today && !dirty ? 'Registrado' : 'Guardar'}
       </Button>
     </section>
@@ -120,7 +120,7 @@ function History({ moods, minutesByDay }: { moods: MoodEntry[]; minutesByDay: Ma
   return (
     <section className="mood-section-9">
       <h2 className="deco-eyebrow">Historial</h2>
-      <ul className="mood-ul-10">
+      <ul className="lista-tarjeta">
         {moods.slice(0, 30).map((m) => (
           <li key={m.id} className="mood-li-11">
             <MoodIcon mood={m.mood} className="mood-moodicon-12" />

@@ -1,0 +1,26 @@
+/* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .ui-label {
+    align-items: center;
+    gap: var(--espacio-2);
+    font-size: var(--texto-sm);
+    line-height: 1;
+    font-weight: var(--peso-medio);
+    -webkit-user-select: none;
+    user-select: none;
+    display: flex;
+  }
+
+  .ui-label:is(:where(.group)[data-disabled="true"] *) {
+    pointer-events: none;
+    opacity: .5;
+  }
+
+  .ui-label:is(:where(.peer):disabled ~ *) {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+}

@@ -2,8 +2,8 @@ import { CloudRain, Headphones, Piano, Square, Trees, Volume2, type LucideIcon }
 import { useAmbience } from '@/context/ambience-context'
 import { AMBIENCES, type AmbienceId } from '@/lib/ambience'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Slider } from '@/components/ui/slider'
+import { Button } from '@/components/ui/button/button'
+import { Slider } from '@/components/ui/slider/slider'
 import {
   Sheet,
   SheetContent,
@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet'
+} from '@/components/ui/sheet/sheet'
 
 const ICONS: Record<AmbienceId, LucideIcon> = {
   rain: CloudRain,

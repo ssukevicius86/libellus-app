@@ -1,0 +1,191 @@
+/* ===============================================
+   VARIABLES GLOBALES DE LIBELLUS
+   ===============================================
+   Todas las variables de diseño en un solo lugar.
+
+   - La PALETA usa los nombres de shadcn/ui (--gold, --card, --muted-foreground…)
+     porque los componentes de src/components/ui/ dependen de ellos.
+   - El resto son variables propias, en español, para no chocar con las
+     variables internas de Tailwind (--text-sm, --spacing…).
+   - scripts/tw-to-css.mjs lee este archivo: al convertir una página usa
+     estas variables en lugar de valores sueltos.
+   =============================================== */
+
+/* =========================================
+   BREAKPOINTS
+   =========================================
+   Las variables NO funcionan dentro de @media(),
+   así que se escriben a mano (mobile first):
+
+   - Móvil:      < 640px   (sin media query)
+   - Tablet:     @media (min-width: 40rem)   → 640px
+   - Escritorio: @media (min-width: 64rem)   → 1024px
+   ========================================= */
+
+/* =========================================
+   PALETA (modo claro y oscuro)
+   ========================================= */
+
+:root {
+    --radius: 0.75rem;
+    --background: #f6f2ea;
+    --foreground: #26234a;
+    --card: #fffcf6;
+    --card-foreground: #26234a;
+    --popover: #fffcf6;
+    --popover-foreground: #26234a;
+    --primary: #5f4f9f;
+    --primary-foreground: #fdfbff;
+    --secondary: #ebe5f5;
+    --secondary-foreground: #3a3466;
+    --muted: #eee9f2;
+    --muted-foreground: #6c6886;
+    --accent: #e6def5;
+    --accent-foreground: #3a3466;
+    --destructive: #c2410c;
+    --border: #e2d7c2;
+    --input: #ddd2bd;
+    --ring: #a8823f;
+    --gold: #9c7535;
+    --gold-foreground: #fffcf6;
+    --chart-1: #6c55c4;
+    --chart-2: #b07a1e;
+    --chart-3: #9b8fd0;
+    --chart-4: #c9a66b;
+    --chart-5: #463c7f;
+    --sidebar: #f1ece2;
+    --sidebar-foreground: #26234a;
+    --sidebar-primary: #5f4f9f;
+    --sidebar-primary-foreground: #fdfbff;
+    --sidebar-accent: #e6def5;
+    --sidebar-accent-foreground: #3a3466;
+    --sidebar-border: #e2d7c2;
+    --sidebar-ring: #a8823f;
+    --deco-glow: rgb(95 79 159 / 0.08);
+}
+
+.dark {
+    --background: #13122a;
+    --foreground: #ece8f7;
+    --card: #1c1a3a;
+    --card-foreground: #ece8f7;
+    --popover: #1c1a3a;
+    --popover-foreground: #ece8f7;
+    --primary: #b9a7e8;
+    --primary-foreground: #17153a;
+    --secondary: #26234a;
+    --secondary-foreground: #ece8f7;
+    --muted: #221f43;
+    --muted-foreground: #a7a2c6;
+    --accent: #2b2852;
+    --accent-foreground: #ece8f7;
+    --destructive: #f0846b;
+    --border: rgb(212 179 122 / 0.2);
+    --input: rgb(212 179 122 / 0.24);
+    --ring: #d4b37a;
+    --gold: #d4b37a;
+    --gold-foreground: #17153a;
+    --chart-1: #8f74e0;
+    --chart-2: #bf8424;
+    --chart-3: #8a78cf;
+    --chart-4: #e8d3a6;
+    --chart-5: #6a5ab0;
+    --sidebar: #17162f;
+    --sidebar-foreground: #ece8f7;
+    --sidebar-primary: #b9a7e8;
+    --sidebar-primary-foreground: #17153a;
+    --sidebar-accent: #2b2852;
+    --sidebar-accent-foreground: #ece8f7;
+    --sidebar-border: rgb(212 179 122 / 0.2);
+    --sidebar-ring: #d4b37a;
+    --deco-glow: rgb(185 167 232 / 0.1);
+}
+
+:root {
+    /* =========================================
+       COLORES DERIVADOS
+       =========================================
+       Mezclas de la paleta con transparencia. Se adaptan solas
+       al modo oscuro porque .dark se aplica en <html>. */
+    --dorado-suave: color-mix(in oklab, var(--gold) 10%, transparent);
+    --dorado-filete: color-mix(in oklab, var(--gold) 15%, transparent);
+    --tarjeta-translucida: color-mix(in oklab, var(--card) 60%, transparent);
+    --tarjeta-velada: color-mix(in oklab, var(--card) 80%, transparent);
+    --texto-tenue: color-mix(in oklab, var(--foreground) 85%, transparent);
+    --texto-suave: color-mix(in oklab, var(--foreground) 80%, transparent);
+
+    /* =========================================
+       TIPOGRAFÍA
+       ========================================= */
+    --fuente-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    --fuente-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+
+    /* Tamaños, cada uno con su interlineado */
+    --texto-xs: 0.75rem;                  /* 12px */
+    --texto-xs-interlineado: 1.3333;
+    --texto-sm: 0.875rem;                 /* 14px */
+    --texto-sm-interlineado: 1.4286;
+    --texto-base: 1rem;                   /* 16px */
+    --texto-base-interlineado: 1.5;
+    --texto-lg: 1.125rem;                 /* 18px */
+    --texto-lg-interlineado: 1.5556;
+    --texto-xl: 1.25rem;                  /* 20px */
+    --texto-xl-interlineado: 1.4;
+    --texto-2xl: 1.5rem;                  /* 24px */
+    --texto-2xl-interlineado: 1.3333;
+    --texto-3xl: 1.875rem;                /* 30px */
+    --texto-3xl-interlineado: 1.2;
+    --texto-4xl: 2.25rem;                 /* 36px */
+    --texto-4xl-interlineado: 1.1111;
+    --texto-5xl: 3rem;                    /* 48px */
+    --texto-5xl-interlineado: 1;
+
+    /* Interlineados para cuando se quiere otro distinto al del tamaño */
+    --interlineado-ajustado: 1.25;
+    --interlineado-relajado: 1.625;
+
+    /* Pesos */
+    --peso-ligero: 300;
+    --peso-medio: 500;
+    --peso-seminegrita: 600;
+
+    /* =========================================
+       ESPACIADO (escala de 4px)
+       ========================================= */
+    --espacio-1: 0.25rem;                 /* 4px */
+    --espacio-2: 0.5rem;                  /* 8px */
+    --espacio-3: 0.75rem;                 /* 12px */
+    --espacio-4: 1rem;                    /* 16px */
+    --espacio-5: 1.25rem;                 /* 20px */
+    --espacio-6: 1.5rem;                  /* 24px */
+    --espacio-8: 2rem;                    /* 32px */
+    --espacio-10: 2.5rem;                 /* 40px */
+
+    /* =========================================
+       TAMAÑOS
+       ========================================= */
+    /* Iconos cuadrados */
+    --icono-sm: 1rem;                     /* 16px */
+    --icono-md: 1.25rem;                  /* 20px */
+
+    /* Ancho máximo de contenedores */
+    --contenedor-sm: 24rem;               /* 384px */
+    --contenedor-md: 28rem;               /* 448px */
+    --contenedor-lg: 32rem;               /* 512px */
+    --contenedor-xl: 36rem;               /* 576px */
+    --contenedor-2xl: 42rem;              /* 672px */
+
+    /* =========================================
+       BORDES
+       ========================================= */
+    --radio-md: calc(var(--radius) * 0.8);
+    --radio-lg: var(--radius);
+    --radio-xl: calc(var(--radius) * 1.4);
+    --radio-pildora: 9999px;
+
+    /* =========================================
+       TRANSICIONES
+       ========================================= */
+    --transicion-duracion: 150ms;
+    --transicion-curva: cubic-bezier(0.4, 0, 0.2, 1);
+}

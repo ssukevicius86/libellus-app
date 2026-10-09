@@ -1,0 +1,126 @@
+/* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .ui-badge {
+    justify-content: center;
+    align-items: center;
+    gap: var(--espacio-1);
+    border-style: solid;
+    width: fit-content;
+    padding-inline: var(--espacio-2);
+    padding-block: 0.125rem;
+    font-size: var(--texto-xs);
+    line-height: var(--texto-xs-interlineado);
+    font-weight: var(--peso-medio);
+    white-space: nowrap;
+    transition-property: color, box-shadow;
+    transition-timing-function: var(--transicion-curva);
+    transition-duration: var(--transicion-duracion);
+    border-width: 1px;
+    border-color: #0000;
+    border-radius: var(--radio-pildora);
+    flex-shrink: 0;
+    display: inline-flex;
+    overflow: hidden;
+  }
+
+  .ui-badge:focus-visible {
+    border-color: var(--ring);
+    box-shadow: 0 0 0 3px var(--tw-ring-color, currentcolor);
+    --tw-ring-color: color-mix(in oklab, var(--ring) 50%, transparent);
+  }
+
+  .ui-badge[aria-invalid="true"] {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklab, var(--destructive) 20%, transparent);
+  }
+
+  .ui-badge:is(.dark *)[aria-invalid="true"] {
+    --tw-ring-color: color-mix(in oklab, var(--destructive) 40%, transparent);
+  }
+
+  .ui-badge > svg {
+    pointer-events: none;
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .ui-badge--variant-default {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  @media (hover: hover) {
+    a.ui-badge--variant-default:hover {
+      background-color: color-mix(in oklab, var(--primary) 90%, transparent);
+    }
+  }
+
+  .ui-badge--variant-secondary {
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
+  }
+
+  @media (hover: hover) {
+    a.ui-badge--variant-secondary:hover {
+      background-color: color-mix(in oklab, var(--secondary) 90%, transparent);
+    }
+  }
+
+  .ui-badge--variant-destructive {
+    background-color: var(--destructive);
+    color: #fff;
+  }
+
+  .ui-badge--variant-destructive:focus-visible {
+    --tw-ring-color: color-mix(in oklab, var(--destructive) 20%, transparent);
+  }
+
+  .ui-badge--variant-destructive:is(.dark *) {
+    background-color: color-mix(in oklab, var(--destructive) 60%, transparent);
+  }
+
+  .ui-badge--variant-destructive:is(.dark *):focus-visible {
+    --tw-ring-color: color-mix(in oklab, var(--destructive) 40%, transparent);
+  }
+
+  @media (hover: hover) {
+    a.ui-badge--variant-destructive:hover {
+      background-color: color-mix(in oklab, var(--destructive) 90%, transparent);
+    }
+  }
+
+  .ui-badge--variant-outline {
+    border-color: var(--border);
+    color: var(--foreground);
+  }
+
+  @media (hover: hover) {
+    a.ui-badge--variant-outline:hover {
+      background-color: var(--accent);
+      color: var(--accent-foreground);
+    }
+    a.ui-badge--variant-ghost:hover {
+      background-color: var(--accent);
+      color: var(--accent-foreground);
+    }
+  }
+
+  .ui-badge--variant-link {
+    color: var(--primary);
+    text-underline-offset: 4px;
+  }
+
+  @media (hover: hover) {
+    a.ui-badge--variant-link:hover {
+      text-decoration-line: underline;
+    }
+  }
+}
+
+@property --tw-ring-color {
+  syntax: "*";
+  inherits: false;
+}

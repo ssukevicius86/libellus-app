@@ -1,0 +1,174 @@
+/* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .ui-dialog-overlay {
+    z-index: 50;
+    background-color: color-mix(in oklab, #000 50%, transparent);
+    position: fixed;
+    inset: 0;
+  }
+
+  .ui-dialog-overlay[data-state="closed"] {
+    animation: exit .15s ease 0s 1 normal none;
+    --tw-exit-opacity: 0;
+  }
+
+  .ui-dialog-overlay[data-state="open"] {
+    animation: enter .15s ease 0s 1 normal none;
+    --tw-enter-opacity: 0;
+  }
+
+  .ui-dialog-content {
+    z-index: 50;
+    width: 100%;
+    max-width: calc(100% - 2rem);
+    translate: -50% -50%;
+    gap: var(--espacio-4);
+    border-radius: var(--radio-lg);
+    border-style: solid;
+    background-color: var(--background);
+    padding: var(--espacio-6);
+    box-shadow: 0 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;
+    border-width: 1px;
+    outline-style: none;
+    transition-duration: .2s;
+    display: grid;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+  }
+
+  .ui-dialog-content[data-state="closed"] {
+    animation: exit .2s ease 0s 1 normal none;
+    --tw-exit-opacity: 0;
+    --tw-exit-scale: .95;
+  }
+
+  .ui-dialog-content[data-state="open"] {
+    animation: enter .2s ease 0s 1 normal none;
+    --tw-enter-opacity: 0;
+    --tw-enter-scale: .95;
+  }
+
+  @media (min-width: 40rem) {
+    .ui-dialog-content {
+      max-width: var(--contenedor-lg);
+    }
+  }
+
+  .ui-dialog-close {
+    top: var(--espacio-4);
+    right: var(--espacio-4);
+    border-radius: .125rem;
+    opacity: .7;
+    transition-property: opacity;
+    transition-timing-function: var(--transicion-curva);
+    transition-duration: var(--transicion-duracion);
+    position: absolute;
+  }
+
+  @media (hover: hover) {
+    .ui-dialog-close:hover {
+      opacity: 1;
+    }
+  }
+
+  .ui-dialog-close:focus {
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+    outline-style: none;
+  }
+
+  @media (forced-colors: active) {
+    .ui-dialog-close:focus {
+      outline-offset: 2px;
+      outline: 2px solid #0000;
+    }
+  }
+
+  .ui-dialog-close:disabled {
+    pointer-events: none;
+  }
+
+  .ui-dialog-close[data-state="open"] {
+    background-color: var(--accent);
+    color: var(--muted-foreground);
+  }
+
+  .ui-dialog-close svg {
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  .ui-dialog-close svg:not([class*="size-"]) {
+    width: var(--icono-sm);
+    height: var(--icono-sm);
+  }
+
+  .ui-dialog-span-1 {
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    overflow: hidden;
+  }
+
+  .ui-dialog-header {
+    gap: var(--espacio-2);
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+  }
+
+  @media (min-width: 40rem) {
+    .ui-dialog-header {
+      text-align: left;
+    }
+  }
+
+  .ui-dialog-footer {
+    gap: var(--espacio-2);
+    flex-direction: column-reverse;
+    display: flex;
+  }
+
+  @media (min-width: 40rem) {
+    .ui-dialog-footer {
+      flex-direction: row;
+      justify-content: flex-end;
+    }
+  }
+
+  .ui-dialog-title {
+    font-size: var(--texto-lg);
+    line-height: 1;
+    font-weight: var(--peso-seminegrita);
+  }
+
+  .ui-dialog-description {
+    font-size: var(--texto-sm);
+    line-height: var(--texto-sm-interlineado);
+    color: var(--muted-foreground);
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: var(--tw-enter-opacity, 1);
+    transform: translate3d(var(--tw-enter-translate-x, 0),var(--tw-enter-translate-y, 0),0)scale3d(var(--tw-enter-scale, 1),var(--tw-enter-scale, 1),var(--tw-enter-scale, 1))rotate(var(--tw-enter-rotate, 0));
+    filter: blur(var(--tw-enter-blur, 0));
+  }
+}
+
+@keyframes exit {
+  to {
+    opacity: var(--tw-exit-opacity, 1);
+    transform: translate3d(var(--tw-exit-translate-x, 0),var(--tw-exit-translate-y, 0),0)scale3d(var(--tw-exit-scale, 1),var(--tw-exit-scale, 1),var(--tw-exit-scale, 1))rotate(var(--tw-exit-rotate, 0));
+    filter: blur(var(--tw-exit-blur, 0));
+  }
+}

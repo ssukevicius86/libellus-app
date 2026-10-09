@@ -1,0 +1,67 @@
+/* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .ui-card {
+    gap: var(--espacio-6);
+    border-radius: var(--radio-xl);
+    border-style: solid;
+    background-color: var(--card);
+    padding-block: var(--espacio-6);
+    color: var(--card-foreground);
+    box-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+    border-width: 1px;
+    flex-direction: column;
+    display: flex;
+  }
+
+  .ui-card-header {
+    align-items: flex-start;
+    gap: var(--espacio-2);
+    padding-inline: var(--espacio-6);
+    grid-template-rows: auto auto;
+    grid-auto-rows: min-content;
+    display: grid;
+    container: card-header / inline-size;
+  }
+
+  .ui-card-header:has([data-slot="card-action"]) {
+    grid-template-columns: 1fr auto;
+  }
+
+  .ui-card-header.border-b {
+    padding-bottom: var(--espacio-6);
+  }
+
+  .ui-card-title {
+    line-height: 1;
+    font-weight: var(--peso-seminegrita);
+  }
+
+  .ui-card-description {
+    font-size: var(--texto-sm);
+    line-height: var(--texto-sm-interlineado);
+    color: var(--muted-foreground);
+  }
+
+  .ui-card-action {
+    grid-row: 1 / span 2;
+    grid-column-start: 2;
+    place-self: flex-start flex-end;
+  }
+
+  .ui-card-content {
+    padding-inline: var(--espacio-6);
+  }
+
+  .ui-card-footer {
+    padding-inline: var(--espacio-6);
+    align-items: center;
+    display: flex;
+  }
+
+  .ui-card-footer.border-t {
+    padding-top: var(--espacio-6);
+  }
+}

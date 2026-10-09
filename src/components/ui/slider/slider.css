@@ -1,0 +1,104 @@
+/* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .ui-slider {
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    align-items: center;
+    width: 100%;
+    display: flex;
+    position: relative;
+  }
+
+  .ui-slider[data-disabled] {
+    opacity: .5;
+  }
+
+  .ui-slider[data-orientation="vertical"] {
+    height: 100%;
+    min-height: 11rem;
+    flex-direction: column;
+    width: auto;
+  }
+
+  .ui-slider-track {
+    background-color: var(--muted);
+    border-radius: var(--radio-pildora);
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ui-slider-track[data-orientation="horizontal"] {
+    height: 0.375rem;
+    width: 100%;
+  }
+
+  .ui-slider-track[data-orientation="vertical"] {
+    height: 100%;
+    width: 0.375rem;
+  }
+
+  .ui-slider-range {
+    background-color: var(--primary);
+    position: absolute;
+  }
+
+  .ui-slider-range[data-orientation="horizontal"] {
+    height: 100%;
+  }
+
+  .ui-slider-range[data-orientation="vertical"] {
+    width: 100%;
+  }
+
+  .ui-slider-thumb {
+    width: var(--icono-sm);
+    height: var(--icono-sm);
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--primary);
+    background-color: #fff;
+    box-shadow: var(--tw-ring-shadow), 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+    border-radius: var(--radio-pildora);
+    flex-shrink: 0;
+    display: block;
+    transition-property: color, box-shadow;
+    transition-timing-function: var(--transicion-curva);
+    transition-duration: var(--transicion-duracion);
+  }
+
+  @media (hover: hover) {
+    .ui-slider-thumb:hover {
+      --tw-ring-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 50%, transparent);
+      box-shadow: var(--tw-ring-shadow), 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+    }
+  }
+
+  .ui-slider-thumb:focus-visible {
+    --tw-ring-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 50%, transparent);
+    box-shadow: var(--tw-ring-shadow), 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+    outline-style: none;
+  }
+
+  @media (forced-colors: active) {
+    .ui-slider-thumb:focus-visible {
+      outline-offset: 2px;
+      outline: 2px solid #0000;
+    }
+  }
+
+  .ui-slider-thumb:disabled {
+    pointer-events: none;
+    opacity: .5;
+  }
+}
+
+@property --tw-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}

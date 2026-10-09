@@ -3,7 +3,7 @@ import { Navigate, useLocation } from 'react-router'
 import { FirebaseError } from 'firebase/app'
 import { LogIn } from 'lucide-react'
 import { DecoArch, DecoDivider, LotusIcon } from '@/components/deco'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button/button'
 import { useAuth } from '@/context/auth-context'
 import './Login.css'
 
@@ -58,7 +58,7 @@ export default function Login() {
             <LogIn /> Entrar con Google
           </Button>
           {error && (
-            <p role="alert" className="login-p-11">
+            <p role="alert" className="texto-error">
               {error}
             </p>
           )}

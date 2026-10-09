@@ -1,0 +1,73 @@
+/* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .ui-textarea {
+    field-sizing: content;
+    min-height: 4rem;
+    border-radius: var(--radio-md);
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--input);
+    width: 100%;
+    padding-inline: var(--espacio-3);
+    padding-block: var(--espacio-2);
+    font-size: var(--texto-base);
+    line-height: var(--texto-base-interlineado);
+    box-shadow: var(--tw-ring-shadow), 0 1px 2px 0 #0000000d;
+    transition-property: color, box-shadow;
+    transition-timing-function: var(--transicion-curva);
+    transition-duration: var(--transicion-duracion);
+    background-color: #0000;
+    outline-style: none;
+    display: flex;
+  }
+
+  .ui-textarea::placeholder {
+    color: var(--muted-foreground);
+  }
+
+  .ui-textarea:focus-visible {
+    border-color: var(--ring);
+    --tw-ring-shadow: 0 0 0 3px var(--tw-ring-color, currentcolor);
+    box-shadow: 0 0 0 3px var(--tw-ring-color, currentcolor), 0 1px 2px 0 #0000000d;
+    --tw-ring-color: color-mix(in oklab, var(--ring) 50%, transparent);
+  }
+
+  .ui-textarea:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+
+  .ui-textarea[aria-invalid="true"] {
+    border-color: var(--destructive);
+    --tw-ring-color: color-mix(in oklab, var(--destructive) 20%, transparent);
+  }
+
+  @media (min-width: 48rem) {
+    .ui-textarea {
+      font-size: var(--texto-sm);
+      line-height: var(--texto-sm-interlineado);
+    }
+  }
+
+  .ui-textarea:is(.dark *) {
+    background-color: color-mix(in oklab, var(--input) 30%, transparent);
+  }
+
+  .ui-textarea:is(.dark *)[aria-invalid="true"] {
+    --tw-ring-color: color-mix(in oklab, var(--destructive) 40%, transparent);
+  }
+}
+
+@property --tw-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --tw-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}

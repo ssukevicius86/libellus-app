@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "generate-pwa-assets": "pwa-assets-generator",
     "deploy": "npm run build && npx firebase-tools deploy",
-    "tw-to-css": "node scripts/tw-to-css.mjs"
+    "tw-to-css": "node scripts/tw-to-css.mjs",
+    "tw-to-css:ui": "node scripts/tw-to-css.mjs --ui"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.4.0",

@@ -8,7 +8,7 @@ import { formatMinutes, minutesLastDays, readingStreak } from '@/lib/stats'
 import { BookRow } from '@/components/books'
 import { DecoDivider, PageHeader } from '@/components/deco'
 import { MoodPicker } from '@/components/mood'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button/button'
 import './Sanctuary.css'
 
 function greeting() {
@@ -22,9 +22,9 @@ function greeting() {
 function StatTile({ icon: Icon, value, label }: { icon: typeof Flame; value: string; label: string }) {
   return (
     <div className="deco-card sanctuary-stat">
-      <Icon className="sanctuary-stat-icon" strokeWidth={1.6} aria-hidden="true" />
+      <Icon className="icono-dorado" strokeWidth={1.6} aria-hidden="true" />
       <p className="sanctuary-stat-value">{value}</p>
-      <p className="sanctuary-stat-label">{label}</p>
+      <p className="texto-nota">{label}</p>
     </div>
   )
 }
@@ -76,7 +76,7 @@ export default function Sanctuary() {
             </Link>
           </div>
           {books.loading ? (
-            <p className="sanctuary-muted">Cargando…</p>
+            <p className="texto-secundario">Cargando…</p>
           ) : reading.length ? (
             <div className="sanctuary-book-list">
               {reading.slice(0, 3).map((book) => (
@@ -95,7 +95,7 @@ export default function Sanctuary() {
             </div>
           ) : (
             <div className="sanctuary-empty">
-              <p className="sanctuary-empty-text">
+              <p className="texto-vacio">
                 Ningún libro abierto por ahora.
               </p>
               <Button asChild variant="outline">
@@ -114,7 +114,7 @@ export default function Sanctuary() {
             onChange={(m) => void saveMood(uid, m, todayMood?.note ?? '')}
           />
           <DecoDivider />
-          <p className="sanctuary-muted sanctuary-mood-footer">
+          <p className="texto-secundario sanctuary-mood-footer">
             {todayMood ? (
               <>
                 Hoy: <span className="sanctuary-gold">{MOOD_LABELS[todayMood.mood]}</span> ·{' '}

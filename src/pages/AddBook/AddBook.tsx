@@ -7,10 +7,10 @@ import { searchBooks, type BookSearchResult } from '@/lib/googleBooks'
 import { cn } from '@/lib/utils'
 import { BookCover } from '@/components/books'
 import { PageHeader } from '@/components/deco'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Button } from '@/components/ui/button/button'
+import { Input } from '@/components/ui/input/input'
+import { Label } from '@/components/ui/label/label'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs/tabs'
 import './AddBook.css'
 
 const STATUSES: BookStatus[] = ['want', 'reading', 'read']
@@ -48,7 +48,7 @@ export default function AddBook() {
       <PageHeader eyebrow="Nuevo en tus estantes" title="Agregar libro" />
 
       <div className="add-book-div-2">
-        <span className="add-book-span-3">Agregar como:</span>
+        <span className="texto-secundario">Agregar como:</span>
         {STATUSES.map((s) => (
           <button
             key={s}
@@ -56,8 +56,8 @@ export default function AddBook() {
             onClick={() => setStatus(s)}
             aria-pressed={status === s}
             className={cn(
-              'add-book-button-4',
-              status === s ? 'add-book-button-5' : 'add-book-button-6',
+              'chip',
+              status === s ? 'chip--activo' : 'add-book-button-6',
             )}
           >
             {STATUS_LABELS[s]}
@@ -138,19 +138,19 @@ function SearchPanel({
           autoFocus
         />
         <Button type="submit" disabled={searching || !q.trim()}>
-          {searching ? <Loader2 className="add-book-loader2-11" /> : <Search />}
+          {searching ? <Loader2 className="girar" /> : <Search />}
           <span className="add-book-span-12">Buscar</span>
         </Button>
       </form>
 
-      {error && <p className="add-book-p-13">{error}</p>}
+      {error && <p className="texto-error">{error}</p>}
 
       {results && results.length === 0 && (
-        <p className="add-book-span-3">Sin resultados. Probá con otras palabras.</p>
+        <p className="texto-secundario">Sin resultados. Probá con otras palabras.</p>
       )}
 
       {results && results.length > 0 && (
-        <ul className="add-book-ul-14">
+        <ul className="lista-tarjeta">
           {results.map((r) => {
             const inLibrary = owned.has(r.googleId)
             const key = r.googleId ?? r.title
@@ -177,7 +177,7 @@ function SearchPanel({
                     onClick={() => onAdd(r)}
                     aria-label={`Agregar ${r.title}`}
                   >
-                    {saving === key ? <Loader2 className="add-book-loader2-11" /> : <Plus />}
+                    {saving === key ? <Loader2 className="girar" /> : <Plus />}
                     <span className="add-book-span-12">Agregar</span>
                   </Button>
                 )}
@@ -241,7 +241,7 @@ function ManualForm({
         </div>
       </div>
       <Button type="submit" disabled={saving || !title.trim()} className="add-book-button-25">
-        {saving ? <Loader2 className="add-book-loader2-11" /> : <Plus />} Guardar libro
+        {saving ? <Loader2 className="girar" /> : <Plus />} Guardar libro
       </Button>
     </form>
   )

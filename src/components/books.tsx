@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { authorsLabel, bookProgress, STATUS_LABELS, type Book } from '@/lib/books'
 import { cn } from '@/lib/utils'
 import { LotusIcon } from '@/components/deco'
-import { Progress } from '@/components/ui/progress'
+import { Progress } from '@/components/ui/progress/progress'
 
 type CoverBook = Pick<Book, 'title' | 'authors' | 'coverUrl'>
 

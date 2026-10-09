@@ -26,10 +26,10 @@ import { BookCover } from '@/components/books'
 import { DecoDivider, LotusIcon, PageHeader } from '@/components/deco'
 import { DimOverlay, FocusRing } from '@/components/focus'
 import { MoodPicker } from '@/components/mood'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Slider } from '@/components/ui/slider'
+import { Button } from '@/components/ui/button/button'
+import { Input } from '@/components/ui/input/input'
+import { Label } from '@/components/ui/label/label'
+import { Slider } from '@/components/ui/slider/slider'
 import './ReadingSession.css'
 
 const PRESETS = [15, 25, 45, 60]
@@ -137,7 +137,7 @@ export default function ReadingSession() {
             {book ? (
               <>
                 <p className="reading-session-p-5">{book.title}</p>
-                <p className="reading-session-p-6">{authorsLabel(book.authors)}</p>
+                <p className="texto-secundario">{authorsLabel(book.authors)}</p>
               </>
             ) : (
               <p className="reading-session-p-7">Tiempo de lectura</p>
@@ -175,7 +175,7 @@ export default function ReadingSession() {
                   className={cn(
                     'reading-session-button-12',
                     ambience.playing.includes(id)
-                      ? 'reading-session-button-13'
+                      ? 'chip--activo'
                       : 'reading-session-button-14',
                   )}
                 >
@@ -304,7 +304,7 @@ export default function ReadingSession() {
             </div>
             {book && <p className="reading-session-p-32">{book.title}</p>}
             {candidates.length === 0 && (
-              <p className="reading-session-p-33">
+              <p className="texto-nota">
                 Marcá un libro como “Leyendo” en tu{' '}
                 <Link to="/biblioteca" className="reading-session-link-34">
                   biblioteca
@@ -325,7 +325,7 @@ export default function ReadingSession() {
                   aria-pressed={minutes === p}
                   className={cn(
                     'reading-session-button-36',
-                    minutes === p ? 'reading-session-button-13' : 'reading-session-button-14',
+                    minutes === p ? 'chip--activo' : 'reading-session-button-14',
                   )}
                 >
                   {p}′
@@ -337,7 +337,7 @@ export default function ReadingSession() {
                 aria-pressed={minutes === null}
                 className={cn(
                   'reading-session-button-37',
-                  minutes === null ? 'reading-session-button-13' : 'reading-session-button-14',
+                  minutes === null ? 'chip--activo' : 'reading-session-button-14',
                 )}
               >
                 Libre
@@ -346,7 +346,7 @@ export default function ReadingSession() {
             <div className="reading-session-div-38">
               <div className="reading-session-div-39">
                 <span className="reading-session-span-40">
-                  <SunDim className="reading-session-sundim-41" /> Atenuación de brillo
+                  <SunDim className="icono-dorado" /> Atenuación de brillo
                 </span>
                 <span className="reading-session-span-42">{Math.round(dim * 100)}%</span>
               </div>
@@ -475,7 +475,7 @@ function FinishForm({
               onChange={(e) => setPage(e.target.value)}
               className="reading-session-input-47"
             />
-            {book.pageCount && <p className="reading-session-p-33">de {book.pageCount}</p>}
+            {book.pageCount && <p className="texto-nota">de {book.pageCount}</p>}
           </div>
         </section>
       )}
@@ -486,14 +486,14 @@ function FinishForm({
       </section>
 
       {error && (
-        <p role="alert" className="reading-session-p-48">
+        <p role="alert" className="texto-error">
           {error}
         </p>
       )}
 
       <div className="reading-session-div-49">
         <Button type="submit" size="lg" disabled={saving}>
-          {saving ? <Loader2 className="reading-session-loader2-50" /> : <Check />} Guardar sesión
+          {saving ? <Loader2 className="girar" /> : <Check />} Guardar sesión
         </Button>
         <Button type="button" variant="ghost" size="lg" onClick={onDiscard} disabled={saving}>
           Descartar

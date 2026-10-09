@@ -1,41 +1,16 @@
 /* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
 
 .add-book-button-1 {
-  margin-bottom: 1rem;
-  margin-left: -0.5rem;
+  margin-bottom: var(--espacio-4);
+  margin-left: calc(var(--espacio-2) * -1);
 }
 
 .add-book-div-2 {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--espacio-6);
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--espacio-2);
   flex-wrap: wrap;
   display: flex;
-}
-
-.add-book-span-3 {
-  font-size: .875rem;
-  line-height: 1.4286;
-  color: var(--muted-foreground);
-}
-
-.add-book-button-4 {
-  border-style: solid;
-  padding-inline: 0.75rem;
-  padding-block: .25rem;
-  font-size: .875rem;
-  line-height: 1.4286;
-  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
-  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-  transition-duration: .15s;
-  border-width: 1px;
-  border-radius: 9999px;
-}
-
-.add-book-button-5 {
-  border-color: var(--gold);
-  background-color: color-mix(in oklab, var(--gold) 10%, transparent);
-  color: var(--gold);
 }
 
 .add-book-button-6 {
@@ -49,28 +24,24 @@
 }
 
 .add-book-p-7 {
-  margin-bottom: 1rem;
-  font-size: .875rem;
-  line-height: 1.4286;
+  margin-bottom: var(--espacio-4);
+  font-size: var(--texto-sm);
+  line-height: var(--texto-sm-interlineado);
   color: var(--destructive);
 }
 
 .add-book-tabscontent-8 {
-  padding-top: 1rem;
+  padding-top: var(--espacio-4);
 }
 
 :where(.add-book-div-9 > :not(:last-child)) {
   margin-block-start: 0;
-  margin-block-end: 1rem;
+  margin-block-end: var(--espacio-4);
 }
 
 .add-book-form-10 {
-  gap: 0.5rem;
+  gap: var(--espacio-2);
   display: flex;
-}
-
-.add-book-loader2-11 {
-  animation: spin 1s linear infinite;
 }
 
 .add-book-span-12 {
@@ -83,30 +54,10 @@
   }
 }
 
-.add-book-p-13 {
-  font-size: .875rem;
-  line-height: 1.4286;
-  color: var(--destructive);
-}
-
-:where(.add-book-ul-14 > :not(:last-child)) {
-  border-bottom-style: solid;
-  border-top-style: solid;
-  border-top-width: 0;
-  border-bottom-width: 1px;
-}
-
-.add-book-ul-14 {
-  border-radius: var(--radius);
-  border-style: solid;
-  background-color: color-mix(in oklab, var(--card) 60%, transparent);
-  border-width: 1px;
-}
-
 .add-book-li-15 {
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem;
+  gap: var(--espacio-4);
+  padding: var(--espacio-3);
   display: flex;
 }
 
@@ -121,9 +72,9 @@
 
 .add-book-p-18 {
   -webkit-line-clamp: 2;
-  font-size: .875rem;
-  line-height: 1.4286;
-  font-weight: 500;
+  font-size: var(--texto-sm);
+  line-height: var(--texto-sm-interlineado);
+  font-weight: var(--peso-medio);
   -webkit-box-orient: vertical;
   display: -webkit-box;
   overflow: hidden;
@@ -132,46 +83,46 @@
 .add-book-p-19 {
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: .75rem;
-  line-height: 1.3333;
+  font-size: var(--texto-xs);
+  line-height: var(--texto-xs-interlineado);
   color: var(--muted-foreground);
   overflow: hidden;
 }
 
 .add-book-span-20 {
   align-items: center;
-  gap: .25rem;
-  font-size: .75rem;
-  line-height: 1.3333;
+  gap: var(--espacio-1);
+  font-size: var(--texto-xs);
+  line-height: var(--texto-xs-interlineado);
   color: var(--gold);
   display: flex;
 }
 
 .add-book-check-21 {
-  width: 1rem;
-  height: 1rem;
+  width: var(--icono-sm);
+  height: var(--icono-sm);
 }
 
 .add-book-form-22 {
-  max-width: 36rem;
-  gap: 1rem;
-  padding: 1.25rem;
+  max-width: var(--contenedor-xl);
+  gap: var(--espacio-4);
+  padding: var(--espacio-5);
   display: grid;
 }
 
 @media (min-width: 40rem) {
   .add-book-form-22 {
-    padding: 1.5rem;
+    padding: var(--espacio-6);
   }
 }
 
 .add-book-div-23 {
-  gap: 0.5rem;
+  gap: var(--espacio-2);
   display: grid;
 }
 
 .add-book-div-24 {
-  gap: 1rem;
+  gap: var(--espacio-4);
   display: grid;
 }
 
@@ -183,10 +134,4 @@
 
 .add-book-button-25 {
   justify-self: flex-start;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
 }

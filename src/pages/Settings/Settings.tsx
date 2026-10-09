@@ -5,8 +5,8 @@ import { useAuth } from '@/context/auth-context'
 import { usePreferences, type Theme } from '@/context/preferences-context'
 import { cn } from '@/lib/utils'
 import { PageHeader } from '@/components/deco'
-import { Button } from '@/components/ui/button'
-import { Slider } from '@/components/ui/slider'
+import { Button } from '@/components/ui/button/button'
+import { Slider } from '@/components/ui/slider/slider'
 import './Settings.css'
 
 const THEMES: { id: Theme; label: string; icon: typeof Sun }[] = [
@@ -19,7 +19,7 @@ function Row({ title, hint, children }: { title: string; hint?: string; children
     <div className="settings-div-1">
       <div>
         <p className="settings-p-2">{title}</p>
-        {hint && <p className="settings-p-3">{hint}</p>}
+        {hint && <p className="texto-nota">{hint}</p>}
       </div>
       <div className="settings-div-4">{children}</div>
     </div>
@@ -47,7 +47,7 @@ export default function Settings() {
                 onClick={() => prefs.setPreference('theme', id)}
                 className={cn(
                   'settings-button-8',
-                  prefs.theme === id ? 'settings-button-9' : 'settings-button-10',
+                  prefs.theme === id ? 'chip--activo' : 'settings-button-10',
                 )}
               >
                 <Icon className="settings-icon-11" /> {label}

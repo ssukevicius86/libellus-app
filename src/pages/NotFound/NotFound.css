@@ -3,9 +3,9 @@
 .not-found-main-1 {
   justify-content: center;
   align-items: center;
-  gap: 1.25rem;
+  gap: var(--espacio-5);
   min-height: 100svh;
-  padding: 1.5rem;
+  padding: var(--espacio-6);
   text-align: center;
   flex-direction: column;
   display: flex;
@@ -17,19 +17,11 @@
 }
 
 .not-found-h1-3 {
-  font-size: 1.5rem;
-  line-height: 1.3333;
-  font-weight: 300;
+  font-size: var(--texto-2xl);
+  line-height: var(--texto-2xl-interlineado);
+  font-weight: var(--peso-ligero);
 }
 
 .not-found-decodivider-4 {
   width: 10rem;
-}
-
-.not-found-p-5 {
-  font-family: Cormorant Garamond, ui-serif, Georgia, serif;
-  font-size: 1.125rem;
-  line-height: 1.5556;
-  color: var(--muted-foreground);
-  font-style: italic;
 }

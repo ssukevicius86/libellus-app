@@ -5,9 +5,9 @@ import { useBooks } from '@/hooks/useLibrary'
 import { STATUS_LABELS, type BookStatus } from '@/lib/books'
 import { BookCard } from '@/components/books'
 import { PageHeader } from '@/components/deco'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Button } from '@/components/ui/button/button'
+import { Input } from '@/components/ui/input/input'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs/tabs'
 import './Library.css'
 
 type Filter = BookStatus | 'all'
@@ -75,7 +75,7 @@ export default function Library() {
         </div>
       ) : (
         <div className="deco-card library-div-10">
-          <p className="library-p-11">
+          <p className="texto-vacio">
             {books.length === 0
               ? 'Tu biblioteca está esperando su primer libro.'
               : needle

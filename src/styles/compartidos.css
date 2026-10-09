@@ -1,0 +1,109 @@
+/* ===============================================
+   CLASES COMPARTIDAS
+   ===============================================
+   Patrones que se repiten en varias páginas.
+
+   scripts/tw-to-css.mjs las detecta: si una clase de una página tiene
+   exactamente los mismos estilos que una de estas, la sustituye por esta.
+   Para que la detección funcione, escribe aquí los valores con las
+   variables de variables.css.
+   =============================================== */
+
+/* =========================================
+   TEXTOS
+   ========================================= */
+
+/* Texto chico gris: descripciones, ayudas */
+.texto-secundario {
+    font-size: var(--texto-sm);
+    line-height: var(--texto-sm-interlineado);
+    color: var(--muted-foreground);
+}
+
+/* Texto mínimo gris: notas al pie, contadores */
+.texto-nota {
+    font-size: var(--texto-xs);
+    line-height: var(--texto-xs-interlineado);
+    color: var(--muted-foreground);
+}
+
+/* Mensajes de error de formularios */
+.texto-error {
+    font-size: var(--texto-sm);
+    line-height: var(--texto-sm-interlineado);
+    color: var(--destructive);
+}
+
+/* Estados vacíos: "Ningún libro…", "Nada por aquí…" */
+.texto-vacio {
+    font-family: var(--fuente-serif);
+    font-size: var(--texto-lg);
+    line-height: var(--texto-lg-interlineado);
+    font-style: italic;
+    color: var(--muted-foreground);
+}
+
+/* =========================================
+   CHIPS (botones píldora seleccionables)
+   ========================================= */
+
+.chip {
+    padding-inline: var(--espacio-3);
+    padding-block: var(--espacio-1);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: var(--radio-pildora);
+    font-size: var(--texto-sm);
+    line-height: var(--texto-sm-interlineado);
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke;
+    transition-duration: var(--transicion-duracion);
+    transition-timing-function: var(--transicion-curva);
+}
+
+/* Chip (o cualquier botón) seleccionado */
+.chip--activo {
+    border-color: var(--gold);
+    background-color: var(--dorado-suave);
+    color: var(--gold);
+}
+
+/* =========================================
+   CONTENEDORES
+   ========================================= */
+
+/* Lista dentro de una tarjeta translúcida con borde */
+.lista-tarjeta {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: var(--radio-lg);
+    background-color: var(--tarjeta-translucida);
+}
+
+/* Línea separadora entre los elementos de la lista */
+:where(.lista-tarjeta > :not(:last-child)) {
+    border-top-width: 0;
+    border-top-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+/* =========================================
+   ICONOS Y ANIMACIONES
+   ========================================= */
+
+.icono-dorado {
+    width: var(--icono-sm);
+    height: var(--icono-sm);
+    color: var(--gold);
+}
+
+/* Spinner de carga */
+.girar {
+    animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -8,6 +8,7 @@ import { PageHeader } from '@/components/deco'
 import { MoodIcon, MoodPicker } from '@/components/mood'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
+import './Mood.css'
 
 const longDate = new Intl.DateTimeFormat('es', { weekday: 'long', day: 'numeric', month: 'long' })
 
@@ -36,16 +37,16 @@ export default function Mood() {
   const hasData = series.some((d) => d.mood || d.minutes)
 
   return (
-    <div className="space-y-8">
+    <div className="mood-div-1">
       <PageHeader eyebrow="Módulo emocional" title="Tu clima interior" />
 
       <TodayCheckIn key={today?.date ?? 'none'} today={today} />
 
-      <section className="deco-card space-y-6 p-5 sm:p-6">
+      <section className="deco-card mood-section-2">
         <div>
           <h2 className="deco-eyebrow">Últimos 30 días</h2>
           {insight && (
-            <p className="mt-2 font-serif text-lg italic text-foreground/85">
+            <p className="mood-p-3">
               {insight.reading > insight.idle + 0.2
                 ? 'Los días que leés, tu ánimo tiende a estar más luminoso.'
                 : insight.reading < insight.idle - 0.2
@@ -56,17 +57,17 @@ export default function Mood() {
         </div>
         {hasData ? (
           <>
-            <figure className="space-y-2">
-              <figcaption className="text-sm font-medium">Ánimo diario</figcaption>
+            <figure className="mood-figure-4">
+              <figcaption className="mood-figcaption-5">Ánimo diario</figcaption>
               <MoodLineChart data={series} />
             </figure>
-            <figure className="space-y-2">
-              <figcaption className="text-sm font-medium">Minutos de lectura por día</figcaption>
+            <figure className="mood-figure-4">
+              <figcaption className="mood-figcaption-5">Minutos de lectura por día</figcaption>
               <MinutesBarChart data={series} />
             </figure>
           </>
         ) : (
-          <p className="text-sm text-muted-foreground">
+          <p className="mood-p-6">
             Registrá tu ánimo y tus sesiones de lectura para ver cómo evolucionan juntos.
           </p>
         )}
@@ -95,7 +96,7 @@ function TodayCheckIn({ today }: { today: MoodEntry | undefined }) {
   }
 
   return (
-    <section className="deco-card space-y-4 p-5 sm:p-6">
+    <section className="deco-card mood-section-7">
       <h2 className="deco-eyebrow">Hoy, {longDate.format(new Date())}</h2>
       <MoodPicker value={mood} onChange={setMood} />
       <Textarea
@@ -107,7 +108,7 @@ function TodayCheckIn({ today }: { today: MoodEntry | undefined }) {
         aria-label="Nota del día"
       />
       <Button onClick={() => void save()} disabled={!mood || !dirty || saving}>
-        {saving && <Loader2 className="animate-spin" />}
+        {saving && <Loader2 className="mood-loader2-8" />}
         {today && !dirty ? 'Registrado' : 'Guardar'}
       </Button>
     </section>
@@ -117,21 +118,21 @@ function TodayCheckIn({ today }: { today: MoodEntry | undefined }) {
 function History({ moods, minutesByDay }: { moods: MoodEntry[]; minutesByDay: Map<string, number> }) {
   if (!moods.length) return null
   return (
-    <section className="space-y-3">
+    <section className="mood-section-9">
       <h2 className="deco-eyebrow">Historial</h2>
-      <ul className="divide-y rounded-lg border bg-card/60">
+      <ul className="mood-ul-10">
         {moods.slice(0, 30).map((m) => (
-          <li key={m.id} className="flex items-start gap-3 px-4 py-3">
-            <MoodIcon mood={m.mood} className="mt-0.5 size-5 shrink-0 text-gold" />
-            <div className="min-w-0 flex-1">
-              <p className="text-sm">
-                <span className="font-medium">{MOOD_LABELS[m.mood]}</span>
-                <span className="text-muted-foreground"> · {longDate.format(parseDay(m.date))}</span>
+          <li key={m.id} className="mood-li-11">
+            <MoodIcon mood={m.mood} className="mood-moodicon-12" />
+            <div className="mood-div-13">
+              <p className="mood-p-14">
+                <span className="mood-span-15">{MOOD_LABELS[m.mood]}</span>
+                <span className="mood-span-16"> · {longDate.format(parseDay(m.date))}</span>
               </p>
-              {m.note && <p className="mt-0.5 font-serif text-base text-foreground/80">{m.note}</p>}
+              {m.note && <p className="mood-p-17">{m.note}</p>}
             </div>
             {minutesByDay.get(m.date) ? (
-              <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+              <span className="mood-span-18">
                 {formatMinutes(minutesByDay.get(m.date)!)}
               </span>
             ) : null}

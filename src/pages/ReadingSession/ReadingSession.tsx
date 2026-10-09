@@ -30,6 +30,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
+import './ReadingSession.css'
 
 const PRESETS = [15, 25, 45, 60]
 
@@ -128,24 +129,24 @@ export default function ReadingSession() {
 
   if (phase === 'running') {
     return (
-      <div className="fixed inset-0 z-40 overflow-y-auto bg-background">
+      <div className="reading-session-div-1">
         {dimOn && <DimOverlay level={dim} />}
-        <div className="mx-auto flex min-h-full max-w-md flex-col items-center justify-center gap-8 px-6 py-10">
-          <div className="text-center">
-            <LotusIcon className="mx-auto mb-3 h-7 text-gold" />
+        <div className="reading-session-div-2">
+          <div className="reading-session-div-3">
+            <LotusIcon className="reading-session-lotusicon-4" />
             {book ? (
               <>
-                <p className="font-serif text-2xl leading-tight">{book.title}</p>
-                <p className="text-sm text-muted-foreground">{authorsLabel(book.authors)}</p>
+                <p className="reading-session-p-5">{book.title}</p>
+                <p className="reading-session-p-6">{authorsLabel(book.authors)}</p>
               </>
             ) : (
-              <p className="font-serif text-2xl italic">Tiempo de lectura</p>
+              <p className="reading-session-p-7">Tiempo de lectura</p>
             )}
           </div>
 
           <FocusRing elapsedMs={elapsed} targetMs={targetMs} paused={paused} />
 
-          <div className="flex items-center gap-3">
+          <div className="reading-session-div-8">
             {paused ? (
               <Button size="lg" onClick={resume} aria-label="Reanudar">
                 <Play /> Reanudar
@@ -160,11 +161,11 @@ export default function ReadingSession() {
             </Button>
           </div>
 
-          <DecoDivider className="w-full" />
+          <DecoDivider className="reading-session-decodivider-9" />
 
           {/* Controles sensoriales rápidos */}
-          <div className="w-full space-y-4">
-            <div className="flex justify-center gap-2">
+          <div className="reading-session-div-10">
+            <div className="reading-session-div-11">
               {AMBIENCES.map(({ id, label }) => (
                 <button
                   key={id}
@@ -172,24 +173,24 @@ export default function ReadingSession() {
                   onClick={() => ambience.toggle(id)}
                   aria-pressed={ambience.playing.includes(id)}
                   className={cn(
-                    'rounded-full border px-4 py-1.5 text-sm transition-colors',
+                    'reading-session-button-12',
                     ambience.playing.includes(id)
-                      ? 'border-gold bg-gold/10 text-gold'
-                      : 'text-muted-foreground hover:text-foreground',
+                      ? 'reading-session-button-13'
+                      : 'reading-session-button-14',
                   )}
                 >
                   {label}
                 </button>
               ))}
             </div>
-            <div className="flex items-center gap-3">
+            <div className="reading-session-div-8">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setDimOn(!dimOn)}
                 aria-pressed={dimOn}
                 aria-label="Atenuar brillo"
-                className={cn(dimOn && 'text-gold')}
+                className={cn(dimOn && 'reading-session-button-15')}
               >
                 <SunDim />
               </Button>
@@ -241,15 +242,15 @@ export default function ReadingSession() {
 
   if (phase === 'done' && summary) {
     return (
-      <div className="mx-auto flex max-w-md flex-col items-center gap-5 py-10 text-center">
-        <LotusIcon className="h-10 text-gold" />
-        <h1 className="deco-title text-2xl font-light">Sesión guardada</h1>
-        <DecoDivider className="w-40" />
-        <p className="font-serif text-xl italic text-foreground/85">
+      <div className="reading-session-div-16">
+        <LotusIcon className="reading-session-lotusicon-17" />
+        <h1 className="deco-title reading-session-h1-18">Sesión guardada</h1>
+        <DecoDivider className="reading-session-decodivider-19" />
+        <p className="reading-session-p-20">
           {formatMinutes(summary.minutes)} de lectura
           {summary.pages ? ` · ${summary.pages} páginas` : ''}
         </p>
-        <div className="flex flex-wrap justify-center gap-2">
+        <div className="reading-session-div-21">
           <Button onClick={() => setPhase('setup')}>Otra sesión</Button>
           {book && (
             <Button asChild variant="outline">
@@ -268,18 +269,18 @@ export default function ReadingSession() {
   return (
     <div>
       <PageHeader eyebrow="Digital detox" title="Sesión de lectura" />
-      <div className="grid gap-6 lg:grid-cols-2">
-        <div className="space-y-6">
-          <section className="deco-card space-y-4 p-5">
+      <div className="reading-session-div-22">
+        <div className="reading-session-div-23">
+          <section className="deco-card reading-session-section-24">
             <h2 className="deco-eyebrow">¿Qué vas a leer?</h2>
-            <div className="flex gap-3 overflow-x-auto pb-1">
+            <div className="reading-session-div-25">
               <button
                 type="button"
                 onClick={() => setBookId(null)}
                 aria-pressed={bookId === null}
                 className={cn(
-                  'flex aspect-[2/3] w-20 shrink-0 items-center justify-center rounded-md border p-2 text-center text-xs text-muted-foreground',
-                  bookId === null && 'border-gold text-gold ring-1 ring-gold',
+                  'reading-session-button-26',
+                  bookId === null && 'reading-session-button-27',
                 )}
               >
                 Sin libro
@@ -293,19 +294,19 @@ export default function ReadingSession() {
                   aria-label={b.title}
                   title={b.title}
                   className={cn(
-                    'shrink-0 rounded-md transition-opacity',
-                    bookId === b.id ? 'ring-2 ring-gold ring-offset-2 ring-offset-card' : 'opacity-60 hover:opacity-100',
+                    'reading-session-button-28',
+                    bookId === b.id ? 'reading-session-button-29' : 'reading-session-button-30',
                   )}
                 >
-                  <BookCover book={b} className="w-20" />
+                  <BookCover book={b} className="reading-session-bookcover-31" />
                 </button>
               ))}
             </div>
-            {book && <p className="text-sm">{book.title}</p>}
+            {book && <p className="reading-session-p-32">{book.title}</p>}
             {candidates.length === 0 && (
-              <p className="text-xs text-muted-foreground">
+              <p className="reading-session-p-33">
                 Marcá un libro como “Leyendo” en tu{' '}
-                <Link to="/biblioteca" className="underline underline-offset-4">
+                <Link to="/biblioteca" className="reading-session-link-34">
                   biblioteca
                 </Link>{' '}
                 para elegirlo acá.
@@ -313,9 +314,9 @@ export default function ReadingSession() {
             )}
           </section>
 
-          <section className="deco-card space-y-4 p-5">
+          <section className="deco-card reading-session-section-24">
             <h2 className="deco-eyebrow">Focus Timer</h2>
-            <div className="grid grid-cols-5 gap-2">
+            <div className="reading-session-div-35">
               {PRESETS.map((p) => (
                 <button
                   key={p}
@@ -323,8 +324,8 @@ export default function ReadingSession() {
                   onClick={() => setMinutes(p)}
                   aria-pressed={minutes === p}
                   className={cn(
-                    'rounded-md border py-2 text-sm tabular-nums transition-colors',
-                    minutes === p ? 'border-gold bg-gold/10 text-gold' : 'text-muted-foreground hover:text-foreground',
+                    'reading-session-button-36',
+                    minutes === p ? 'reading-session-button-13' : 'reading-session-button-14',
                   )}
                 >
                   {p}′
@@ -335,19 +336,19 @@ export default function ReadingSession() {
                 onClick={() => setMinutes(null)}
                 aria-pressed={minutes === null}
                 className={cn(
-                  'rounded-md border py-2 text-sm transition-colors',
-                  minutes === null ? 'border-gold bg-gold/10 text-gold' : 'text-muted-foreground hover:text-foreground',
+                  'reading-session-button-37',
+                  minutes === null ? 'reading-session-button-13' : 'reading-session-button-14',
                 )}
               >
                 Libre
               </button>
             </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="flex items-center gap-2">
-                  <SunDim className="size-4 text-gold" /> Atenuación de brillo
+            <div className="reading-session-div-38">
+              <div className="reading-session-div-39">
+                <span className="reading-session-span-40">
+                  <SunDim className="reading-session-sundim-41" /> Atenuación de brillo
                 </span>
-                <span className="tabular-nums text-muted-foreground">{Math.round(dim * 100)}%</span>
+                <span className="reading-session-span-42">{Math.round(dim * 100)}%</span>
               </div>
               <Slider
                 value={[dim * 100]}
@@ -362,18 +363,18 @@ export default function ReadingSession() {
             </div>
           </section>
 
-          <section className="deco-card space-y-4 p-5">
+          <section className="deco-card reading-session-section-24">
             <h2 className="deco-eyebrow">¿Cómo llegás a la lectura?</h2>
             <MoodPicker value={moodBefore} onChange={setMoodBefore} compact />
           </section>
         </div>
 
-        <div className="space-y-6">
-          <section className="deco-card space-y-4 p-5">
+        <div className="reading-session-div-23">
+          <section className="deco-card reading-session-section-24">
             <h2 className="deco-eyebrow">Microambiente</h2>
             <AmbienceMixer showMaster />
           </section>
-          <Button size="lg" className="w-full" onClick={start}>
+          <Button size="lg" className="reading-session-decodivider-9" onClick={start}>
             <Play /> Comenzar {minutes ? `${minutes} minutos` : 'sesión libre'}
           </Button>
         </div>
@@ -456,13 +457,13 @@ function FinishForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto max-w-lg space-y-6">
+    <form onSubmit={handleSubmit} className="reading-session-form-43">
       <PageHeader eyebrow="Fin de la sesión" title={formatMinutes(durationMin)} />
 
       {book && (
-        <section className="deco-card flex items-center gap-4 p-5">
-          <BookCover book={book} className="w-14" />
-          <div className="grid flex-1 gap-1.5">
+        <section className="deco-card reading-session-section-44">
+          <BookCover book={book} className="reading-session-bookcover-45" />
+          <div className="reading-session-div-46">
             <Label htmlFor="page">¿En qué página quedaste?</Label>
             <Input
               id="page"
@@ -472,27 +473,27 @@ function FinishForm({
               inputMode="numeric"
               value={page}
               onChange={(e) => setPage(e.target.value)}
-              className="w-32"
+              className="reading-session-input-47"
             />
-            {book.pageCount && <p className="text-xs text-muted-foreground">de {book.pageCount}</p>}
+            {book.pageCount && <p className="reading-session-p-33">de {book.pageCount}</p>}
           </div>
         </section>
       )}
 
-      <section className="deco-card space-y-4 p-5">
+      <section className="deco-card reading-session-section-24">
         <h2 className="deco-eyebrow">¿Cómo te sentís ahora?</h2>
         <MoodPicker value={moodAfter} onChange={setMoodAfter} />
       </section>
 
       {error && (
-        <p role="alert" className="text-sm text-destructive">
+        <p role="alert" className="reading-session-p-48">
           {error}
         </p>
       )}
 
-      <div className="flex flex-wrap gap-2">
+      <div className="reading-session-div-49">
         <Button type="submit" size="lg" disabled={saving}>
-          {saving ? <Loader2 className="animate-spin" /> : <Check />} Guardar sesión
+          {saving ? <Loader2 className="reading-session-loader2-50" /> : <Check />} Guardar sesión
         </Button>
         <Button type="button" variant="ghost" size="lg" onClick={onDiscard} disabled={saving}>
           Descartar

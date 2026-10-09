@@ -1,0 +1,74 @@
+/* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
+
+.login-main-1 {
+  min-height: 100svh;
+  padding: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.login-decoarch-2 {
+  width: 100%;
+  max-width: 24rem;
+}
+
+.login-div-3 {
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 32rem;
+  padding-inline: 2.5rem;
+  padding-top: 6rem;
+  padding-bottom: 3.5rem;
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+}
+
+.login-lotusicon-4 {
+  height: 3rem;
+  color: var(--gold);
+}
+
+:where(.login-div-5 > :not(:last-child)) {
+  margin-block-start: 0;
+  margin-block-end: 0.5rem;
+}
+
+.login-h1-6 {
+  font-family: Cormorant Garamond, ui-serif, Georgia, serif;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.login-p-7 {
+  font-size: .75rem;
+  line-height: 1.3333;
+  letter-spacing: .3em;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+}
+
+.login-decodivider-8 {
+  width: 10rem;
+}
+
+.login-p-9 {
+  font-family: Cormorant Garamond, ui-serif, Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.5556;
+  color: color-mix(in oklab, var(--foreground) 80%, transparent);
+  font-style: italic;
+}
+
+.login-button-10 {
+  width: 100%;
+}
+
+.login-p-11 {
+  font-size: .875rem;
+  line-height: 1.4286;
+  color: var(--destructive);
+}

@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 import { PageHeader } from '@/components/deco'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
+import './Settings.css'
 
 const THEMES: { id: Theme; label: string; icon: typeof Sun }[] = [
   { id: 'dark', label: 'Noche', icon: Moon },
@@ -15,12 +16,12 @@ const THEMES: { id: Theme; label: string; icon: typeof Sun }[] = [
 
 function Row({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
   return (
-    <div className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between">
+    <div className="settings-div-1">
       <div>
-        <p className="text-sm font-medium">{title}</p>
-        {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+        <p className="settings-p-2">{title}</p>
+        {hint && <p className="settings-p-3">{hint}</p>}
       </div>
-      <div className="sm:w-64">{children}</div>
+      <div className="settings-div-4">{children}</div>
     </div>
   )
 }
@@ -31,12 +32,12 @@ export default function Settings() {
   const { masterVolume, setMasterVolume, stopAll } = useAmbience()
 
   return (
-    <div className="max-w-2xl">
+    <div className="settings-div-5">
       <PageHeader eyebrow="Tu espacio" title="Ajustes" />
 
-      <section className="deco-card divide-y px-5 sm:px-6">
+      <section className="deco-card settings-section-6">
         <Row title="Tema" hint="Lavandas y dorados, de noche o de día">
-          <div className="grid grid-cols-2 gap-2" role="radiogroup" aria-label="Tema">
+          <div className="settings-div-7" role="radiogroup" aria-label="Tema">
             {THEMES.map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
@@ -45,11 +46,11 @@ export default function Settings() {
                 aria-checked={prefs.theme === id}
                 onClick={() => prefs.setPreference('theme', id)}
                 className={cn(
-                  'flex items-center justify-center gap-2 rounded-md border py-2 text-sm transition-colors',
-                  prefs.theme === id ? 'border-gold bg-gold/10 text-gold' : 'text-muted-foreground hover:text-foreground',
+                  'settings-button-8',
+                  prefs.theme === id ? 'settings-button-9' : 'settings-button-10',
                 )}
               >
-                <Icon className="size-4" /> {label}
+                <Icon className="settings-icon-11" /> {label}
               </button>
             ))}
           </div>
@@ -77,7 +78,7 @@ export default function Settings() {
         </Row>
 
         <Row title="Volumen de los ambientes" hint={`${Math.round(masterVolume * 100)}%`}>
-          <div className="flex items-center gap-3">
+          <div className="settings-div-12">
             <Slider
               value={[masterVolume * 100]}
               onValueChange={([v]) => setMasterVolume(v / 100)}
@@ -89,13 +90,13 @@ export default function Settings() {
         </Row>
       </section>
 
-      <section className="deco-card mt-6 flex flex-wrap items-center gap-4 p-5 sm:p-6">
+      <section className="deco-card settings-section-13">
         {profile?.photoURL && (
-          <img src={profile.photoURL} alt="" referrerPolicy="no-referrer" className="size-12 rounded-full border border-gold/40" />
+          <img src={profile.photoURL} alt="" referrerPolicy="no-referrer" className="settings-img-14" />
         )}
-        <div className="min-w-0 flex-1">
-          <p className="truncate font-medium">{profile?.displayName ?? user?.displayName}</p>
-          <p className="truncate text-sm text-muted-foreground">{profile?.email ?? user?.email}</p>
+        <div className="settings-div-15">
+          <p className="settings-p-16">{profile?.displayName ?? user?.displayName}</p>
+          <p className="settings-p-17">{profile?.email ?? user?.email}</p>
         </div>
         <Button
           variant="outline"

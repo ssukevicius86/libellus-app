@@ -1,0 +1,141 @@
+/* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
+
+:where(.mood-div-1 > :not(:last-child)) {
+  margin-block-start: 0;
+  margin-block-end: 2rem;
+}
+
+:where(.mood-section-2 > :not(:last-child)) {
+  margin-block-start: 0;
+  margin-block-end: 1.5rem;
+}
+
+.mood-section-2 {
+  padding: 1.25rem;
+}
+
+@media (min-width: 40rem) {
+  .mood-section-2 {
+    padding: 1.5rem;
+  }
+}
+
+.mood-p-3 {
+  margin-top: 0.5rem;
+  font-family: Cormorant Garamond, ui-serif, Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.5556;
+  color: color-mix(in oklab, var(--foreground) 85%, transparent);
+  font-style: italic;
+}
+
+:where(.mood-figure-4 > :not(:last-child)) {
+  margin-block-start: 0;
+  margin-block-end: 0.5rem;
+}
+
+.mood-figcaption-5 {
+  font-size: .875rem;
+  line-height: 1.4286;
+  font-weight: 500;
+}
+
+.mood-p-6 {
+  font-size: .875rem;
+  line-height: 1.4286;
+  color: var(--muted-foreground);
+}
+
+:where(.mood-section-7 > :not(:last-child)) {
+  margin-block-start: 0;
+  margin-block-end: 1rem;
+}
+
+.mood-section-7 {
+  padding: 1.25rem;
+}
+
+@media (min-width: 40rem) {
+  .mood-section-7 {
+    padding: 1.5rem;
+  }
+}
+
+.mood-loader2-8 {
+  animation: spin 1s linear infinite;
+}
+
+:where(.mood-section-9 > :not(:last-child)) {
+  margin-block-start: 0;
+  margin-block-end: 0.75rem;
+}
+
+:where(.mood-ul-10 > :not(:last-child)) {
+  border-bottom-style: solid;
+  border-top-style: solid;
+  border-top-width: 0;
+  border-bottom-width: 1px;
+}
+
+.mood-ul-10 {
+  border-radius: var(--radius);
+  border-style: solid;
+  background-color: color-mix(in oklab, var(--card) 60%, transparent);
+  border-width: 1px;
+}
+
+.mood-li-11 {
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding-inline: 1rem;
+  padding-block: 0.75rem;
+  display: flex;
+}
+
+.mood-moodicon-12 {
+  margin-top: 0.125rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.mood-div-13 {
+  flex: 1;
+  min-width: 0;
+}
+
+.mood-p-14 {
+  font-size: .875rem;
+  line-height: 1.4286;
+}
+
+.mood-span-15 {
+  font-weight: 500;
+}
+
+.mood-span-16 {
+  color: var(--muted-foreground);
+}
+
+.mood-p-17 {
+  margin-top: 0.125rem;
+  font-family: Cormorant Garamond, ui-serif, Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: color-mix(in oklab, var(--foreground) 80%, transparent);
+}
+
+.mood-span-18 {
+  font-size: .75rem;
+  line-height: 1.3333;
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

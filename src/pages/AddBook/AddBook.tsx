@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import './AddBook.css'
 
 const STATUSES: BookStatus[] = ['want', 'reading', 'read']
 
@@ -39,15 +40,15 @@ export default function AddBook() {
 
   return (
     <div>
-      <Button asChild variant="ghost" size="sm" className="mb-4 -ml-2">
+      <Button asChild variant="ghost" size="sm" className="add-book-button-1">
         <Link to="/biblioteca">
           <ArrowLeft /> Biblioteca
         </Link>
       </Button>
       <PageHeader eyebrow="Nuevo en tus estantes" title="Agregar libro" />
 
-      <div className="mb-6 flex flex-wrap items-center gap-2">
-        <span className="text-sm text-muted-foreground">Agregar como:</span>
+      <div className="add-book-div-2">
+        <span className="add-book-span-3">Agregar como:</span>
         {STATUSES.map((s) => (
           <button
             key={s}
@@ -55,8 +56,8 @@ export default function AddBook() {
             onClick={() => setStatus(s)}
             aria-pressed={status === s}
             className={cn(
-              'rounded-full border px-3 py-1 text-sm transition-colors',
-              status === s ? 'border-gold bg-gold/10 text-gold' : 'text-muted-foreground hover:text-foreground',
+              'add-book-button-4',
+              status === s ? 'add-book-button-5' : 'add-book-button-6',
             )}
           >
             {STATUS_LABELS[s]}
@@ -65,7 +66,7 @@ export default function AddBook() {
       </div>
 
       {error && (
-        <p role="alert" className="mb-4 text-sm text-destructive">
+        <p role="alert" className="add-book-p-7">
           {error}
         </p>
       )}
@@ -75,10 +76,10 @@ export default function AddBook() {
           <TabsTrigger value="search">Buscar</TabsTrigger>
           <TabsTrigger value="manual">Cargar a mano</TabsTrigger>
         </TabsList>
-        <TabsContent value="search" className="pt-4">
+        <TabsContent value="search" className="add-book-tabscontent-8">
           <SearchPanel owned={owned} saving={saving} onAdd={(b) => save(b, b.googleId ?? b.title)} />
         </TabsContent>
-        <TabsContent value="manual" className="pt-4">
+        <TabsContent value="manual" className="add-book-tabscontent-8">
           <ManualForm saving={saving === 'manual'} onAdd={(b) => save(b, 'manual')} />
         </TabsContent>
       </Tabs>
@@ -127,8 +128,8 @@ function SearchPanel({
   }
 
   return (
-    <div className="space-y-4">
-      <form onSubmit={handleSearch} className="flex gap-2">
+    <div className="add-book-div-9">
+      <form onSubmit={handleSearch} className="add-book-form-10">
         <Input
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -137,36 +138,36 @@ function SearchPanel({
           autoFocus
         />
         <Button type="submit" disabled={searching || !q.trim()}>
-          {searching ? <Loader2 className="animate-spin" /> : <Search />}
-          <span className="hidden sm:inline">Buscar</span>
+          {searching ? <Loader2 className="add-book-loader2-11" /> : <Search />}
+          <span className="add-book-span-12">Buscar</span>
         </Button>
       </form>
 
-      {error && <p className="text-sm text-destructive">{error}</p>}
+      {error && <p className="add-book-p-13">{error}</p>}
 
       {results && results.length === 0 && (
-        <p className="text-sm text-muted-foreground">Sin resultados. Probá con otras palabras.</p>
+        <p className="add-book-span-3">Sin resultados. Probá con otras palabras.</p>
       )}
 
       {results && results.length > 0 && (
-        <ul className="divide-y rounded-lg border bg-card/60">
+        <ul className="add-book-ul-14">
           {results.map((r) => {
             const inLibrary = owned.has(r.googleId)
             const key = r.googleId ?? r.title
             return (
-              <li key={key} className="flex items-center gap-4 p-3">
-                <BookCover book={r} className="w-12" />
-                <div className="min-w-0 flex-1">
-                  <p className="line-clamp-2 text-sm font-medium">{r.title}</p>
-                  <p className="truncate text-xs text-muted-foreground">
+              <li key={key} className="add-book-li-15">
+                <BookCover book={r} className="add-book-bookcover-16" />
+                <div className="add-book-div-17">
+                  <p className="add-book-p-18">{r.title}</p>
+                  <p className="add-book-p-19">
                     {authorsLabel(r.authors)}
                     {r.publishedYear && ` · ${r.publishedYear}`}
                     {r.pageCount && ` · ${r.pageCount} pág.`}
                   </p>
                 </div>
                 {inLibrary ? (
-                  <span className="flex items-center gap-1 text-xs text-gold">
-                    <Check className="size-4" /> En tu biblioteca
+                  <span className="add-book-span-20">
+                    <Check className="add-book-check-21" /> En tu biblioteca
                   </span>
                 ) : (
                   <Button
@@ -176,8 +177,8 @@ function SearchPanel({
                     onClick={() => onAdd(r)}
                     aria-label={`Agregar ${r.title}`}
                   >
-                    {saving === key ? <Loader2 className="animate-spin" /> : <Plus />}
-                    <span className="hidden sm:inline">Agregar</span>
+                    {saving === key ? <Loader2 className="add-book-loader2-11" /> : <Plus />}
+                    <span className="add-book-span-12">Agregar</span>
                   </Button>
                 )}
               </li>
@@ -215,12 +216,12 @@ function ManualForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="deco-card grid max-w-xl gap-4 p-5 sm:p-6">
-      <div className="grid gap-2">
+    <form onSubmit={handleSubmit} className="deco-card add-book-form-22">
+      <div className="add-book-div-23">
         <Label htmlFor="title">Título *</Label>
         <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} required maxLength={300} />
       </div>
-      <div className="grid gap-2">
+      <div className="add-book-div-23">
         <Label htmlFor="authors">Autores</Label>
         <Input
           id="authors"
@@ -229,18 +230,18 @@ function ManualForm({
           placeholder="Separados por coma"
         />
       </div>
-      <div className="grid gap-4 sm:grid-cols-[8rem_1fr]">
-        <div className="grid gap-2">
+      <div className="add-book-div-24">
+        <div className="add-book-div-23">
           <Label htmlFor="pages">Páginas</Label>
           <Input id="pages" type="number" min={1} inputMode="numeric" value={pages} onChange={(e) => setPages(e.target.value)} />
         </div>
-        <div className="grid gap-2">
+        <div className="add-book-div-23">
           <Label htmlFor="cover">URL de portada (https)</Label>
           <Input id="cover" type="url" value={cover} onChange={(e) => setCover(e.target.value)} placeholder="https://…" />
         </div>
       </div>
-      <Button type="submit" disabled={saving || !title.trim()} className="justify-self-start">
-        {saving ? <Loader2 className="animate-spin" /> : <Plus />} Guardar libro
+      <Button type="submit" disabled={saving || !title.trim()} className="add-book-button-25">
+        {saving ? <Loader2 className="add-book-loader2-11" /> : <Plus />} Guardar libro
       </Button>
     </form>
   )

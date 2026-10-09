@@ -1,0 +1,149 @@
+/* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
+
+.settings-div-1 {
+  gap: 0.75rem;
+  padding-block: 1.25rem;
+  flex-direction: column;
+  display: flex;
+}
+
+@media (min-width: 40rem) {
+  .settings-div-1 {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.settings-p-2 {
+  font-size: .875rem;
+  line-height: 1.4286;
+  font-weight: 500;
+}
+
+.settings-p-3 {
+  font-size: .75rem;
+  line-height: 1.3333;
+  color: var(--muted-foreground);
+}
+
+@media (min-width: 40rem) {
+  .settings-div-4 {
+    width: 16rem;
+  }
+}
+
+.settings-div-5 {
+  max-width: 42rem;
+}
+
+:where(.settings-section-6 > :not(:last-child)) {
+  border-bottom-style: solid;
+  border-top-style: solid;
+  border-top-width: 0;
+  border-bottom-width: 1px;
+}
+
+.settings-section-6 {
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 40rem) {
+  .settings-section-6 {
+    padding-inline: 1.5rem;
+  }
+}
+
+.settings-div-7 {
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: grid;
+}
+
+.settings-button-8 {
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: calc(var(--radius) * .8);
+  border-style: solid;
+  padding-block: 0.5rem;
+  font-size: .875rem;
+  line-height: 1.4286;
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .15s;
+  border-width: 1px;
+  display: flex;
+}
+
+.settings-button-9 {
+  border-color: var(--gold);
+  background-color: color-mix(in oklab, var(--gold) 10%, transparent);
+  color: var(--gold);
+}
+
+.settings-button-10 {
+  color: var(--muted-foreground);
+}
+
+@media (hover: hover) {
+  .settings-button-10:hover {
+    color: var(--foreground);
+  }
+}
+
+.settings-icon-11 {
+  width: 1rem;
+  height: 1rem;
+}
+
+.settings-div-12 {
+  align-items: center;
+  gap: 0.75rem;
+  display: flex;
+}
+
+.settings-section-13 {
+  margin-top: 1.5rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+@media (min-width: 40rem) {
+  .settings-section-13 {
+    padding: 1.5rem;
+  }
+}
+
+.settings-img-14 {
+  width: 3rem;
+  height: 3rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: color-mix(in oklab, var(--gold) 40%, transparent);
+  border-radius: 9999px;
+}
+
+.settings-div-15 {
+  flex: 1;
+  min-width: 0;
+}
+
+.settings-p-16 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  overflow: hidden;
+}
+
+.settings-p-17 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: .875rem;
+  line-height: 1.4286;
+  color: var(--muted-foreground);
+  overflow: hidden;
+}

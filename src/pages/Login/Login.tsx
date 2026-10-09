@@ -5,6 +5,7 @@ import { LogIn } from 'lucide-react'
 import { DecoArch, DecoDivider, LotusIcon } from '@/components/deco'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/context/auth-context'
+import './Login.css'
 
 const CANCELLED = ['auth/popup-closed-by-user', 'auth/cancelled-popup-request']
 
@@ -39,25 +40,25 @@ export default function Login() {
   }
 
   return (
-    <main className="flex min-h-svh items-center justify-center p-6">
-      <DecoArch className="w-full max-w-sm">
-        <div className="flex min-h-[32rem] flex-col items-center justify-end gap-6 px-10 pt-24 pb-14 text-center">
-          <LotusIcon className="h-12 text-gold" />
-          <div className="space-y-2">
-            <h1 className="font-serif text-5xl text-gold">Libellus</h1>
-            <p className="text-xs tracking-[0.3em] text-muted-foreground uppercase">
+    <main className="login-main-1">
+      <DecoArch className="login-decoarch-2">
+        <div className="login-div-3">
+          <LotusIcon className="login-lotusicon-4" />
+          <div className="login-div-5">
+            <h1 className="login-h1-6">Libellus</h1>
+            <p className="login-p-7">
               Santuario digital de lectura
             </p>
           </div>
-          <DecoDivider className="w-40" />
-          <p className="font-serif text-lg italic text-foreground/80">
+          <DecoDivider className="login-decodivider-8" />
+          <p className="login-p-9">
             Tu biblioteca, tu atmósfera y tu calma, en un solo lugar.
           </p>
-          <Button size="lg" onClick={handleSignIn} disabled={loading || pending} className="w-full">
+          <Button size="lg" onClick={handleSignIn} disabled={loading || pending} className="login-button-10">
             <LogIn /> Entrar con Google
           </Button>
           {error && (
-            <p role="alert" className="text-sm text-destructive">
+            <p role="alert" className="login-p-11">
               {error}
             </p>
           )}

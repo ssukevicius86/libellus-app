@@ -1,0 +1,362 @@
+/* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
+
+.reading-session-div-1 {
+  z-index: 40;
+  background-color: var(--background);
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+}
+
+.reading-session-div-2 {
+  min-height: 100%;
+  max-width: 28rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding-inline: 1.5rem;
+  padding-block: 2.5rem;
+  flex-direction: column;
+  margin-inline: auto;
+  display: flex;
+}
+
+.reading-session-div-3 {
+  text-align: center;
+}
+
+.reading-session-lotusicon-4 {
+  margin-inline: auto;
+  margin-bottom: 0.75rem;
+  height: 1.75rem;
+  color: var(--gold);
+}
+
+.reading-session-p-5 {
+  font-family: Cormorant Garamond, ui-serif, Georgia, serif;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
+.reading-session-p-6 {
+  font-size: .875rem;
+  line-height: 1.4286;
+  color: var(--muted-foreground);
+}
+
+.reading-session-p-7 {
+  font-family: Cormorant Garamond, ui-serif, Georgia, serif;
+  font-size: 1.5rem;
+  line-height: 1.3333;
+  font-style: italic;
+}
+
+.reading-session-div-8 {
+  align-items: center;
+  gap: 0.75rem;
+  display: flex;
+}
+
+.reading-session-decodivider-9 {
+  width: 100%;
+}
+
+.reading-session-div-10 {
+  width: 100%;
+}
+
+:where(.reading-session-div-10 > :not(:last-child)) {
+  margin-block-start: 0;
+  margin-block-end: 1rem;
+}
+
+.reading-session-div-11 {
+  justify-content: center;
+  gap: 0.5rem;
+  display: flex;
+}
+
+.reading-session-button-12 {
+  border-style: solid;
+  padding-inline: 1rem;
+  padding-block: 0.375rem;
+  font-size: .875rem;
+  line-height: 1.4286;
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .15s;
+  border-width: 1px;
+  border-radius: 9999px;
+}
+
+.reading-session-button-13 {
+  border-color: var(--gold);
+  background-color: color-mix(in oklab, var(--gold) 10%, transparent);
+  color: var(--gold);
+}
+
+.reading-session-button-14 {
+  color: var(--muted-foreground);
+}
+
+@media (hover: hover) {
+  .reading-session-button-14:hover {
+    color: var(--foreground);
+  }
+}
+
+.reading-session-button-15 {
+  color: var(--gold);
+}
+
+.reading-session-div-16 {
+  max-width: 28rem;
+  align-items: center;
+  gap: 1.25rem;
+  padding-block: 2.5rem;
+  text-align: center;
+  flex-direction: column;
+  margin-inline: auto;
+  display: flex;
+}
+
+.reading-session-lotusicon-17 {
+  height: 2.5rem;
+  color: var(--gold);
+}
+
+.reading-session-h1-18 {
+  font-size: 1.5rem;
+  line-height: 1.3333;
+  font-weight: 300;
+}
+
+.reading-session-decodivider-19 {
+  width: 10rem;
+}
+
+.reading-session-p-20 {
+  font-family: Cormorant Garamond, ui-serif, Georgia, serif;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: color-mix(in oklab, var(--foreground) 85%, transparent);
+  font-style: italic;
+}
+
+.reading-session-div-21 {
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.reading-session-div-22 {
+  gap: 1.5rem;
+  display: grid;
+}
+
+@media (min-width: 64rem) {
+  .reading-session-div-22 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+:where(.reading-session-div-23 > :not(:last-child)) {
+  margin-block-start: 0;
+  margin-block-end: 1.5rem;
+}
+
+:where(.reading-session-section-24 > :not(:last-child)) {
+  margin-block-start: 0;
+  margin-block-end: 1rem;
+}
+
+.reading-session-section-24 {
+  padding: 1.25rem;
+}
+
+.reading-session-div-25 {
+  gap: 0.75rem;
+  padding-bottom: .25rem;
+  display: flex;
+  overflow-x: auto;
+}
+
+.reading-session-button-26 {
+  aspect-ratio: 2 / 3;
+  width: 5rem;
+  border-radius: calc(var(--radius) * .8);
+  border-style: solid;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: .75rem;
+  line-height: 1.3333;
+  color: var(--muted-foreground);
+  border-width: 1px;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.reading-session-button-27 {
+  border-color: var(--gold);
+  color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold);
+}
+
+.reading-session-button-28 {
+  border-radius: calc(var(--radius) * .8);
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .15s;
+  flex-shrink: 0;
+}
+
+.reading-session-button-29 {
+  box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--gold);
+}
+
+.reading-session-button-30 {
+  opacity: .6;
+}
+
+@media (hover: hover) {
+  .reading-session-button-30:hover {
+    opacity: 1;
+  }
+}
+
+.reading-session-bookcover-31 {
+  width: 5rem;
+}
+
+.reading-session-p-32 {
+  font-size: .875rem;
+  line-height: 1.4286;
+}
+
+.reading-session-p-33 {
+  font-size: .75rem;
+  line-height: 1.3333;
+  color: var(--muted-foreground);
+}
+
+.reading-session-link-34 {
+  text-underline-offset: 4px;
+  text-decoration-line: underline;
+}
+
+.reading-session-div-35 {
+  gap: 0.5rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: grid;
+}
+
+.reading-session-button-36 {
+  border-radius: calc(var(--radius) * .8);
+  border-style: solid;
+  padding-block: 0.5rem;
+  font-size: .875rem;
+  line-height: 1.4286;
+  font-variant-numeric: tabular-nums;
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .15s;
+  border-width: 1px;
+}
+
+.reading-session-button-37 {
+  border-radius: calc(var(--radius) * .8);
+  border-style: solid;
+  padding-block: 0.5rem;
+  font-size: .875rem;
+  line-height: 1.4286;
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .15s;
+  border-width: 1px;
+}
+
+:where(.reading-session-div-38 > :not(:last-child)) {
+  margin-block-start: 0;
+  margin-block-end: 0.5rem;
+}
+
+.reading-session-div-39 {
+  font-size: .875rem;
+  line-height: 1.4286;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.reading-session-span-40 {
+  align-items: center;
+  gap: 0.5rem;
+  display: flex;
+}
+
+.reading-session-sundim-41 {
+  width: 1rem;
+  height: 1rem;
+  color: var(--gold);
+}
+
+.reading-session-span-42 {
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.reading-session-form-43 {
+  max-width: 32rem;
+  margin-inline: auto;
+}
+
+:where(.reading-session-form-43 > :not(:last-child)) {
+  margin-block-start: 0;
+  margin-block-end: 1.5rem;
+}
+
+.reading-session-section-44 {
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  display: flex;
+}
+
+.reading-session-bookcover-45 {
+  width: 3.5rem;
+}
+
+.reading-session-div-46 {
+  gap: 0.375rem;
+  flex: 1;
+  display: grid;
+}
+
+.reading-session-input-47 {
+  width: 8rem;
+}
+
+.reading-session-p-48 {
+  font-size: .875rem;
+  line-height: 1.4286;
+  color: var(--destructive);
+}
+
+.reading-session-div-49 {
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.reading-session-loader2-50 {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

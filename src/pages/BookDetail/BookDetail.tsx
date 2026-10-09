@@ -34,6 +34,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
 import { Textarea } from '@/components/ui/textarea'
+import './BookDetail.css'
 
 const STATUSES: BookStatus[] = ['want', 'reading', 'read']
 const dateFmt = new Intl.DateTimeFormat('es', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -52,11 +53,11 @@ export default function BookDetail() {
   const { id } = useParams()
   const { data: book, loading } = useBook(id)
 
-  if (loading) return <p className="text-muted-foreground">Cargando…</p>
+  if (loading) return <p className="book-detail-p-1">Cargando…</p>
   if (!book) {
     return (
-      <div className="flex flex-col items-start gap-4">
-        <p className="font-serif text-lg italic text-muted-foreground">Este libro ya no está en tu biblioteca.</p>
+      <div className="book-detail-div-2">
+        <p className="book-detail-p-3">Este libro ya no está en tu biblioteca.</p>
         <Button asChild variant="outline">
           <Link to="/biblioteca">Volver a la biblioteca</Link>
         </Button>
@@ -77,23 +78,23 @@ function BookView({ book }: { book: Book }) {
   }
 
   return (
-    <div className="space-y-8">
-      <Button asChild variant="ghost" size="sm" className="-ml-2">
+    <div className="book-detail-div-4">
+      <Button asChild variant="ghost" size="sm" className="book-detail-button-5">
         <Link to="/biblioteca">
           <ArrowLeft /> Biblioteca
         </Link>
       </Button>
 
-      <section className="flex flex-col gap-6 sm:flex-row">
-        <BookCover book={book} className="w-36 self-center sm:w-44 sm:self-start" />
-        <div className="min-w-0 flex-1 space-y-4">
-          <div className="space-y-2">
+      <section className="book-detail-section-6">
+        <BookCover book={book} className="book-detail-bookcover-7" />
+        <div className="book-detail-div-8">
+          <div className="book-detail-div-9">
             <StatusBadge status={book.status} />
-            <h1 className="font-serif text-3xl leading-tight sm:text-4xl">{book.title}</h1>
-            <p className="text-muted-foreground">{authorsLabel(book.authors)}</p>
+            <h1 className="book-detail-h1-10">{book.title}</h1>
+            <p className="book-detail-p-1">{authorsLabel(book.authors)}</p>
           </div>
 
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Estado de lectura">
+          <div className="book-detail-div-11" role="group" aria-label="Estado de lectura">
             {STATUSES.map((s) => (
               <button
                 key={s}
@@ -101,10 +102,10 @@ function BookView({ book }: { book: Book }) {
                 onClick={() => void changeStatus(s)}
                 aria-pressed={book.status === s}
                 className={cn(
-                  'rounded-full border px-3 py-1 text-sm transition-colors',
+                  'book-detail-button-12',
                   book.status === s
-                    ? 'border-gold bg-gold/10 text-gold'
-                    : 'text-muted-foreground hover:text-foreground',
+                    ? 'book-detail-button-13'
+                    : 'book-detail-button-14',
                 )}
               >
                 {STATUS_LABELS[s]}
@@ -112,8 +113,8 @@ function BookView({ book }: { book: Book }) {
             ))}
           </div>
 
-          <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">Tu valoración</p>
+          <div className="book-detail-div-15">
+            <p className="book-detail-p-16">Tu valoración</p>
             <Stars value={book.rating} onChange={(rating) => void updateBook(uid, book.id, { rating })} />
           </div>
 
@@ -125,14 +126,14 @@ function BookView({ book }: { book: Book }) {
         </div>
       </section>
 
-      <section className="deco-card space-y-4 p-5 sm:p-6">
-        <div className="flex items-center justify-between gap-4">
+      <section className="deco-card book-detail-section-17">
+        <div className="book-detail-div-18">
           <h2 className="deco-eyebrow">Progreso</h2>
-          <span className="text-sm tabular-nums text-muted-foreground">{Math.round(progress * 100)}%</span>
+          <span className="book-detail-span-19">{Math.round(progress * 100)}%</span>
         </div>
         <Progress value={progress * 100} />
         <ProgressEditor key={`${book.currentPage}-${book.pageCount}`} book={book} onFinished={celebrate} />
-        <p className="text-xs text-muted-foreground">
+        <p className="book-detail-p-16">
           {book.startedAt && `Empezado el ${dateFmt.format(book.startedAt.toDate())}`}
           {book.finishedAt && ` · Terminado el ${dateFmt.format(book.finishedAt.toDate())}`}
         </p>
@@ -141,9 +142,9 @@ function BookView({ book }: { book: Book }) {
       <NotesEditor key={book.id} book={book} />
 
       {book.description && (
-        <section className="space-y-2">
+        <section className="book-detail-div-9">
           <h2 className="deco-eyebrow">Sinopsis</h2>
-          <p className="font-serif text-lg leading-relaxed text-foreground/85">{book.description}</p>
+          <p className="book-detail-p-20">{book.description}</p>
         </section>
       )}
 
@@ -182,17 +183,17 @@ function ProgressEditor({ book, onFinished }: { book: Book; onFinished: () => vo
   const dirty = page !== String(book.currentPage) || total !== (book.pageCount ? String(book.pageCount) : '')
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-wrap items-end gap-3">
-      <div className="grid gap-1.5">
+    <form onSubmit={handleSubmit} className="book-detail-form-21">
+      <div className="book-detail-div-22">
         <Label htmlFor="page">Página actual</Label>
-        <Input id="page" type="number" min={0} inputMode="numeric" value={page} onChange={(e) => setPage(e.target.value)} className="w-28" />
+        <Input id="page" type="number" min={0} inputMode="numeric" value={page} onChange={(e) => setPage(e.target.value)} className="book-detail-input-23" />
       </div>
-      <div className="grid gap-1.5">
+      <div className="book-detail-div-22">
         <Label htmlFor="total">de</Label>
-        <Input id="total" type="number" min={1} inputMode="numeric" value={total} onChange={(e) => setTotal(e.target.value)} placeholder="total" className="w-28" />
+        <Input id="total" type="number" min={1} inputMode="numeric" value={total} onChange={(e) => setTotal(e.target.value)} placeholder="total" className="book-detail-input-23" />
       </div>
       <Button type="submit" variant="outline" disabled={!dirty || saving}>
-        {saving && <Loader2 className="animate-spin" />} Actualizar
+        {saving && <Loader2 className="book-detail-loader2-24" />} Actualizar
       </Button>
     </form>
   )
@@ -215,7 +216,7 @@ function NotesEditor({ book }: { book: Book }) {
   }
 
   return (
-    <section className="space-y-3">
+    <section className="book-detail-section-25">
       <h2 className="deco-eyebrow">Notas y citas</h2>
       <Textarea
         value={notes}
@@ -223,11 +224,11 @@ function NotesEditor({ book }: { book: Book }) {
         placeholder="Frases que te quedaron, ideas, lo que te hizo sentir…"
         rows={5}
         maxLength={20000}
-        className="font-serif text-lg"
+        className="book-detail-textarea-26"
         aria-label="Notas y citas"
       />
       <Button variant="outline" size="sm" onClick={() => void save()} disabled={notes === saved || saving}>
-        {saving && <Loader2 className="animate-spin" />}
+        {saving && <Loader2 className="book-detail-loader2-24" />}
         {notes === saved ? 'Guardado' : 'Guardar notas'}
       </Button>
     </section>
@@ -240,22 +241,22 @@ function SessionsList({ bookId }: { bookId: string }) {
   const total = sessions.reduce((sum, s) => sum + s.durationMin, 0)
 
   return (
-    <section className="space-y-3">
-      <div className="flex items-baseline justify-between">
+    <section className="book-detail-section-25">
+      <div className="book-detail-div-27">
         <h2 className="deco-eyebrow">Sesiones de lectura</h2>
-        <span className="text-xs text-muted-foreground">{formatMinutes(total)} en total</span>
+        <span className="book-detail-p-16">{formatMinutes(total)} en total</span>
       </div>
-      <ul className="divide-y rounded-lg border bg-card/60">
+      <ul className="book-detail-ul-28">
         {sessions.map((s) => (
-          <li key={s.id} className="flex items-center justify-between gap-3 px-4 py-3 text-sm">
+          <li key={s.id} className="book-detail-li-29">
             <span>{dateFmt.format(s.startedAt.toDate())}</span>
-            <span className="flex items-center gap-3 text-muted-foreground">
+            <span className="book-detail-span-30">
               {s.pagesRead ? <span>{s.pagesRead} pág.</span> : null}
-              <span className="tabular-nums">{formatMinutes(s.durationMin)}</span>
+              <span className="book-detail-span-31">{formatMinutes(s.durationMin)}</span>
               {s.moodAfter && (
-                <span className="flex items-center gap-1" title={MOOD_LABELS[s.moodAfter as MoodValue]}>
-                  <MoodIcon mood={s.moodAfter as MoodValue} className="size-4 text-gold" />
-                  <span className="sr-only">{MOOD_LABELS[s.moodAfter as MoodValue]}</span>
+                <span className="book-detail-span-32" title={MOOD_LABELS[s.moodAfter as MoodValue]}>
+                  <MoodIcon mood={s.moodAfter as MoodValue} className="book-detail-moodicon-33" />
+                  <span className="book-detail-span-34">{MOOD_LABELS[s.moodAfter as MoodValue]}</span>
                 </span>
               )}
             </span>
@@ -285,7 +286,7 @@ function DeleteBook({ book }: { book: Book }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="text-destructive hover:text-destructive">
+        <Button variant="ghost" className="book-detail-button-35">
           <Trash2 /> Quitar de la biblioteca
         </Button>
       </DialogTrigger>
@@ -301,7 +302,7 @@ function DeleteBook({ book }: { book: Book }) {
             <Button variant="outline">Cancelar</Button>
           </DialogClose>
           <Button variant="destructive" onClick={() => void handleDelete()} disabled={deleting}>
-            {deleting && <Loader2 className="animate-spin" />} Quitar
+            {deleting && <Loader2 className="book-detail-loader2-24" />} Quitar
           </Button>
         </DialogFooter>
       </DialogContent>

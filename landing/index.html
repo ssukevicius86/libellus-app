@@ -1252,33 +1252,6 @@
         }
 
         /* ===============================================
-           FRANJA DE VALORES
-           =============================================== */
-        .valores {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
-            gap: 1.5rem;
-            padding: 1.75rem;
-        }
-
-        .valor { display: flex; align-items: center; gap: 0.875rem; }
-
-        .valor-icono {
-            display: grid;
-            place-items: center;
-            width: 2.75rem;
-            height: 2.75rem;
-            flex-shrink: 0;
-            border-radius: var(--radio-pildora);
-            color: var(--gold);
-            box-shadow: var(--relieve-hundido);
-        }
-
-        .valor-icono svg { width: 1.25rem; height: 1.25rem; }
-        .valor strong { display: block; font-size: 0.8125rem; font-weight: 600; }
-        .valor span { font-size: 0.75rem; color: var(--muted-foreground); }
-
-        /* ===============================================
            LLAMADO FINAL Y PIE
            =============================================== */
         .llamado {
@@ -1313,6 +1286,182 @@
         }
 
         .pie .marca { justify-content: center; margin-bottom: 0.75rem; }
+
+        /* ===============================================
+           DATOS DEL HERO: detalle debajo de cada número
+           =============================================== */
+        .hero-datos small { display: block; font-size: 0.6875rem; opacity: 0.8; }
+
+        /* ===============================================
+           ¿POR QUÉ LIBELLUS?: tarjetas lavanda, azul noche y dorado
+           =============================================== */
+        .beneficios {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+        }
+
+        .beneficio {
+            padding: 2rem 1.75rem;
+            border-radius: var(--radio-xl);
+            box-shadow: var(--relieve-elevado);
+        }
+
+        .beneficio h3 { font-size: 1.5rem; margin: 1.25rem 0 0.5rem; }
+        .beneficio p { font-size: 0.9375rem; text-wrap: pretty; }
+
+        .beneficio-icono {
+            display: grid;
+            place-items: center;
+            width: 3.25rem;
+            height: 3.25rem;
+            border-radius: var(--radio-pildora);
+            background: rgb(255 255 255 / 0.22);
+            box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.35);
+        }
+
+        .beneficio-icono svg { width: 1.5rem; height: 1.5rem; }
+
+        .beneficio--lavanda { background: linear-gradient(160deg, #c3b8d1, #a99bb8); color: #27344a; }
+        .beneficio--noche { background: linear-gradient(160deg, #34405c, #27344a); color: #f0e6d8; }
+        .beneficio--noche .beneficio-icono { color: #c19d5f; background: rgb(240 230 216 / 0.08); }
+        .beneficio--dorado { background: linear-gradient(160deg, #d5b783, #c19d5f); color: #27344a; }
+
+        /* ===============================================
+           MÓDULOS: Focus Timer, biblioteca y cierre
+           =============================================== */
+        .modulos {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+            margin-bottom: 1.5rem;
+        }
+
+        .modulo { padding: 1.75rem; }
+        .modulo h3 { font-size: 1.5rem; margin: 1.25rem 0 0.5rem; }
+        .modulo > p { font-size: 0.875rem; color: var(--muted-foreground); text-wrap: pretty; }
+
+        .modulo-visual {
+            position: relative;
+            display: grid;
+            place-items: center;
+            height: 9rem;
+            border-radius: var(--radio-lg);
+            box-shadow: var(--relieve-hundido);
+            overflow: hidden;
+        }
+
+        /* Timer: anillo dorado sobre la noche */
+        .modulo-visual--timer { background: linear-gradient(160deg, #34405c, #182132); }
+
+        .timer-anillo {
+            grid-area: 1 / 1;
+            width: 6.5rem;
+            height: 6.5rem;
+            border-radius: 50%;
+            background: conic-gradient(#c19d5f 0 68%, rgb(240 230 216 / 0.14) 68% 100%);
+            mask: radial-gradient(farthest-side, transparent calc(100% - 6px), #000 calc(100% - 5px));
+        }
+
+        .timer-tiempo {
+            grid-area: 1 / 1;
+            font-family: var(--fuente-serif);
+            font-size: 1.5rem;
+            color: #f0e6d8;
+            opacity: 0.85;
+        }
+
+        /* Estante art déco: lomos con filetes dorados */
+        .modulo-visual--estante {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 0.35rem;
+            padding: 1rem 1rem 0;
+            background: linear-gradient(to bottom, var(--muted), var(--background));
+            border-bottom: 6px solid #c19d5f;
+        }
+
+        .modulo-visual--estante i {
+            width: 1.6rem;
+            height: var(--alto);
+            border-radius: 3px 3px 0 0;
+            background:
+                linear-gradient(to bottom, transparent 14%, #c19d5f 14% 17%, transparent 17% 80%, #c19d5f 80% 83%, transparent 83%),
+                var(--color);
+            box-shadow: inset -3px 0 0 rgb(0 0 0 / 0.12);
+        }
+
+        .modulo-visual--estante i.inclinado { transform: rotate(8deg); transform-origin: bottom left; }
+
+        /* Mensaje al terminar la sesión */
+        .modulo-visual--mensaje {
+            background: linear-gradient(160deg, #f0e6d8, #e2d6c8);
+            color: #27344a;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .modulo-visual--mensaje p { font-family: var(--fuente-serif); font-size: 1.375rem; line-height: 1.25; }
+        .modulo-visual--mensaje span { display: block; font-size: 1rem; color: #7d5e2a; }
+
+        /* ===============================================
+           CIERRE: QR sobre tarjeta Moon Cream con guarda art déco
+           =============================================== */
+        /* La luna de la ilustración es crema como el texto: se atenúa para que no lo tape */
+        .instalar .escena { opacity: 0.32; }
+        .instalar h2, .instalar > p { text-shadow: 0 1px 12px rgb(22 30 46 / 0.8); }
+        .instalar .eyebrow { color: #c19d5f; margin-bottom: 0.75rem; }
+        .instalar strong { color: #f0e6d8; }
+
+        .instalar-cuerpo {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem 3rem;
+            margin: 2.5rem auto;
+        }
+
+        .qr { margin: 0; }
+
+        .qr-codigo {
+            width: 12.5rem;
+            height: 12.5rem;
+            padding: 1rem;
+            border-radius: var(--radio-lg);
+            background: #f0e6d8;
+            /* Guarda art déco: filete dorado doble */
+            outline: 1px solid #d4af30;
+            outline-offset: -0.5rem;
+            box-shadow: 0 0 0 4px #f0e6d8, 0 0 0 5px #d4af30, 0 18px 40px -12px rgb(0 0 0 / 0.55);
+        }
+
+        .qr figcaption { margin-top: 1rem; font-size: 0.75rem; color: #d8cfdc; }
+
+        .instalar-lista {
+            display: grid;
+            gap: 0.875rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-align: start;
+            font-size: 0.9375rem;
+        }
+
+        .instalar-lista li { display: flex; align-items: center; gap: 0.75rem; }
+
+        .instalar-lista svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            padding: 0.3rem;
+            border-radius: 50%;
+            color: #27344a;
+            background: #c19d5f;
+            flex-shrink: 0;
+        }
+
+        .instalar-nota { margin-top: 1.25rem; font-size: 0.8125rem; }
 
         /* Aparición al hacer scroll */
         .aparece {
@@ -1378,21 +1527,21 @@
             <path id="pino" d="M0-46 15-16H8l14 22H-22l14-22H-15Z" />
         </defs>
 
-        <!-- Logo: las dos alas de Libellus -->
-        <symbol id="logo" viewBox="100 20 608 392">
+        <!-- Logo: isotipo de la marca (flor de loto sobre el libro abierto) -->
+        <symbol id="logo" viewBox="51 53 740 480">
             <g fill="currentColor" stroke="currentColor" stroke-miterlimit="10">
-                <path d="M337.84,161.08c-5.18,29.18-.78,55.56,6.43,83.56-22.17-21.21-44.21-36.24-72.01-45.54-12.11-29.47-12.48-60.06-7.82-93.1,29.3,13.65,55.13,28.26,73.41,55.08Z"/>
-                <path d="M113.68,371.23h244.13c7.39,12.12,31.36,22.88,45.88,19.94.09,3.3.18,6.61.27,9.91-12.51,2.5-38.04-6.64-46.15-16.59-81.38-.14-162.75-.28-244.13-.42v-12.83Z"/>
-                <path d="M385.42,345.29c-12.94-22.62-49.64-54.34-70.61-63.34,16.07,20.75,47.51,49.14,70.61,63.34Z"/>
-                <path d="M143.01,370.64l-14.21.13c5.52-9.55,13.25-22.96,18.69-32.37,77.47-2.58,160.16-12.36,227.92,34.08-65.5-20.12-156.25-38.64-223.14-17.88-3.09,5.35-6.17,10.69-9.26,16.04Z"/>
-                <path d="M170.91,338.4l18.14-30.82c28.57-4.01,56.9-3.59,85.51-.17,48.77,13.23,92.27,28.25,129.41,63.81v12.42c-60.39-48.98-129.03-77.56-207.78-66.12l-12.11,19.94-13.17.93Z"/>
-                <path d="M230.16,303.82c-26.51-31.16-54.22-73.19-64.04-113.82,3.39-.27,30.88-2.4,34.99-2.72,0,0,29.05,1.67,29.05,1.67,0,0,29.05,6.26,29.05,6.26-6.91-20.35-8.78-51.65-8-73,0,0,5.62-30.72,5.62-30.72,29.35,10.75,61.48,31.94,83.45,54.6,7.85-41.93,35.23-85.99,63.07-117.33l.55,15.24c-50.32,59.03-78.5,151.77-38.54,223.46,18.89,26.64,38.38,59.77,38.47,93.39-31.75-95.25-116.56-176.6-222.85-161.32,12.47,47.22,43.46,95.78,93.56,107.9l-44.39-3.59Z"/>
-                <path d="M470.01,161.08c5.18,29.18.78,55.56-6.43,83.56,22.17-21.21,44.21-36.24,72.01-45.54,12.11-29.47,12.48-60.06,7.82-93.1-29.3,13.65-55.13,28.26-73.41,55.08Z"/>
-                <path d="M694.17,371.23h-244.13c-7.39,12.12-31.36,22.88-45.88,19.94-.09,3.3-.18,6.61-.27,9.91,12.51,2.5,38.04-6.64,46.15-16.59,81.38-.14,162.75-.28,244.13-.42v-12.83Z"/>
-                <path d="M422.43,345.29c12.94-22.62,49.64-54.34,70.61-63.34-16.07,20.75-47.51,49.14-70.61,63.34Z"/>
-                <path d="M664.85,370.64l14.21.13c-5.52-9.55-13.25-22.96-18.69-32.37-77.47-2.58-160.16-12.36-227.92,34.08,65.5-20.12,156.25-38.64,223.14-17.88,3.09,5.35,6.17,10.69,9.26,16.04Z"/>
-                <path d="M635.82,338.32l-17.01-30.74c-28.57-4.01-56.9-3.59-85.51-.17-48.77,13.23-92.27,28.25-129.41,63.81v12.42c60.39-48.98,129.03-77.56,207.78-66.12l11.72,19.92,12.43.88Z"/>
-                <path d="M577.7,303.82c26.51-31.16,54.22-73.19,64.04-113.82-3.39-.27-30.88-2.4-34.99-2.72,0,0-29.05,1.67-29.05,1.67l-29.05,6.26c6.91-20.35,8.78-51.65,8-73,0,0-5.62-30.72-5.62-30.72-29.35,10.75-61.48,31.94-83.45,54.6-8.25-42.38-34.76-86.05-63.65-117.59l.03,15.5c50.32,59.03,78.5,151.77,38.54,223.46-18.89,26.64-38.38,59.77-38.47,93.39,31.75-95.25,116.56-176.6,222.85-161.32-12.47,47.22-43.46,95.78-93.56,107.9l44.39-3.59Z"/>
+                <path d="M338.28,225.95c-6.48,36.5-.98,69.5,8.04,104.53-27.73-26.54-55.3-45.34-90.08-56.97-15.15-36.87-15.61-75.13-9.78-116.46,36.65,17.07,68.96,35.35,91.83,68.9h-.01Z"/>
+                <path d="M57.87,488.83h305.39c9.24,15.16,39.23,28.62,57.39,24.94.11,4.13.23,8.27.34,12.4-15.65,3.13-47.59-8.31-57.73-20.75q-152.7-.27-305.39-.53v-16.05h0Z"/>
+                <path d="M397.8,456.38c-16.19-28.29-62.1-67.97-88.33-79.23,20.1,25.95,59.43,61.47,88.33,79.23H397.8Z"/>
+                <path d="M94.56,488.09l-17.77.16c6.9-11.94,16.57-28.72,23.38-40.49,96.9-3.23,200.34-15.46,285.1,42.63-81.93-25.17-195.45-48.33-279.12-22.36q-5.8,10.04-11.59,20.06h0Z"/>
+                <path d="M129.46,447.76l22.69-38.55c35.74-5.02,71.18-4.49,106.97-.21,61.01,16.55,115.42,35.33,161.88,79.82v15.53c-75.54-61.27-161.4-97.02-259.91-82.71l-15.15,24.95-16.48,1.16h0Z"/>
+                <path d="M203.58,404.51c-33.16-38.98-67.83-91.56-80.11-142.38,4.24-.34,38.63-3.01,43.77-3.41l36.34,2.09,36.34,7.83c-8.65-25.45-10.98-64.61-10.01-91.31l7.03-38.43c36.72,13.45,76.91,39.95,104.39,68.3,9.82-52.45,43.88-107.84,78.71-147.04l.87,19.33c-62.94,73.84-98.19,189.85-48.21,279.53,23.63,33.33,48.01,74.77,48.13,116.83-39.72-119.15-145.81-220.92-278.77-201.8,15.6,59.07,54.36,119.81,117.03,134.97l-55.52-4.49v-.02Z"/>
+                <path d="M503.61,225.95c6.48,36.5.98,69.5-8.04,104.53,27.73-26.54,55.3-45.34,90.08-56.97,15.15-36.87,15.61-75.13,9.78-116.46-36.65,17.07-68.96,35.35-91.83,68.9h.01Z"/>
+                <path d="M784.02,488.83h-305.39c-9.24,15.16-39.23,28.62-57.39,24.94-.11,4.13-.23,8.27-.34,12.4,15.65,3.13,47.59-8.31,57.73-20.75q152.7-.27,305.39-.53v-16.05h0Z"/>
+                <path d="M444.09,456.38c16.19-28.29,62.1-67.97,88.33-79.23C512.32,403.1,472.99,438.62,444.09,456.38Z"/>
+                <path d="M747.34,488.09l17.78.16c-6.91-11.94-16.58-28.72-23.38-40.49-96.91-3.23-200.35-15.46-285.11,42.63,81.93-25.17,195.45-48.33,279.13-22.36q5.8,10.04,11.58,20.06h0Z"/>
+                <path d="M711.03,447.66l-21.28-38.45c-35.74-5.02-71.18-4.49-106.97-.21-61,16.55-115.42,35.33-161.88,79.82v15.53c75.54-61.27,161.41-97.02,259.92-82.71l14.66,24.92,15.55,1.1h0Z"/>
+                <path d="M638.32,404.51c33.16-38.98,67.83-91.56,80.11-142.38-4.24-.34-38.63-3.01-43.77-3.41l-36.34,2.09-36.34,7.83c8.65-25.45,10.99-64.61,10.01-91.31l-7.03-38.43c-36.71,13.45-76.91,39.95-104.39,68.3-10.32-53.02-43.23-107.56-79.37-147.02l-.21,19.31c62.94,73.84,98.2,189.85,48.21,279.53-23.63,33.33-48.01,74.77-48.12,116.83,39.71-119.15,145.8-220.92,278.76-201.8-15.6,59.07-54.36,119.81-117.03,134.97l55.53-4.49v-.02Z"/>
             </g>
         </symbol>
 
@@ -1534,9 +1683,10 @@
                 </span>
             </a>
             <nav class="nav" aria-label="Secciones">
+                <a href="#valores">Por qué Libellus</a>
                 <a href="#app">La app</a>
                 <a href="#detalles">Detalles</a>
-                <a href="#valores">Por qué Libellus</a>
+                <a href="#instalar">Instalar</a>
             </nav>
             <div class="cabecera-acciones">
                 <button type="button" class="icono-boton" id="tema" aria-label="Cambiar tema">
@@ -1556,23 +1706,26 @@
             <div class="contenedor">
                 <div class="aparece">
                     <p class="eyebrow">Lectura · Calma · Ritual</p>
-                    <h1>Encontrá tu <span class="dorado">rincón de lectura</span></h1>
+                    <h1>Encontrá tu <span class="dorado">refugio de lectura</span></h1>
                     <p class="hero-bajada">
-                        Libellus es una app para leer con calma: un temporizador que cuida tu concentración,
-                        sonidos que te envuelven, tu biblioteca siempre a mano y un registro de cómo te hace
-                        sentir cada página.
+                        Libellus no busca que leas más, sino que disfrutes leer otra vez. Una Progressive Web App
+                        diseñada como un refugio de calma: temporizador de concentración sin presiones,
+                        microambientes sonoros envolventes, registro emocional y una biblioteca a tu propio ritmo.
                     </p>
                     <div class="hero-botones">
                         <a href="/login" class="boton boton--dorado">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
-                            Empezar a leer
+                            Empezar mi ritual
                         </a>
-                        <a href="#app" class="boton">Ver la app</a>
+                        <a href="#instalar" class="boton">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg>
+                            Escanear QR
+                        </a>
                     </div>
                     <ul class="hero-datos">
-                        <li><strong>3</strong><span>ambientes sonoros</span></li>
-                        <li><strong>5</strong><span>climas de ánimo</span></li>
-                        <li><strong>0</strong><span>distracciones</span></li>
+                        <li><strong>3</strong><span>ambientes sonoros<small>Lluvia, Bosque, Piano</small></span></li>
+                        <li><strong>5</strong><span>climas de ánimo<small>Tormenta, Calma, Radiante…</small></span></li>
+                        <li><strong>0</strong><span>distracciones<small>ni presiones numéricas</small></span></li>
                     </ul>
                 </div>
 
@@ -1658,6 +1811,43 @@
                             <div class="dias"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="filete" aria-hidden="true"><span></span></div>
+
+        <!-- ===============================================
+             ¿POR QUÉ LIBELLUS?
+             =============================================== -->
+        <section class="seccion" id="valores">
+            <div class="contenedor">
+                <div class="seccion-cabeza aparece">
+                    <p class="eyebrow">¿Por qué Libellus?</p>
+                    <h2>Leer para sentirse mejor, no solo para leer más</h2>
+                    <p class="texto-secundario">
+                        Las aplicaciones tradicionales tratan a la lectura como una métrica o una competencia.
+                        Libellus propone un cambio de paradigma: transformar cada sesión en un momento íntimo de
+                        autocuidado, descompresión urbana y paz mental.
+                    </p>
+                </div>
+
+                <div class="beneficios">
+                    <article class="beneficio beneficio--lavanda aparece">
+                        <span class="beneficio-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+                        <h3>Lectura a ritmo propio</h3>
+                        <p>Mirá tu progreso de forma amigable, página a página, sin metas imposibles ni alertas estresantes.</p>
+                    </article>
+                    <article class="beneficio beneficio--noche aparece">
+                        <span class="beneficio-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg></span>
+                        <h3>Microambientes sonoros</h3>
+                        <p>Aislá el ruido exterior combinando lluvia, bosques serenos y notas suaves de piano.</p>
+                    </article>
+                    <article class="beneficio beneficio--dorado aparece">
+                        <span class="beneficio-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v2M4.93 4.93l1.41 1.41M20 12h2M19.07 4.93l-1.41 1.41M15.95 12.65a4 4 0 0 0-5.93-4.61"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/></svg></span>
+                        <h3>Registro de ánimo</h3>
+                        <p>Elegí cómo te sentís hoy (Calma, Luminoso, Radiante…) y descubrí cómo cada historia transforma tu clima emocional.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -1801,9 +1991,34 @@
         <section class="seccion" id="detalles">
             <div class="contenedor">
                 <div class="seccion-cabeza aparece">
-                    <p class="eyebrow">Cada detalle cuenta</p>
-                    <h2>Diseñada como un objeto querido</h2>
+                    <p class="eyebrow">Diseñada como un objeto querido</p>
+                    <h2>Una app que combina tecnología y sensibilidad</h2>
                     <p class="texto-secundario">Relieves suaves, filetes dorados y una paleta nocturna. Probá algunas piezas acá mismo.</p>
+                </div>
+
+                <div class="modulos">
+                    <article class="tarjeta modulo aparece">
+                        <div class="modulo-visual modulo-visual--timer" aria-hidden="true">
+                            <span class="timer-anillo"></span>
+                            <span class="timer-tiempo">25:00</span>
+                        </div>
+                        <h3>Focus Timer atenuado</h3>
+                        <p>Un temporizador suave que baja el brillo y mantiene la pantalla encendida mientras leés, para que nada te saque de la historia.</p>
+                    </article>
+                    <article class="tarjeta modulo aparece">
+                        <div class="modulo-visual modulo-visual--estante" aria-hidden="true">
+                            <i style="--alto:78%;--color:#626b91"></i><i style="--alto:92%;--color:#27344a"></i><i style="--alto:70%;--color:#a99bb8"></i><i style="--alto:86%;--color:#c19d5f"></i><i style="--alto:74%;--color:#34405c"></i><i class="inclinado" style="--alto:82%;--color:#a99bb8"></i>
+                        </div>
+                        <h3>Biblioteca art déco</h3>
+                        <p>Tus libros organizados con lomos decorados en dorado y lavanda, creando un estante visual mágico.</p>
+                    </article>
+                    <article class="tarjeta modulo aparece">
+                        <div class="modulo-visual modulo-visual--mensaje" aria-hidden="true">
+                            <p>Leíste 20 minutos.<span>Seguí cuidando tu mente.</span></p>
+                        </div>
+                        <h3>Un cierre amable</h3>
+                        <p>Al terminar cada sesión, Libellus te despide con calma y celebra el tiempo que te regalaste.</p>
+                    </article>
                 </div>
 
                 <div class="mosaico">
@@ -1937,46 +2152,43 @@
         </section>
 
         <!-- ===============================================
-             FRANJA DE VALORES
+             CIERRE: instalar con código QR
              =============================================== -->
-        <section class="contenedor" id="valores" aria-label="Por qué Libellus">
-            <div class="tarjeta valores aparece">
-                <div class="valor">
-                    <span class="valor-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span>
-                    <div><strong>Calma</strong><span>Lectura sin apuro</span></div>
-                </div>
-                <div class="valor">
-                    <span class="valor-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>
-                    <div><strong>Concentración</strong><span>Focus Timer y atenuación</span></div>
-                </div>
-                <div class="valor">
-                    <span class="valor-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/></svg></span>
-                    <div><strong>Bienestar</strong><span>Tu ánimo, día a día</span></div>
-                </div>
-                <div class="valor">
-                    <span class="valor-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 12l10 10 10-10Z"/></svg></span>
-                    <div><strong>Simplicidad</strong><span>Solo lo esencial</span></div>
-                </div>
-                <div class="valor">
-                    <span class="valor-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></span>
-                    <div><strong>Sin conexión</strong><span>Se instala como app</span></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===============================================
-             LLAMADO FINAL
-             =============================================== -->
-        <section class="seccion">
+        <section class="seccion" id="instalar">
             <div class="contenedor">
-                <div class="tarjeta llamado aparece">
+                <div class="tarjeta llamado instalar aparece">
                     <svg class="escena" aria-hidden="true" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice"><use href="#escena-noche" /></svg>
                     <svg class="llamado-logo" aria-hidden="true"><use href="#logo" /></svg>
-                    <h2>Tu próximo capítulo te espera</h2>
-                    <p>Entrá con tu cuenta de Google y armá tu santuario en un minuto. Es gratis.</p>
-                    <div class="hero-botones">
-                        <a href="/login" class="boton boton--dorado">Crear mi santuario</a>
+                    <p class="eyebrow">Tu próximo capítulo te espera</p>
+                    <h2>Llevá tu refugio de lectura a todas partes</h2>
+                    <p>
+                        Libellus es una Progressive Web App (PWA): no necesitás ocupar espacio ni esperar descargas
+                        desde tiendas de aplicaciones. Escaneá el QR o ingresá a <strong>libellusapp.com</strong>
+                        y guardala en tu pantalla de inicio en un solo clic.
+                    </p>
+
+                    <div class="instalar-cuerpo">
+                        <figure class="qr">
+                            <!-- QR de https://libellusapp.com (corrección de errores alta: tolera el isotipo del centro) -->
+                            <svg class="qr-codigo" viewBox="-1 -1 31 31" role="img" aria-label="Código QR para abrir libellusapp.com">
+                                <rect x="-1" y="-1" width="31" height="31" fill="#f0e6d8" />
+                                <path fill="#27344a" d="M0 0h7v1h-7zM9 0h1v1h-1zM13 0h3v1h-3zM18 0h1v1h-1zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h6v1h-6zM17 1h1v1h-1zM20 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h2v1h-2zM11 2h1v1h-1zM14 2h1v1h-1zM16 2h3v1h-3zM20 2h1v1h-1zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h2v1h-2zM13 3h1v1h-1zM16 3h2v1h-2zM19 3h2v1h-2zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM9 4h1v1h-1zM11 4h1v1h-1zM13 4h2v1h-2zM17 4h3v1h-3zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h1v1h-1zM12 5h3v1h-3zM18 5h3v1h-3zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM8 7h3v1h-3zM12 7h1v1h-1zM15 7h6v1h-6zM4 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM13 8h4v1h-4zM18 8h1v1h-1zM21 8h2v1h-2zM25 8h2v1h-2zM1 9h1v1h-1zM7 9h1v1h-1zM9 9h1v1h-1zM12 9h1v1h-1zM15 9h1v1h-1zM17 9h1v1h-1zM20 9h1v1h-1zM25 9h2v1h-2zM28 9h1v1h-1zM0 10h3v1h-3zM4 10h4v1h-4zM9 10h1v1h-1zM14 10h1v1h-1zM17 10h1v1h-1zM19 10h1v1h-1zM22 10h5v1h-5zM1 11h3v1h-3zM7 11h1v1h-1zM9 11h2v1h-2zM14 11h2v1h-2zM18 11h1v1h-1zM21 11h3v1h-3zM26 11h2v1h-2zM0 12h5v1h-5zM6 12h1v1h-1zM8 12h2v1h-2zM12 12h1v1h-1zM15 12h1v1h-1zM17 12h1v1h-1zM19 12h3v1h-3zM23 12h3v1h-3zM0 13h6v1h-6zM8 13h5v1h-5zM14 13h1v1h-1zM16 13h1v1h-1zM20 13h1v1h-1zM24 13h1v1h-1zM26 13h1v1h-1zM4 14h4v1h-4zM11 14h1v1h-1zM14 14h1v1h-1zM18 14h2v1h-2zM23 14h1v1h-1zM26 14h3v1h-3zM0 15h2v1h-2zM3 15h3v1h-3zM8 15h2v1h-2zM12 15h2v1h-2zM20 15h2v1h-2zM24 15h2v1h-2zM28 15h1v1h-1zM1 16h1v1h-1zM3 16h2v1h-2zM6 16h3v1h-3zM10 16h1v1h-1zM14 16h3v1h-3zM19 16h1v1h-1zM21 16h3v1h-3zM25 16h1v1h-1zM27 16h1v1h-1zM3 17h1v1h-1zM5 17h1v1h-1zM9 17h1v1h-1zM13 17h2v1h-2zM16 17h1v1h-1zM18 17h1v1h-1zM20 17h1v1h-1zM23 17h1v1h-1zM27 17h2v1h-2zM0 18h1v1h-1zM5 18h2v1h-2zM8 18h2v1h-2zM11 18h1v1h-1zM13 18h1v1h-1zM17 18h2v1h-2zM23 18h2v1h-2zM2 19h4v1h-4zM9 19h1v1h-1zM12 19h3v1h-3zM16 19h1v1h-1zM19 19h2v1h-2zM22 19h1v1h-1zM25 19h1v1h-1zM28 19h1v1h-1zM2 20h1v1h-1zM5 20h3v1h-3zM9 20h1v1h-1zM11 20h1v1h-1zM15 20h10v1h-10zM26 20h3v1h-3zM8 21h1v1h-1zM12 21h1v1h-1zM15 21h1v1h-1zM19 21h2v1h-2zM24 21h1v1h-1zM0 22h7v1h-7zM8 22h3v1h-3zM13 22h2v1h-2zM18 22h3v1h-3zM22 22h1v1h-1zM24 22h1v1h-1zM27 22h2v1h-2zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h2v1h-2zM12 23h3v1h-3zM17 23h4v1h-4zM24 23h1v1h-1zM26 23h1v1h-1zM28 23h1v1h-1zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM8 24h2v1h-2zM14 24h3v1h-3zM18 24h1v1h-1zM20 24h6v1h-6zM27 24h1v1h-1zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM9 25h1v1h-1zM12 25h5v1h-5zM18 25h2v1h-2zM21 25h1v1h-1zM24 25h1v1h-1zM27 25h1v1h-1zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM9 26h2v1h-2zM12 26h2v1h-2zM19 26h2v1h-2zM22 26h1v1h-1zM24 26h3v1h-3zM0 27h1v1h-1zM6 27h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM14 27h3v1h-3zM19 27h5v1h-5zM25 27h1v1h-1zM27 27h2v1h-2zM0 28h7v1h-7zM9 28h1v1h-1zM11 28h4v1h-4zM16 28h1v1h-1zM19 28h3v1h-3zM23 28h1v1h-1zM26 28h1v1h-1z" />
+                                <rect x="10.9" y="10.9" width="7.2" height="7.2" rx="1.4" fill="#f0e6d8" />
+                                <use href="#logo" x="11.5" y="11.5" width="6" height="6" style="color:#c19d5f" />
+                            </svg>
+                            <figcaption>Escaneá con la cámara de tu celular</figcaption>
+                        </figure>
+                        <ul class="instalar-lista">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Sin costo de instalación</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Funciona en iOS y Android</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Modo sin conexión disponible</li>
+                        </ul>
                     </div>
+
+                    <div class="hero-botones">
+                        <a href="https://libellusapp.com" class="boton boton--dorado">Abrir PWA en libellusapp.com</a>
+                    </div>
+                    <p class="instalar-nota">Disfrutá de tu primer ritual de lectura en menos de 1 minuto. Acceso libre y gratuito.</p>
                 </div>
             </div>
         </section>

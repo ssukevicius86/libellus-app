@@ -21,7 +21,7 @@ npm run dev
 | `npm run build` | `tsc -b` (estricto) + build de producción con service worker |
 | `npm run preview` | Sirve `dist/` (para probar la PWA instalable) |
 | `npm run lint` | ESLint |
-| `npm run generate-pwa-assets` | Regenera iconos PWA desde `public/logo.svg` |
+| `npm run generate-pwa-assets` | Regenera iconos PWA desde `public/isotipo.svg` |
 | `npm run deploy` | Build + `firebase deploy` (Hosting y reglas de Firestore) |
 
 ## Firebase

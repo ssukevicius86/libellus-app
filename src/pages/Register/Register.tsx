@@ -12,7 +12,7 @@ const MAX_AGE = 120
 // Al menos 8 caracteres, con una minúscula, una mayúscula y un número
 const PASSWORD_PATTERN = '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
 
-/** Escena del registro: completando un formulario (recorte de public/img-crear-cuenta-2.png). */
+/** Escena del registro: completando un formulario (recorte de la ilustración original img-crear-cuenta-2.png, guardada en el historial de git). */
 const ILLUSTRATION = {
   src: '/ilustraciones/registro-escritorio-960.webp',
   srcSet: '/ilustraciones/registro-escritorio-480.webp 480w, /ilustraciones/registro-escritorio-960.webp 960w',

@@ -8,7 +8,7 @@ import { GoogleIcon } from '@/components/auth/GoogleIcon'
 import { Button } from '@/components/ui/button/button'
 import { useAuth } from '@/context/auth-context'
 
-/** Escena que ocupa el ancho del panel, debajo del título (recorte de public/img-login-2.jpg). */
+/** Escena que ocupa el ancho del panel, debajo del título (recorte de la ilustración original img-login-2.jpg, guardada en el historial de git). */
 const ILLUSTRATION = {
   src: '/ilustraciones/lectura-sala-960.webp',
   srcSet: '/ilustraciones/lectura-sala-480.webp 480w, /ilustraciones/lectura-sala-960.webp 960w',

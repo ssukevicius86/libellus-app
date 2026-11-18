@@ -26,94 +26,97 @@
    PALETA (modo claro y oscuro)
    ========================================= */
 
-/* Modo claro, basado en la paleta:
-   Azul noche #1d2132 · Lavanda #889bd2 · Celeste pastel #bedfff
-   Lavanda claro #e6ddee · Dorado suave #d4af37 · Lavanda suave #ae8fb1
-   El dorado se oscurece (#7f620e) para que se lea sobre el fondo claro. */
+/* Paleta de marca (igual a la landing):
+   Midnight Blue #27344A · Brand Gold #C19D5F · Twilight Blue #626B91
+   Dusty Lavender #A99BB8 · Moon Cream #F0E6D8
+
+   Modo claro: fondo Moon Cream y texto Midnight Blue.
+   El dorado de los textos se oscurece (#7d5e2a) para que se lea sobre el crema;
+   el Brand Gold queda para superficies y el logo. */
 :root {
     --radius: 1.25rem;
-    --background: #e6ddee;
-    --foreground: #1d2132;
+    --background: #f0e6d8;
+    --foreground: #27344a;
     /* Neumorfismo: las superficies son del mismo color que el fondo */
-    --card: #e6ddee;
-    --card-foreground: #1d2132;
-    --popover: #f5f1f9;
-    --popover-foreground: #1d2132;
-    --primary: #1d2132;
-    --primary-foreground: #bedfff;
-    --secondary: #889bd2;
-    --secondary-foreground: #1d2132;
-    --muted: #ddd2e8;
-    --muted-foreground: #4b5068;
-    --accent: #bedfff;
-    --accent-foreground: #1d2132;
-    --destructive: #c2410c;
-    --border: rgb(174 143 177 / 0.45);
-    --input: rgb(174 143 177 / 0.6);
-    --ring: #7f620e;
-    --gold: #7f620e;
-    --gold-foreground: #f5f1f9;
-    --chart-1: #889bd2;
-    --chart-2: #d4af37;
-    --chart-3: #ae8fb1;
-    --chart-4: #bedfff;
-    --chart-5: #1d2132;
-    --sidebar: #e6ddee;
-    --sidebar-foreground: #1d2132;
-    --sidebar-primary: #1d2132;
-    --sidebar-primary-foreground: #bedfff;
-    --sidebar-accent: #bedfff;
-    --sidebar-accent-foreground: #1d2132;
-    --sidebar-border: rgb(174 143 177 / 0.45);
-    --sidebar-ring: #7f620e;
+    --card: #f0e6d8;
+    --card-foreground: #27344a;
+    --popover: #f7f0e6;
+    --popover-foreground: #27344a;
+    --primary: #27344a;
+    --primary-foreground: #f0e6d8;
+    --secondary: #626b91;
+    --secondary-foreground: #f0e6d8;
+    --muted: #e4d8c8;
+    --muted-foreground: #626b91;
+    --accent: #e4d8c8;
+    --accent-foreground: #27344a;
+    --destructive: #b3401c;
+    --border: rgb(193 157 95 / 0.4);
+    --input: rgb(193 157 95 / 0.5);
+    --ring: #7d5e2a;
+    --gold: #7d5e2a;
+    --gold-foreground: #f0e6d8;
+    --chart-1: #626b91;
+    --chart-2: #c19d5f;
+    --chart-3: #a99bb8;
+    --chart-4: #27344a;
+    --chart-5: #d9c6a5;
+    --sidebar: #f0e6d8;
+    --sidebar-foreground: #27344a;
+    --sidebar-primary: #27344a;
+    --sidebar-primary-foreground: #f0e6d8;
+    --sidebar-accent: #e4d8c8;
+    --sidebar-accent-foreground: #27344a;
+    --sidebar-border: rgb(193 157 95 / 0.4);
+    --sidebar-ring: #7d5e2a;
     /* Sin brillo de fondo: el neumorfismo necesita un fondo parejo */
     --deco-glow: transparent;
     /* Relieve neumórfico: luz desde arriba a la izquierda.
        --neu-luz es la sombra clara; --neu-sombra, la oscura (el fondo más oscuro). */
-    --neu-luz: rgb(255 255 255 / 0.85);
-    --neu-sombra: rgb(150 131 178 / 0.55);
-    --neu-sombra-fuerte: rgb(130 110 160 / 0.6);
+    --neu-luz: rgb(255 255 255 / 0.8);
+    --neu-sombra: rgb(176 156 128 / 0.5);
+    --neu-sombra-fuerte: rgb(160 138 108 / 0.6);
 }
 
+/* Modo oscuro: fondo Midnight Blue, textos secundarios en Dusty Lavender */
 .dark {
-    /* Un poco más claro que el negro para que se vea la sombra clara */
-    --background: #1b1935;
-    --foreground: #ece8f7;
-    --card: #1b1935;
-    --card-foreground: #ece8f7;
-    --popover: #1c1a3a;
-    --popover-foreground: #ece8f7;
-    --primary: #b9a7e8;
-    --primary-foreground: #17153a;
-    --secondary: #26234a;
-    --secondary-foreground: #ece8f7;
-    --muted: #221f43;
-    --muted-foreground: #a7a2c6;
-    --accent: #2b2852;
-    --accent-foreground: #ece8f7;
+    --background: #27344a;
+    --foreground: #f0e6d8;
+    --card: #27344a;
+    --card-foreground: #f0e6d8;
+    --popover: #2c3a52;
+    --popover-foreground: #f0e6d8;
+    --primary: #a99bb8;
+    --primary-foreground: #27344a;
+    --secondary: #34405c;
+    --secondary-foreground: #f0e6d8;
+    --muted: #212c40;
+    --muted-foreground: #a99bb8;
+    --accent: #34405c;
+    --accent-foreground: #f0e6d8;
     --destructive: #f0846b;
-    --border: rgb(212 179 122 / 0.2);
-    --input: rgb(212 179 122 / 0.24);
-    --ring: #d4b37a;
-    --gold: #d4b37a;
-    --gold-foreground: #17153a;
-    --chart-1: #8f74e0;
-    --chart-2: #bf8424;
-    --chart-3: #8a78cf;
-    --chart-4: #e8d3a6;
-    --chart-5: #6a5ab0;
-    --sidebar: #1b1935;
-    --sidebar-foreground: #ece8f7;
-    --sidebar-primary: #b9a7e8;
-    --sidebar-primary-foreground: #17153a;
-    --sidebar-accent: #2b2852;
-    --sidebar-accent-foreground: #ece8f7;
-    --sidebar-border: rgb(212 179 122 / 0.2);
-    --sidebar-ring: #d4b37a;
+    --border: rgb(193 157 95 / 0.25);
+    --input: rgb(193 157 95 / 0.3);
+    --ring: #c19d5f;
+    --gold: #c19d5f;
+    --gold-foreground: #27344a;
+    --chart-1: #a99bb8;
+    --chart-2: #c19d5f;
+    --chart-3: #626b91;
+    --chart-4: #f0e6d8;
+    --chart-5: #8a7aa0;
+    --sidebar: #27344a;
+    --sidebar-foreground: #f0e6d8;
+    --sidebar-primary: #a99bb8;
+    --sidebar-primary-foreground: #27344a;
+    --sidebar-accent: #34405c;
+    --sidebar-accent-foreground: #f0e6d8;
+    --sidebar-border: rgb(193 157 95 / 0.25);
+    --sidebar-ring: #c19d5f;
     --deco-glow: transparent;
-    --neu-luz: rgb(185 167 232 / 0.09);
-    --neu-sombra: rgb(6 5 18 / 0.7);
-    --neu-sombra-fuerte: rgb(4 3 14 / 0.8);
+    --neu-luz: rgb(98 107 145 / 0.22);
+    --neu-sombra: rgb(14 20 32 / 0.65);
+    --neu-sombra-fuerte: rgb(10 15 26 / 0.75);
 }
 
 :root {
@@ -163,7 +166,10 @@
     /* =========================================
        TIPOGRAFÍA
        ========================================= */
-    --fuente-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    /* Manual de marca: Amarante para el logo y los titulares (en mayúsculas),
+       Karma Bold para taglines y subtítulos, Karma Regular para el texto.
+       --fuente-sans conserva el nombre porque la usan Tailwind (font-sans) y los componentes. */
+    --fuente-sans: "Karma", ui-serif, Georgia, serif;
     --fuente-serif: "Amarante", ui-serif, Georgia, serif;
 
     /* Tamaños, cada uno con su interlineado */
@@ -194,6 +200,7 @@
     --peso-ligero: 300;
     --peso-medio: 500;
     --peso-seminegrita: 600;
+    --peso-negrita: 700;
 
     /* =========================================
        ESPACIADO (escala de 4px)

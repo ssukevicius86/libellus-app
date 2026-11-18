@@ -462,7 +462,7 @@ function FinishForm({
         if (book.pageCount && newPage >= book.pageCount && book.status !== 'read') {
           await setBookStatus(uid, book, 'read')
           if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            void confetti({ particleCount: 120, spread: 75, colors: ['#d4b37a', '#b9a7e8', '#ece8f7'] })
+            void confetti({ particleCount: 120, spread: 75, colors: ['#c19d5f', '#a99bb8', '#f0e6d8'] })
           }
         } else if (book.status === 'want') {
           await setBookStatus(uid, book, 'reading')

@@ -45,7 +45,7 @@ function celebrate() {
     particleCount: 120,
     spread: 75,
     origin: { y: 0.7 },
-    colors: ['#d4b37a', '#b9a7e8', '#ece8f7', '#8f74e0'],
+    colors: ['#c19d5f', '#a99bb8', '#f0e6d8', '#626b91'],
   })
 }
 

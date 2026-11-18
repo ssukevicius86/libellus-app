@@ -4,6 +4,7 @@ import { NavLink, Outlet, useLocation } from 'react-router'
 import { cn } from '@/lib/utils'
 import { AmbiencePlayer } from '@/components/ambience'
 import { Isotipo } from '@/components/brand'
+import { InstallAppButton } from '@/components/InstallAppButton'
 
 const NAV: { to: string; label: string; icon: LucideIcon; end?: boolean }[] = [
   { to: '/', label: 'Santuario', icon: House, end: true },
@@ -58,6 +59,9 @@ export default function AppLayout() {
             </NavLink>
           ))}
         </nav>
+        <div className="mt-auto px-3 pt-6 pb-6">
+          <InstallAppButton variant="outline" className="w-full" />
+        </div>
       </aside>
 
       <main className="mx-auto w-full max-w-5xl px-4 pt-6 pb-[calc(7rem+env(safe-area-inset-bottom))] sm:px-6 md:pt-10 md:pb-12">

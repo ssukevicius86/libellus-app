@@ -24,7 +24,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     document.documentElement.classList.toggle('dark', prefs.theme === 'dark')
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', prefs.theme === 'dark' ? '#13122a' : '#e6ddee')
+      ?.setAttribute('content', prefs.theme === 'dark' ? '#27344a' : '#f0e6d8')
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs))
     } catch {

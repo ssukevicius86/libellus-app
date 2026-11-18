@@ -6,6 +6,8 @@ import { useAuth } from '@/context/auth-context'
 import { usePreferences, type Theme } from '@/context/preferences-context'
 import { cn } from '@/lib/utils'
 import { PageHeader } from '@/components/deco'
+import { InstallAppButton } from '@/components/InstallAppButton'
+import { useInstallApp } from '@/hooks/useInstallApp'
 import { Button } from '@/components/ui/button/button'
 import { Slider } from '@/components/ui/slider/slider'
 import './Settings.css'
@@ -31,6 +33,7 @@ export default function Settings() {
   const { user, profile, signOut } = useAuth()
   const prefs = usePreferences()
   const { masterVolume, setMasterVolume, stopAll } = useAmbience()
+  const { canInstall } = useInstallApp()
 
   return (
     <div className="settings-div-5">
@@ -95,6 +98,12 @@ export default function Settings() {
             />
           </div>
         </Row>
+
+        {canInstall && (
+          <Row title="Instalar Libellus" hint="Abrila como app, a pantalla completa y sin conexión">
+            <InstallAppButton variant="outline" label="Instalar" />
+          </Row>
+        )}
       </section>
 
       <section className="deco-card settings-section-13">

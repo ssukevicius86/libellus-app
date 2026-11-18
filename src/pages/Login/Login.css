@@ -9,26 +9,26 @@
      el paisaje detrás y da contraste al texto claro */
   background: linear-gradient(
     in oklab to bottom,
-    rgb(67 61 134 / 0.55),
-    rgb(29 33 50 / 0.6)
+    rgb(98 107 145 / 0.55),
+    rgb(39 52 74 / 0.6)
   );
   backdrop-filter: blur(6px);
-  border-inline: 1px solid rgb(245 241 249 / 0.14);
-  box-shadow: 0 0 40px rgb(29 33 50 / 0.2);
+  border-inline: 1px solid rgb(240 230 216 / 0.14);
+  box-shadow: 0 0 40px rgb(22 30 44 / 0.2);
   /* Texto claro sobre la franja, en los dos temas */
-  --auth-texto-marca: #f5f1f9;
-  --auth-texto-marca-suave: #d9d2ee;
-  --auth-halo: rgb(17 15 38 / 0.35);
+  --auth-texto-marca: #f0e6d8;
+  --auth-texto-marca-suave: #e4d8c8;
+  --auth-halo: rgb(22 30 44 / 0.35);
 }
 
 .dark .login__columna {
   background: linear-gradient(
     in oklab to bottom,
-    rgb(43 40 82 / 0.55),
-    rgb(17 15 38 / 0.65)
+    rgb(52 64 92 / 0.55),
+    rgb(22 30 44 / 0.65)
   );
-  --auth-texto-marca: #ece8f7;
-  --auth-texto-marca-suave: #c4bfe0;
+  --auth-texto-marca: #f0e6d8;
+  --auth-texto-marca-suave: #c9bfd3;
 }
 
 .login__marca {
@@ -48,7 +48,8 @@
   font-family: var(--fuente-sans);
   font-size: var(--texto-xl);
   line-height: var(--texto-xl-interlineado);
-  font-weight: var(--peso-seminegrita);
+  /* Tagline: Karma Bold */
+  font-weight: var(--peso-negrita);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-wrap: balance;

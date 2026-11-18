@@ -3,21 +3,21 @@
 
 .auth {
   /* Paleta de la escena, tomada de la app (ver styles/variables.css).
-     Tema claro: atardecer lavanda que baja a un bosque azul noche. */
-  --auth-cielo-alto: #bedfff;            /* celeste pastel */
-  --auth-cielo-bajo: #e6ddee;            /* lavanda claro */
-  --auth-luz: #fff8e6;
-  --auth-bruma: #f5f1f9;
-  --auth-montana-1: #b7b9e3;             /* lavanda aclarada */
-  --auth-montana-2: #a597c4;             /* entre lavanda y lavanda suave */
-  --auth-pinos-1: #7c7aa8;
-  --auth-pinos-2: #4a4b75;
-  --auth-pinos-3: #1d2132;               /* azul noche */
+     Tema claro: atardecer lavanda y crema que baja a un bosque Midnight Blue. */
+  --auth-cielo-alto: #c9bfd3;            /* lavanda */
+  --auth-cielo-bajo: #f0e6d8;            /* Moon Cream */
+  --auth-luz: #fff6e8;
+  --auth-bruma: #f0e6d8;
+  --auth-montana-1: #a99bb8;             /* Dusty Lavender */
+  --auth-montana-2: #8a86a8;             
+  --auth-pinos-1: #626b91;
+  --auth-pinos-2: #3f4a66;
+  --auth-pinos-3: #27344a;               /* Midnight Blue */
   /* Texto sobre el cielo (marca) y sobre el bosque (acciones) */
-  --auth-texto-marca: #1d2132;
-  --auth-texto-marca-suave: #3b3f58;
-  --auth-halo: rgb(245 241 249 / 0.6);
-  --auth-texto: #f5f1f9;
+  --auth-texto-marca: #27344a;
+  --auth-texto-marca-suave: #4a5478;
+  --auth-halo: rgb(240 230 216 / 0.6);
+  --auth-texto: #f0e6d8;
   --auth-texto-suave: color-mix(in oklab, var(--auth-texto) 82%, transparent);
 
   position: relative;
@@ -29,21 +29,21 @@
   background-color: var(--auth-pinos-3);
 }
 
-/* Tema oscuro: noche índigo con luz de luna lavanda. */
+/* Tema oscuro: noche Midnight Blue con luz de luna Moon Cream. */
 .dark .auth {
-  --auth-cielo-alto: #110f28;
-  --auth-cielo-bajo: #2b2852;
-  --auth-luz: #b9a7e8;
-  --auth-bruma: #6a5ab0;
-  --auth-montana-1: #3a3470;
-  --auth-montana-2: #2e2a5c;
-  --auth-pinos-1: #26234a;
-  --auth-pinos-2: #1c1a3a;
-  --auth-pinos-3: #110f26;
-  --auth-texto-marca: #ece8f7;
-  --auth-texto-marca-suave: #c4bfe0;
-  --auth-halo: rgb(6 5 18 / 0.5);
-  --auth-texto: #ece8f7;
+  --auth-cielo-alto: #141c2b;
+  --auth-cielo-bajo: #2d3a52;
+  --auth-luz: #f0e6d8;
+  --auth-bruma: #626b91;
+  --auth-montana-1: #3d4866;
+  --auth-montana-2: #34405c;
+  --auth-pinos-1: #2a354c;
+  --auth-pinos-2: #212c40;
+  --auth-pinos-3: #161e2c;
+  --auth-texto-marca: #f0e6d8;
+  --auth-texto-marca-suave: #c9bfd3;
+  --auth-halo: rgb(10 15 26 / 0.5);
+  --auth-texto: #f0e6d8;
 }
 
 .auth__escena {
@@ -83,7 +83,7 @@
   inline-size: 100%;
   block-size: auto;
   /* Sombra mínima para despegar el dorado del cielo claro, sin desdibujarlo */
-  filter: drop-shadow(0 1px 1px rgb(29 33 50 / 0.3));
+  filter: drop-shadow(0 1px 1px rgb(22 30 44 / 0.3));
 }
 
 /* Botón píldora translúcido, para usar sobre el bosque. */
@@ -162,17 +162,17 @@
 
 /* Colores de los botones 3D (Volver, tema y el botón principal del formulario) */
 .auth {
-  --auth-boton-claro: #8580cf;
-  --auth-boton-base: #5f59ab;
-  --auth-boton-borde: #433d86;
-  --auth-boton-texto: #f5f1f9;
+  --auth-boton-claro: #8a92b5;
+  --auth-boton-base: #626b91;
+  --auth-boton-borde: #4a5478;
+  --auth-boton-texto: #f0e6d8;
 }
 
 .dark .auth {
-  --auth-boton-claro: #d3c6f4;
-  --auth-boton-base: #ab95ea;
-  --auth-boton-borde: #6f55c2;
-  --auth-boton-texto: #17153a;
+  --auth-boton-claro: #d9bd8a;
+  --auth-boton-base: #c19d5f;
+  --auth-boton-borde: #8f7140;
+  --auth-boton-texto: #27344a;
 }
 
 /* Botón 3D chico (Volver, tema): brillo arriba, canto inferior y sombra corta.
@@ -196,7 +196,7 @@
     inset 0 2px 0 rgb(255 255 255 / 0.35),
     inset 0 -2px 0 color-mix(in oklab, var(--auth-boton-borde) 45%, transparent),
     0 var(--boton-grosor) 0 var(--auth-boton-borde),
-    0 calc(var(--boton-grosor) + 3px) 6px rgb(29 33 50 / 0.22);
+    0 calc(var(--boton-grosor) + 3px) 6px rgb(22 30 44 / 0.22);
   transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
 }
 
@@ -217,7 +217,7 @@
     inset 0 2px 0 rgb(255 255 255 / 0.25),
     inset 0 -1px 0 color-mix(in oklab, var(--auth-boton-borde) 45%, transparent),
     0 1px 0 var(--auth-boton-borde),
-    0 2px 4px rgb(29 33 50 / 0.2);
+    0 2px 4px rgb(22 30 44 / 0.2);
 }
 
 .auth-3d:focus-visible {
@@ -253,13 +253,13 @@
    ilustración, abajo el formulario. Colores de la app (ver styles/variables.css). */
 .auth-panel {
   /* Acento lavanda: degradado de los botones y círculos de los íconos */
-  --auth-acento: #5b55a3;
-  --auth-acento-2: #7a83c6;              /* hacia lavanda #889bd2 */
-  --auth-acento-texto: #f5f1f9;
-  --auth-panel-fondo: #f7f1f3;           /* crema lavanda, como la pared de la ilustración */
-  --auth-tarjeta-fondo: #fcf9fb;
-  --auth-campo-fondo: #f3ecf1;
-  --auth-titulo: #3f2f7a;                /* violeta oscuro */
+  --auth-acento: #4a5478;
+  --auth-acento-2: #626b91;              /* Twilight Blue */
+  --auth-acento-texto: #f0e6d8;
+  --auth-panel-fondo: #f5ede2;           /* crema, como la pared de la ilustración */
+  --auth-tarjeta-fondo: #faf5ee;
+  --auth-campo-fondo: #efe5d6;
+  --auth-titulo: #27344a;                /* Midnight Blue */
 
   position: relative;
   z-index: 1;
@@ -276,13 +276,13 @@
 }
 
 .dark .auth-panel {
-  --auth-acento: #b9a7e8;
-  --auth-acento-2: #8f74e0;
-  --auth-acento-texto: #17153a;
-  --auth-panel-fondo: #1c1a3a;
-  --auth-tarjeta-fondo: #221f43;
-  --auth-campo-fondo: #1b1935;
-  --auth-titulo: #e2d8fb;
+  --auth-acento: #c19d5f;
+  --auth-acento-2: #a99bb8;
+  --auth-acento-texto: #27344a;
+  --auth-panel-fondo: #27344a;
+  --auth-tarjeta-fondo: #2c3a52;
+  --auth-campo-fondo: #212c40;
+  --auth-titulo: #f0e6d8;
 }
 
 .auth-panel__encabezado {
@@ -398,7 +398,7 @@
     inset 0 2px 0 rgb(255 255 255 / 0.35),
     inset 0 -2px 0 color-mix(in oklab, var(--auth-boton-borde) 45%, transparent),
     0 var(--boton-grosor) 0 var(--auth-boton-borde),
-    0 calc(var(--boton-grosor) + 4px) 8px rgb(29 33 50 / 0.22);
+    0 calc(var(--boton-grosor) + 4px) 8px rgb(22 30 44 / 0.22);
   transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
 }
 
@@ -424,7 +424,7 @@
     inset 0 2px 0 rgb(255 255 255 / 0.25),
     inset 0 -1px 0 color-mix(in oklab, var(--auth-boton-borde) 45%, transparent),
     0 1px 0 var(--auth-boton-borde),
-    0 2px 4px rgb(29 33 50 / 0.2);
+    0 2px 4px rgb(22 30 44 / 0.2);
 }
 
 .auth-form__enviar.ui-button:focus-visible {
@@ -710,11 +710,11 @@
    en la referencia. Las montañas quedan para la pantalla inicial. */
 
 .auth--formulario {
-  background-color: #c4aee6;
+  background-color: #c9bfd3;
 }
 
 .dark .auth--formulario {
-  background-color: #2a2450;
+  background-color: #1f2a3d;
 }
 
 .auth--formulario::after {
@@ -730,7 +730,7 @@
   background:
     url("/ilustraciones/sala-izq.webp") left bottom / auto 100% no-repeat,
     url("/ilustraciones/sala-der.webp") right bottom / auto 100% no-repeat,
-    linear-gradient(in oklab to bottom, #b597e0 0%, #c3a9e8 55%, #e4d6f3 82%, #f1eaf8 100%);
+    linear-gradient(in oklab to bottom, #b3a6c2 0%, #c2b6cf 55%, #e2d8dc 82%, #f0e6d8 100%);
 }
 
 /* Velo: suaviza el fondo en claro y lo lleva a la noche índigo en oscuro */
@@ -738,16 +738,16 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgb(247 241 243 / 0.18);
+  background-color: rgb(240 230 216 / 0.18);
 }
 
 .dark .auth__sala::after {
-  background-color: rgb(17 15 38 / 0.62);
+  background-color: rgb(22 30 44 / 0.62);
 }
 
 /* "Volver" sobre la habitación: el texto de la marca ya no va sobre el cielo */
 .auth--formulario {
-  --auth-texto-marca: #3f2f7a;
+  --auth-texto-marca: #27344a;
 }
 
 /* Pedestal lavanda donde se apoya el panel */
@@ -758,18 +758,18 @@
   block-size: 2.75rem;
   margin-block-start: calc(var(--espacio-6) * -1 - 1.75rem);
   border-radius: 50%;
-  background: linear-gradient(in oklab to bottom, #d9c9f3, #a98fdc);
+  background: linear-gradient(in oklab to bottom, #d6cce0, #a99bb8);
   box-shadow:
     inset 0 2px 0 rgb(255 255 255 / 0.5),
-    0 4px 0 #8c72c9,
-    0 12px 24px rgb(29 33 50 / 0.25);
+    0 4px 0 #8a7aa0,
+    0 12px 24px rgb(22 30 44 / 0.25);
 }
 
 .dark .auth-pedestal {
-  background: linear-gradient(in oklab to bottom, #4a3f8c, #2e2763);
+  background: linear-gradient(in oklab to bottom, #4a5478, #34405c);
   box-shadow:
     inset 0 2px 0 rgb(255 255 255 / 0.12),
-    0 4px 0 #1f1a47,
+    0 4px 0 #1f2a3d,
     0 12px 24px rgb(0 0 0 / 0.4);
 }
 
@@ -795,12 +795,12 @@
   z-index: 1;
   padding-block-start: var(--espacio-5, 1.25rem);
   /* La pared de la ilustración es crema en los dos temas: texto oscuro siempre */
-  --auth-titulo: #3f2f7a;
-  text-shadow: 0 0 12px rgb(247 241 243 / 0.9);
+  --auth-titulo: #27344a;
+  text-shadow: 0 0 12px rgb(240 230 216 / 0.9);
 }
 
 .auth-panel:has(.auth-panel__ilustracion) .auth-panel__descripcion {
-  color: #4f4868;
+  color: #4a5478;
 }
 
 .auth-panel:has(.auth-panel__ilustracion) .auth-panel__ilustracion {

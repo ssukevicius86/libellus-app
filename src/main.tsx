@@ -8,6 +8,8 @@ import { registerSW } from 'virtual:pwa-register'
 import { AmbienceProvider } from '@/context/AmbienceContext'
 import { AuthProvider } from '@/context/AuthContext'
 import { PreferencesProvider } from '@/context/PreferencesContext'
+// Captura beforeinstallprompt lo antes posible (puede llegar antes de montar React)
+import '@/hooks/useInstallApp'
 import App from './App'
 
 registerSW({ immediate: true })

@@ -73,14 +73,15 @@
 }
 
 @layer components {
-  /* Título art déco: mayúsculas espaciadas, ligero + negrita */
+  /* Titular de marca: Amarante en mayúsculas espaciadas (manual de marca) */
   .deco-title {
-    @apply font-sans uppercase tracking-[0.12em] text-primary;
+    @apply font-serif uppercase tracking-[0.12em] text-primary;
   }
   .deco-eyebrow {
     font-size: var(--texto-xs);
     line-height: var(--texto-xs-interlineado);
-    font-weight: var(--peso-seminegrita);
+    /* Subtítulo / tagline: Karma Bold */
+    font-weight: var(--peso-negrita);
     text-transform: uppercase;
     letter-spacing: 0.2em;
     color: var(--gold);

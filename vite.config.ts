@@ -16,12 +16,14 @@ export default defineConfig({
         overrideManifestIcons: true,
       },
       manifest: {
+        // id estable: requerido por navigator.install() y para identificar la app instalada
+        id: '/',
         name: 'Libellus',
         short_name: 'Libellus',
         description: 'Santuario digital de lectura: tu biblioteca, microambientes sonoros, Focus Timer y registro del ánimo.',
         lang: 'es',
-        theme_color: '#13122a',
-        background_color: '#13122a',
+        theme_color: '#27344a',
+        background_color: '#27344a',
         display: 'standalone',
         start_url: '/',
       },
@@ -51,7 +53,9 @@ export default defineConfig({
         ],
       },
       devOptions: {
-        enabled: false,
+        // Manifest + service worker también en `npm run dev`, para poder probar la instalación
+        enabled: true,
+        suppressWarnings: true,
       },
     }),
   ],

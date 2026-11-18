@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
-import { LogOut, Moon, Sun } from 'lucide-react'
+import { Link } from 'react-router'
+import { ArrowLeft, LogOut, Moon, Sun } from 'lucide-react'
 import { useAmbience } from '@/context/ambience-context'
 import { useAuth } from '@/context/auth-context'
 import { usePreferences, type Theme } from '@/context/preferences-context'
@@ -33,7 +34,13 @@ export default function Settings() {
 
   return (
     <div className="settings-div-5">
-      <PageHeader eyebrow="Tu espacio" title="Ajustes" />
+      <PageHeader eyebrow="Tu espacio" title="Ajustes">
+        <Button asChild variant="ghost">
+          <Link to="/perfil">
+            <ArrowLeft /> Mi perfil
+          </Link>
+        </Button>
+      </PageHeader>
 
       <section className="deco-card settings-section-6">
         <Row title="Tema" hint="Lavandas y dorados, de noche o de día">
@@ -46,7 +53,7 @@ export default function Settings() {
                 aria-checked={prefs.theme === id}
                 onClick={() => prefs.setPreference('theme', id)}
                 className={cn(
-                  'settings-button-8',
+                  'settings-button-8 relieve',
                   prefs.theme === id ? 'chip--activo' : 'settings-button-10',
                 )}
               >

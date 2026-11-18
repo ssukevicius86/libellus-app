@@ -10,6 +10,8 @@ import {
   Play,
   Square,
   SunDim,
+  Volume2,
+  VolumeX,
 } from 'lucide-react'
 import { useAmbience } from '@/context/ambience-context'
 import { usePreferences } from '@/context/preferences-context'
@@ -23,7 +25,8 @@ import { formatMinutes } from '@/lib/stats'
 import { cn } from '@/lib/utils'
 import { AmbienceMixer } from '@/components/ambience'
 import { BookCover } from '@/components/books'
-import { DecoDivider, LotusIcon, PageHeader } from '@/components/deco'
+import { Isotipo } from '@/components/brand'
+import { DecoDivider, PageHeader } from '@/components/deco'
 import { DimOverlay, FocusRing } from '@/components/focus'
 import { MoodPicker } from '@/components/mood'
 import { Button } from '@/components/ui/button/button'
@@ -50,6 +53,16 @@ export default function ReadingSession() {
   const [moodBefore, setMoodBefore] = useState<MoodValue | null>(null)
   const [dim, setDim] = useState(prefs.dimLevel)
   const [dimOn, setDimOn] = useState(prefs.dimLevel > 0)
+  // Volumen previo al silenciar, para restaurarlo
+  const volumeBeforeMute = useRef(ambience.masterVolume || 0.8)
+  const muted = ambience.masterVolume === 0
+  const toggleMute = () => {
+    if (muted) ambience.setMasterVolume(volumeBeforeMute.current)
+    else {
+      volumeBeforeMute.current = ambience.masterVolume
+      ambience.setMasterVolume(0)
+    }
+  }
   const [paused, setPaused] = useState(false)
   const [elapsed, setElapsed] = useState(0)
   const [summary, setSummary] = useState<{ minutes: number; pages: number | null } | null>(null)
@@ -133,7 +146,7 @@ export default function ReadingSession() {
         {dimOn && <DimOverlay level={dim} />}
         <div className="reading-session-div-2">
           <div className="reading-session-div-3">
-            <LotusIcon className="reading-session-lotusicon-4" />
+            <Isotipo label="" className="reading-session-lotusicon-4" />
             {book ? (
               <>
                 <p className="reading-session-p-5">{book.title}</p>
@@ -173,7 +186,7 @@ export default function ReadingSession() {
                   onClick={() => ambience.toggle(id)}
                   aria-pressed={ambience.playing.includes(id)}
                   className={cn(
-                    'reading-session-button-12',
+                    'reading-session-button-12 relieve',
                     ambience.playing.includes(id)
                       ? 'chip--activo'
                       : 'reading-session-button-14',
@@ -182,6 +195,27 @@ export default function ReadingSession() {
                   {label}
                 </button>
               ))}
+            </div>
+            <div className="reading-session-div-8">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleMute}
+                aria-pressed={muted}
+                aria-label={muted ? 'Activar sonido' : 'Silenciar'}
+                className={cn(!muted && 'reading-session-button-15')}
+              >
+                {muted ? <VolumeX /> : <Volume2 />}
+              </Button>
+              <Slider
+                value={[ambience.masterVolume * 100]}
+                onValueChange={([v]) => ambience.setMasterVolume(v / 100)}
+                max={100}
+                step={1}
+                aria-label="Volumen general"
+              />
+              {/* Mismo ancho que el botón de pantalla completa de abajo, para alinear los sliders */}
+              {document.fullscreenEnabled && <span className="reading-session-span-relleno" aria-hidden="true" />}
             </div>
             <div className="reading-session-div-8">
               <Button
@@ -243,7 +277,7 @@ export default function ReadingSession() {
   if (phase === 'done' && summary) {
     return (
       <div className="reading-session-div-16">
-        <LotusIcon className="reading-session-lotusicon-17" />
+        <Isotipo label="" className="reading-session-lotusicon-17" />
         <h1 className="deco-title reading-session-h1-18">Sesión guardada</h1>
         <DecoDivider className="reading-session-decodivider-19" />
         <p className="reading-session-p-20">
@@ -324,7 +358,7 @@ export default function ReadingSession() {
                   onClick={() => setMinutes(p)}
                   aria-pressed={minutes === p}
                   className={cn(
-                    'reading-session-button-36',
+                    'reading-session-button-36 relieve',
                     minutes === p ? 'chip--activo' : 'reading-session-button-14',
                   )}
                 >
@@ -336,7 +370,7 @@ export default function ReadingSession() {
                 onClick={() => setMinutes(null)}
                 aria-pressed={minutes === null}
                 className={cn(
-                  'reading-session-button-37',
+                  'reading-session-button-37 relieve',
                   minutes === null ? 'chip--activo' : 'reading-session-button-14',
                 )}
               >

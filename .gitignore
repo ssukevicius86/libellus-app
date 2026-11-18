@@ -24,3 +24,7 @@ firestore-debug.log*
 !.vscode/extensions.json
 .idea
 .DS_Store
+
+# Instrucciones para asistentes de IA (locales)
+CLAUDE.md
+.github/copilot-instructions.md

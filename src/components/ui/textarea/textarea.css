@@ -9,17 +9,17 @@
     border-radius: var(--radio-md);
     border-style: solid;
     border-width: 1px;
-    border-color: var(--input);
+    border-color: transparent;
     width: 100%;
     padding-inline: var(--espacio-3);
     padding-block: var(--espacio-2);
     font-size: var(--texto-base);
     line-height: var(--texto-base-interlineado);
-    box-shadow: var(--tw-ring-shadow), 0 1px 2px 0 #0000000d;
+    box-shadow: var(--tw-ring-shadow), var(--relieve-hundido);
     transition-property: color, box-shadow;
     transition-timing-function: var(--transicion-curva);
     transition-duration: var(--transicion-duracion);
-    background-color: #0000;
+    background-color: var(--background);
     outline-style: none;
     display: flex;
   }

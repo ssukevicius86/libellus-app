@@ -32,8 +32,8 @@ export function AmbienceMixer({ showMaster = false }: { showMaster?: boolean }) 
           <div
             key={id}
             className={cn(
-              'flex items-center gap-3 rounded-lg border p-3 transition-colors',
-              on ? 'border-gold/50 bg-gold/5' : 'bg-card/50',
+              'flex items-center gap-3 rounded-lg p-3 transition-shadow',
+              on ? 'bg-gold/5 [box-shadow:var(--relieve-hundido)]' : '[box-shadow:var(--relieve-boton)]',
             )}
           >
             <button
@@ -42,8 +42,10 @@ export function AmbienceMixer({ showMaster = false }: { showMaster?: boolean }) 
               aria-pressed={on}
               aria-label={`${on ? 'Detener' : 'Reproducir'} ${label}`}
               className={cn(
-                'flex size-11 shrink-0 items-center justify-center rounded-full border transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                on ? 'border-gold bg-gold text-gold-foreground' : 'text-gold hover:border-gold/60',
+                'flex size-11 shrink-0 items-center justify-center rounded-full transition-[color,background-color,box-shadow] outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                on
+                  ? 'bg-gold text-gold-foreground [box-shadow:var(--relieve-presionado)]'
+                  : 'text-gold [box-shadow:var(--relieve-boton)] hover:[box-shadow:var(--relieve-flotante)]',
               )}
             >
               <Icon className="size-5" strokeWidth={1.5} />
@@ -95,7 +97,7 @@ export function AmbiencePlayer() {
           variant="outline"
           aria-label="Ambientes sonoros"
           className={cn(
-            'fixed right-4 bottom-[calc(5rem+env(safe-area-inset-bottom))] z-30 rounded-full shadow-lg backdrop-blur md:bottom-6',
+            'fixed right-4 bottom-[calc(6rem+env(safe-area-inset-bottom))] z-30 rounded-full md:bottom-6',
             active && 'border-gold text-gold',
           )}
         >

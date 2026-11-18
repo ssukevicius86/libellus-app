@@ -7,11 +7,15 @@
     gap: var(--espacio-6);
     border-radius: var(--radio-xl);
     border-style: solid;
-    background-color: var(--card);
+    background-color: var(--tarjeta-velada);
+    background-image: var(--volumen);
+    -webkit-backdrop-filter: var(--vidrio);
+    backdrop-filter: var(--vidrio);
     padding-block: var(--espacio-6);
     color: var(--card-foreground);
-    box-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+    box-shadow: var(--relieve-elevado);
     border-width: 1px;
+    border-color: transparent;
     flex-direction: column;
     display: flex;
   }

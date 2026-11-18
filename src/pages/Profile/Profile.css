@@ -1,0 +1,265 @@
+/* Estilos de la página Mi perfil (CSS puro, sin Tailwind).
+   Las clases compartidas .deco-card, .deco-eyebrow y .lista-tarjeta
+   están en index.css y styles/compartidos.css. */
+
+.profile > * + * {
+  margin-top: var(--espacio-8);
+}
+
+/* Identidad */
+.profile-identity {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-4);
+  padding: var(--espacio-5);
+}
+
+@media (min-width: 40rem) {
+  .profile-identity {
+    padding: var(--espacio-6);
+  }
+}
+
+.profile-avatar {
+  width: 4rem;
+  height: 4rem;
+  flex-shrink: 0;
+  border: 2px solid color-mix(in oklab, var(--gold) 40%, transparent);
+  border-radius: var(--radio-pildora);
+  box-shadow: var(--relieve-boton);
+  object-fit: cover;
+}
+
+.profile-avatar--inicial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent);
+  background-image: var(--volumen);
+  color: var(--accent-foreground);
+  font-family: var(--fuente-serif);
+  font-size: var(--texto-3xl);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.profile-identity-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* En pantallas angostas el botón baja debajo del nombre */
+.profile-identity {
+  flex-wrap: wrap;
+}
+
+.profile-salir {
+  flex-shrink: 0;
+}
+
+@media (max-width: 30rem) {
+  .profile-salir {
+    inline-size: 100%;
+  }
+}
+
+.profile-name {
+  overflow: hidden;
+  font-family: var(--fuente-serif);
+  font-size: var(--texto-2xl);
+  line-height: var(--texto-2xl-interlineado);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Totales: 2 columnas en móvil, 4 en tablet o más */
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-3);
+}
+
+@media (min-width: 40rem) {
+  .profile-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.profile-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  padding: var(--espacio-4);
+}
+
+.profile-stat-value {
+  font-size: var(--texto-2xl);
+  line-height: var(--texto-2xl-interlineado);
+  font-weight: var(--peso-seminegrita);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Columnas: una en móvil, 3:2 en escritorio */
+.profile-columns {
+  display: grid;
+  gap: var(--espacio-6);
+}
+
+@media (min-width: 64rem) {
+  .profile-columns {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+/* Tarjetas de contenido */
+.profile-panel {
+  padding: var(--espacio-5);
+}
+
+.profile-panel > * + * {
+  margin-top: var(--espacio-5);
+}
+
+@media (min-width: 40rem) {
+  .profile-panel {
+    padding: var(--espacio-6);
+  }
+}
+
+.profile-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
+.profile-link-small {
+  flex-shrink: 0;
+  font-size: var(--texto-xs);
+  line-height: var(--texto-xs-interlineado);
+  color: var(--muted-foreground);
+}
+
+.profile-link-small:hover {
+  color: var(--foreground);
+}
+
+.profile-list > * + * {
+  margin-top: var(--espacio-5);
+}
+
+.profile-centrado {
+  text-align: center;
+}
+
+/* Ánimo antes → después */
+.profile-mood-shift {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-4);
+}
+
+.profile-mood-average {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-1);
+  text-align: center;
+}
+
+.profile-mood-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--gold);
+  stroke-width: 1.4;
+}
+
+.profile-mood-label {
+  font-family: var(--fuente-serif);
+  font-size: var(--texto-xl);
+  line-height: var(--texto-xl-interlineado);
+}
+
+.profile-mood-arrow {
+  width: var(--icono-md);
+  height: var(--icono-md);
+  color: var(--muted-foreground);
+}
+
+/* Historial de sesiones */
+.profile-session {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-4);
+  padding: var(--espacio-3) var(--espacio-4);
+}
+
+.profile-session-date {
+  width: 3.5rem;
+  flex-shrink: 0;
+  font-size: var(--texto-xs);
+  line-height: var(--texto-xs-interlineado);
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.profile-session-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-session-title {
+  display: block;
+  overflow: hidden;
+  font-size: var(--texto-sm);
+  line-height: var(--texto-sm-interlineado);
+  font-weight: var(--peso-medio);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a.profile-session-title:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.profile-session-mood {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--espacio-1);
+}
+
+.profile-session-arrow {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+/* Libros terminados: grilla de tapas */
+.profile-finished {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+  gap: var(--espacio-4);
+}
+
+.profile-finished-book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-2);
+  transition: transform var(--transicion-duracion) var(--transicion-curva);
+}
+
+@media (hover: hover) {
+  .profile-finished-book:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.profile-finished-cover {
+  width: 100%;
+}

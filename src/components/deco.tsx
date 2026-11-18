@@ -1,29 +1,5 @@
-import type { ComponentProps, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
-
-/** Loto lineal de la marca. Hereda el color del texto. */
-export function LotusIcon({ className, ...props }: ComponentProps<'svg'>) {
-  return (
-    <svg
-      viewBox="0 0 64 40"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      className={cn('h-8 w-auto', className)}
-      {...props}
-    >
-      <path d="M32 4c5 6 7 13 0 26-7-13-5-20 0-26Z" />
-      <path d="M32 30c3-9 8-14 15-16-1 8-7 14-15 16Z" />
-      <path d="M32 30c-3-9-8-14-15-16 1 8 7 14 15 16Z" />
-      <path d="M32 30c7-5 15-6 22-4-5 5-13 6-22 4Z" />
-      <path d="M32 30c-7-5-15-6-22-4 5 5 13 6 22 4Z" />
-      <path d="M14 34h36M20 37h24" />
-    </svg>
-  )
-}
 
 /** Arco art déco con filetes dorados que enmarca contenido. */
 export function DecoArch({ children, className }: { children?: ReactNode; className?: string }) {

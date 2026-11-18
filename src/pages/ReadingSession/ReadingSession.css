@@ -97,6 +97,11 @@
   color: var(--gold);
 }
 
+.reading-session-span-relleno {
+  width: 2.25rem;
+  flex-shrink: 0;
+}
+
 .reading-session-div-16 {
   max-width: var(--contenedor-md);
   align-items: center;

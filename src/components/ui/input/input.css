@@ -8,18 +8,18 @@
     border-radius: var(--radio-md);
     border-style: solid;
     border-width: 1px;
-    border-color: var(--input);
+    border-color: transparent;
     width: 100%;
     min-width: 0;
     padding-inline: var(--espacio-3);
     padding-block: var(--espacio-1);
     font-size: var(--texto-base);
     line-height: var(--texto-base-interlineado);
-    box-shadow: 0 1px 2px 0 #0000000d;
+    box-shadow: var(--relieve-hundido);
     transition-property: color, box-shadow;
     transition-timing-function: var(--transicion-curva);
     transition-duration: var(--transicion-duracion);
-    background-color: #0000;
+    background-color: var(--background);
     outline-style: none;
   }
 
@@ -74,7 +74,7 @@
 
   .ui-input-2:focus-visible {
     border-color: var(--ring);
-    box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent), var(--relieve-hundido);
   }
 
   .ui-input-3[aria-invalid="true"] {

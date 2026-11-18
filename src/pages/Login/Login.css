@@ -1,68 +1,50 @@
-/* Generado por scripts/tw-to-css.mjs — renombra las clases libremente */
+/* Login: marca arriba y acciones abajo, sobre el paisaje (ver components/auth/auth.css). */
 
-.login-main-1 {
-  min-height: 100svh;
-  padding: var(--espacio-6);
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.login-decoarch-2 {
-  width: 100%;
-  max-width: var(--contenedor-sm);
-}
-
-.login-div-3 {
-  justify-content: flex-end;
-  align-items: center;
-  gap: var(--espacio-6);
-  min-height: 32rem;
-  padding-inline: var(--espacio-10);
-  padding-top: 6rem;
-  padding-bottom: 3.5rem;
+.login__columna {
+  justify-content: space-between;
+  gap: var(--espacio-10);
   text-align: center;
-  flex-direction: column;
+}
+
+.login__marca {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-3);
+  margin-block-start: 12dvh;
+  color: var(--auth-texto-marca);
+  text-shadow: 0 0 16px var(--auth-halo);
 }
 
-.login-lotusicon-4 {
-  height: 3rem;
-  color: var(--gold);
+.login__logo {
+  inline-size: 12rem;
 }
 
-:where(.login-div-5 > :not(:last-child)) {
-  margin-block-start: 0;
-  margin-block-end: var(--espacio-2);
-}
-
-.login-h1-6 {
-  font-family: var(--fuente-serif);
-  font-size: var(--texto-5xl);
-  line-height: var(--texto-5xl-interlineado);
-  color: var(--gold);
-}
-
-.login-p-7 {
-  font-size: var(--texto-xs);
-  line-height: var(--texto-xs-interlineado);
-  letter-spacing: .3em;
-  color: var(--muted-foreground);
+.login__titulo {
+  font-family: var(--fuente-sans);
+  font-size: var(--texto-xl);
+  line-height: var(--texto-xl-interlineado);
+  font-weight: var(--peso-seminegrita);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  text-wrap: balance;
 }
 
-.login-decodivider-8 {
-  width: 10rem;
+.login__lema {
+  font-size: var(--texto-sm);
+  line-height: 1.6;
+  color: var(--auth-texto-marca-suave);
+  text-wrap: pretty;
 }
 
-.login-p-9 {
-  font-family: var(--fuente-serif);
-  font-size: var(--texto-lg);
-  line-height: var(--texto-lg-interlineado);
-  color: var(--texto-suave);
-  font-style: italic;
+.login__acciones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-3);
+  inline-size: 100%;
 }
 
-.login-button-10 {
-  width: 100%;
+.login__acciones .auth__nota {
+  margin-block-start: var(--espacio-1);
 }

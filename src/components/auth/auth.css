@@ -1,0 +1,882 @@
+/* Pantallas de acceso (login, registro, recuperar contraseña):
+   paisaje a pantalla completa con la paleta de la app. */
+
+.auth {
+  /* Paleta de la escena, tomada de la app (ver styles/variables.css).
+     Tema claro: atardecer lavanda que baja a un bosque azul noche. */
+  --auth-cielo-alto: #bedfff;            /* celeste pastel */
+  --auth-cielo-bajo: #e6ddee;            /* lavanda claro */
+  --auth-luz: #fff8e6;
+  --auth-bruma: #f5f1f9;
+  --auth-montana-1: #b7b9e3;             /* lavanda aclarada */
+  --auth-montana-2: #a597c4;             /* entre lavanda y lavanda suave */
+  --auth-pinos-1: #7c7aa8;
+  --auth-pinos-2: #4a4b75;
+  --auth-pinos-3: #1d2132;               /* azul noche */
+  /* Texto sobre el cielo (marca) y sobre el bosque (acciones) */
+  --auth-texto-marca: #1d2132;
+  --auth-texto-marca-suave: #3b3f58;
+  --auth-halo: rgb(245 241 249 / 0.6);
+  --auth-texto: #f5f1f9;
+  --auth-texto-suave: color-mix(in oklab, var(--auth-texto) 82%, transparent);
+
+  position: relative;
+  isolation: isolate;
+  min-block-size: 100dvh;
+  display: grid;
+  overflow: hidden;
+  color: var(--auth-texto);
+  background-color: var(--auth-pinos-3);
+}
+
+/* Tema oscuro: noche índigo con luz de luna lavanda. */
+.dark .auth {
+  --auth-cielo-alto: #110f28;
+  --auth-cielo-bajo: #2b2852;
+  --auth-luz: #b9a7e8;
+  --auth-bruma: #6a5ab0;
+  --auth-montana-1: #3a3470;
+  --auth-montana-2: #2e2a5c;
+  --auth-pinos-1: #26234a;
+  --auth-pinos-2: #1c1a3a;
+  --auth-pinos-3: #110f26;
+  --auth-texto-marca: #ece8f7;
+  --auth-texto-marca-suave: #c4bfe0;
+  --auth-halo: rgb(6 5 18 / 0.5);
+  --auth-texto: #ece8f7;
+}
+
+.auth__escena {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  z-index: -1;
+}
+
+/* Velo inferior para dar contraste sobre el bosque. */
+.auth::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  block-size: 45%;
+  z-index: -1;
+  background: linear-gradient(in oklab to bottom, transparent, color-mix(in oklab, var(--auth-pinos-3) 85%, transparent));
+  pointer-events: none;
+}
+
+/* Columna centrada con márgenes seguros para notch y barras del sistema. */
+.auth__columna {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  inline-size: 100%;
+  max-inline-size: 26rem;
+  margin-inline: auto;
+  padding-block: max(var(--espacio-10), env(safe-area-inset-top, 0px) + var(--espacio-6))
+    max(var(--espacio-10), env(safe-area-inset-bottom, 0px) + var(--espacio-6));
+  padding-inline: max(var(--espacio-6), env(safe-area-inset-left, 0px))
+    max(var(--espacio-6), env(safe-area-inset-right, 0px));
+}
+
+.auth__logo {
+  inline-size: 100%;
+  block-size: auto;
+  /* Sombra mínima para despegar el dorado del cielo claro, sin desdibujarlo */
+  filter: drop-shadow(0 1px 1px rgb(29 33 50 / 0.3));
+}
+
+/* Botón píldora translúcido, para usar sobre el bosque. */
+.auth__boton {
+  inline-size: 100%;
+  min-block-size: 3rem;
+  border-radius: var(--radio-pildora);
+  border: 1px solid color-mix(in oklab, var(--auth-texto) 35%, transparent);
+  background-color: color-mix(in oklab, var(--auth-texto) 18%, transparent);
+  color: var(--auth-texto);
+  font-size: var(--texto-base);
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.18);
+}
+
+@media (hover: hover) {
+  .auth__boton:hover {
+    background-color: color-mix(in oklab, var(--auth-texto) 28%, transparent);
+    color: var(--auth-texto);
+  }
+}
+
+.auth__boton:focus-visible {
+  outline: 2px solid var(--auth-texto);
+  outline-offset: 3px;
+}
+
+/* Variante secundaria: solo contorno. */
+.auth__boton--secundario {
+  min-block-size: 2.75rem;
+  background-color: transparent;
+  box-shadow: none;
+  font-size: var(--texto-sm);
+}
+
+.auth__nota {
+  font-size: var(--texto-xs);
+  line-height: var(--texto-xs-interlineado);
+  color: var(--auth-texto-suave);
+}
+
+.auth__nota a {
+  color: var(--auth-texto);
+  font-weight: var(--peso-seminegrita);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.auth__alerta {
+  font-size: var(--texto-sm);
+  line-height: var(--texto-sm-interlineado);
+  padding: var(--espacio-2) var(--espacio-3);
+  border-radius: var(--radio-md);
+  background-color: color-mix(in oklab, #7a1f1f 70%, transparent);
+  color: var(--auth-texto);
+  text-wrap: pretty;
+}
+
+/* ---------- Pantallas con formulario ---------- */
+
+.auth--formulario .auth__columna {
+  gap: var(--espacio-6);
+  /* El panel se acomoda según el ancho de esta columna (ver "Pantallas grandes") */
+  container: auth-columna / inline-size;
+}
+
+/* En pantallas grandes la columna se ensancha para que el panel pase a dos columnas. */
+@media (width >= 56rem) {
+  .auth--formulario .auth__columna {
+    max-inline-size: 60rem;
+    justify-content: center;
+    min-block-size: 100dvh;
+  }
+}
+
+/* Colores de los botones 3D (Volver, tema y el botón principal del formulario) */
+.auth {
+  --auth-boton-claro: #8580cf;
+  --auth-boton-base: #5f59ab;
+  --auth-boton-borde: #433d86;
+  --auth-boton-texto: #f5f1f9;
+}
+
+.dark .auth {
+  --auth-boton-claro: #d3c6f4;
+  --auth-boton-base: #ab95ea;
+  --auth-boton-borde: #6f55c2;
+  --auth-boton-texto: #17153a;
+}
+
+/* Botón 3D chico (Volver, tema): brillo arriba, canto inferior y sombra corta.
+   Al apretarlo se hunde. */
+.auth-3d {
+  --boton-grosor: 3px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-1);
+  min-block-size: 2.75rem;
+  min-inline-size: 2.75rem;
+  margin-block-end: var(--boton-grosor);
+  border-radius: var(--radio-pildora);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-seminegrita);
+  color: var(--auth-boton-texto);
+  background: linear-gradient(in oklab to bottom, var(--auth-boton-claro), var(--auth-boton-base) 60%);
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.35),
+    inset 0 -2px 0 color-mix(in oklab, var(--auth-boton-borde) 45%, transparent),
+    0 var(--boton-grosor) 0 var(--auth-boton-borde),
+    0 calc(var(--boton-grosor) + 3px) 6px rgb(29 33 50 / 0.22);
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+}
+
+.auth-3d svg {
+  inline-size: var(--icono-sm, 1rem);
+  block-size: var(--icono-sm, 1rem);
+}
+
+@media (hover: hover) {
+  .auth-3d:hover {
+    filter: brightness(1.06);
+  }
+}
+
+.auth-3d:active {
+  transform: translateY(calc(var(--boton-grosor) - 1px));
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.25),
+    inset 0 -1px 0 color-mix(in oklab, var(--auth-boton-borde) 45%, transparent),
+    0 1px 0 var(--auth-boton-borde),
+    0 2px 4px rgb(29 33 50 / 0.2);
+}
+
+.auth-3d:focus-visible {
+  outline: 2px solid var(--auth-boton-borde);
+  outline-offset: calc(var(--boton-grosor) + 2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-3d {
+    transition: none;
+  }
+}
+
+.auth__volver {
+  align-self: flex-start;
+  padding-inline: var(--espacio-3) var(--espacio-4);
+}
+
+/* Selector de tema: arriba a la derecha, alineado con "Volver" */
+.auth__tema {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: max(var(--espacio-10), env(safe-area-inset-top, 0px) + var(--espacio-6));
+  inset-inline-end: max(var(--espacio-6), env(safe-area-inset-right, 0px));
+}
+
+.auth__tema svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+/* Panel en dos niveles, como una tarjeta dentro de otra: arriba la marca y la
+   ilustración, abajo el formulario. Colores de la app (ver styles/variables.css). */
+.auth-panel {
+  /* Acento lavanda: degradado de los botones y círculos de los íconos */
+  --auth-acento: #5b55a3;
+  --auth-acento-2: #7a83c6;              /* hacia lavanda #889bd2 */
+  --auth-acento-texto: #f5f1f9;
+  --auth-panel-fondo: #f7f1f3;           /* crema lavanda, como la pared de la ilustración */
+  --auth-tarjeta-fondo: #fcf9fb;
+  --auth-campo-fondo: #f3ecf1;
+  --auth-titulo: #3f2f7a;                /* violeta oscuro */
+
+  position: relative;
+  z-index: 1;
+  inline-size: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-5, 1.25rem);
+  padding: var(--espacio-6) var(--espacio-4) var(--espacio-5, 1.25rem);
+  border-radius: 2rem;
+  background-color: color-mix(in oklab, var(--auth-panel-fondo) 94%, transparent);
+  color: var(--foreground);
+  box-shadow: var(--relieve-flotante);
+  backdrop-filter: blur(12px);
+}
+
+.dark .auth-panel {
+  --auth-acento: #b9a7e8;
+  --auth-acento-2: #8f74e0;
+  --auth-acento-texto: #17153a;
+  --auth-panel-fondo: #1c1a3a;
+  --auth-tarjeta-fondo: #221f43;
+  --auth-campo-fondo: #1b1935;
+  --auth-titulo: #e2d8fb;
+}
+
+.auth-panel__encabezado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-2);
+  text-align: center;
+}
+
+.auth-panel__logo {
+  inline-size: 6.5rem;
+  block-size: auto;
+  margin-block-end: var(--espacio-1);
+}
+
+.auth-panel__titulo {
+  font-family: var(--fuente-sans);
+  font-size: var(--texto-3xl, 1.875rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--auth-titulo);
+  text-wrap: balance;
+}
+
+.auth-panel__descripcion {
+  font-size: var(--texto-sm);
+  line-height: 1.5;
+  color: var(--muted-foreground);
+  text-wrap: pretty;
+}
+
+/* Escena a todo el ancho del panel: arriba se funde con el fondo del panel y
+   abajo queda tapada por la tarjeta del formulario, que se apoya encima. */
+.auth-panel__ilustracion {
+  position: relative;
+  z-index: 0;
+  display: block;
+  inline-size: calc(100% + var(--espacio-4) * 2);
+  max-inline-size: none;
+  block-size: auto;
+  aspect-ratio: 960 / 779;
+  object-fit: cover;
+  margin-inline: calc(var(--espacio-4) * -1);
+  margin-block: calc(var(--espacio-3) * -1) -3.5rem;
+  /* Se desvanece arriba y a los costados para fundirse con el panel */
+  mask-image:
+    linear-gradient(to bottom, transparent, #000 10%),
+    linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-composite: intersect;
+  pointer-events: none;
+}
+
+/* Con la escena, el título alcanza: el logo se oculta como en la referencia. */
+.auth-panel:has(.auth-panel__ilustracion) .auth-panel__logo {
+  display: none;
+}
+
+.auth-panel__tarjeta {
+  position: relative;
+  z-index: 1;
+  padding: var(--espacio-5, 1.25rem) var(--espacio-4) var(--espacio-4);
+  border-radius: 1.5rem;
+  background-color: var(--auth-tarjeta-fondo);
+  box-shadow: var(--relieve-elevado);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+/* "¿Olvidaste tu contraseña?" alineado a la derecha, debajo del campo. */
+.auth-form__extra {
+  display: flex;
+  justify-content: flex-end;
+  margin-block-start: calc(var(--espacio-2) * -1);
+  font-size: var(--texto-sm);
+}
+
+.auth-panel .auth-form__extra a,
+.auth-panel .auth-panel__pie a {
+  color: var(--auth-acento);
+  font-weight: var(--peso-seminegrita);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .auth-panel .auth-form__extra a:hover,
+  .auth-panel .auth-panel__pie a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
+
+/* Botón principal: píldora 3D. Brillo arriba, borde inferior más oscuro que da
+   grosor y una sombra corta (sin resplandor difuso). Al apretarlo, se hunde. */
+.auth-form__enviar.ui-button {
+  --boton-grosor: 4px;
+
+  inline-size: 100%;
+  min-block-size: 3.25rem;
+  margin-block: var(--espacio-2) var(--boton-grosor);
+  border-radius: var(--radio-pildora);
+  background: linear-gradient(in oklab to bottom, var(--auth-boton-claro), var(--auth-boton-base) 60%);
+  color: var(--auth-acento-texto);
+  font-size: var(--texto-lg);
+  font-weight: var(--peso-seminegrita);
+  text-shadow: 0 1px 0 color-mix(in oklab, var(--auth-boton-borde) 60%, transparent);
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.35),
+    inset 0 -2px 0 color-mix(in oklab, var(--auth-boton-borde) 45%, transparent),
+    0 var(--boton-grosor) 0 var(--auth-boton-borde),
+    0 calc(var(--boton-grosor) + 4px) 8px rgb(29 33 50 / 0.22);
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+}
+
+.dark .auth-form__enviar.ui-button {
+  text-shadow: none;
+}
+
+.auth-form__enviar.ui-button svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+@media (hover: hover) {
+  .auth-form__enviar.ui-button:hover {
+    background: linear-gradient(in oklab to bottom, var(--auth-boton-claro), var(--auth-boton-base) 60%);
+    filter: brightness(1.06);
+  }
+}
+
+.auth-form__enviar.ui-button:active:not(:disabled) {
+  transform: translateY(calc(var(--boton-grosor) - 1px));
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.25),
+    inset 0 -1px 0 color-mix(in oklab, var(--auth-boton-borde) 45%, transparent),
+    0 1px 0 var(--auth-boton-borde),
+    0 2px 4px rgb(29 33 50 / 0.2);
+}
+
+.auth-form__enviar.ui-button:focus-visible {
+  outline: 2px solid var(--auth-acento);
+  outline-offset: calc(var(--boton-grosor) + 2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-form__enviar.ui-button {
+    transition: none;
+  }
+}
+
+/* Separador "o continuá con" */
+.auth-separador {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  margin-block: var(--espacio-4) var(--espacio-3);
+  font-size: var(--texto-sm);
+  color: var(--muted-foreground);
+}
+
+.auth-separador::before,
+.auth-separador::after {
+  content: "";
+  flex: 1;
+  block-size: 1px;
+  background-color: color-mix(in oklab, var(--muted-foreground) 35%, transparent);
+}
+
+.auth-sociales {
+  display: flex;
+  justify-content: center;
+  gap: var(--espacio-4);
+}
+
+.auth-social {
+  display: grid;
+  place-items: center;
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  border-radius: 50%;
+  background-color: var(--auth-campo-fondo);
+  box-shadow: var(--relieve-boton);
+  transition: transform var(--transicion-duracion) var(--transicion-curva);
+}
+
+.auth-social svg {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+}
+
+.auth-social:disabled {
+  opacity: 0.6;
+}
+
+@media (hover: hover) {
+  .auth-social:not(:disabled):hover {
+    transform: translateY(-2px);
+  }
+}
+
+.auth-social:focus-visible {
+  outline: 2px solid var(--auth-acento);
+  outline-offset: 3px;
+}
+
+.auth-form__error {
+  font-size: var(--texto-sm);
+  line-height: var(--texto-sm-interlineado);
+  padding: var(--espacio-2) var(--espacio-3);
+  border-radius: var(--radio-md);
+  background-color: color-mix(in oklab, var(--destructive) 12%, transparent);
+  color: var(--destructive);
+  text-wrap: pretty;
+}
+
+.auth-form__exito {
+  font-size: var(--texto-sm);
+  line-height: 1.5;
+  padding: var(--espacio-3) var(--espacio-4);
+  border-radius: var(--radio-md);
+  background-color: color-mix(in oklab, var(--gold) 12%, transparent);
+  color: var(--foreground);
+  text-wrap: pretty;
+}
+
+.auth-panel__pie {
+  font-size: var(--texto-sm);
+  text-align: center;
+  color: var(--muted-foreground);
+}
+
+.auth-panel a:not(.ui-button):focus-visible {
+  outline: 2px solid var(--auth-acento);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------- Campos ---------- */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.campo__cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--espacio-2);
+  padding-inline-start: var(--espacio-2);
+}
+
+.campo__ayuda {
+  padding-inline-start: var(--espacio-2);
+  font-size: var(--texto-xs);
+  line-height: 1.45;
+  color: var(--muted-foreground);
+}
+
+/* Campos en forma de píldora */
+.campo .ui-input {
+  block-size: auto;
+  min-block-size: 3rem;
+  border-radius: var(--radio-pildora);
+  padding-inline: var(--espacio-5, 1.25rem);
+  background-color: var(--auth-campo-fondo);
+}
+
+.campo__control {
+  position: relative;
+}
+
+.campo__control--con-icono .ui-input {
+  padding-inline-start: 3.75rem;
+}
+
+.campo__control--con-boton .ui-input {
+  padding-inline-end: 3.25rem;
+}
+
+/* Círculo con el ícono, a la izquierda */
+.campo__icono {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  inline-size: 3rem;
+  border-radius: 50%;
+  background: linear-gradient(in oklab 135deg, var(--auth-acento-2), var(--auth-acento));
+  color: var(--auth-acento-texto);
+  box-shadow: 0 4px 12px color-mix(in oklab, var(--auth-acento) 30%, transparent);
+  pointer-events: none;
+}
+
+.campo__icono svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+.campo__mostrar {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: var(--espacio-1);
+  display: grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  border-radius: 50%;
+  color: var(--auth-acento);
+}
+
+.campo__mostrar svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+@media (hover: hover) {
+  .campo__mostrar:hover {
+    color: var(--foreground);
+  }
+}
+
+.campo__mostrar:focus-visible {
+  outline: 2px solid var(--auth-acento);
+  outline-offset: -4px;
+}
+
+/* El espacio del error queda reservado (visibility, no display): si apareciera al
+   salir del campo, empujaría el botón de enviar y el clic se perdería. */
+.campo__error {
+  visibility: hidden;
+  min-block-size: 1lh;
+  margin-block-start: calc(var(--espacio-1) * -1);
+  padding-inline-start: var(--espacio-2);
+  font-size: var(--texto-xs);
+  line-height: 1.45;
+  color: var(--destructive);
+}
+
+.campo[data-invalido="true"] .campo__error {
+  visibility: visible;
+}
+
+.campo[data-invalido="true"] .campo__ayuda {
+  color: var(--destructive);
+}
+
+/* ---------- Pantallas grandes ----------
+   Con espacio suficiente, el panel pasa a dos columnas: a la izquierda la marca
+   y la ilustración, a la derecha el formulario. */
+
+@container auth-columna (inline-size > 46rem) {
+  .auth-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-areas:
+      "encabezado tarjeta"
+      "ilustracion tarjeta"
+      ".           pie";
+    grid-template-rows: auto 1fr auto;
+    column-gap: var(--espacio-8, 2rem);
+    row-gap: var(--espacio-4);
+    padding: var(--espacio-8, 2rem);
+    border-radius: 2.5rem;
+  }
+
+  .auth-panel__encabezado {
+    grid-area: encabezado;
+    align-self: end;
+    padding-block-start: var(--espacio-6);
+  }
+
+  .auth-panel__logo {
+    inline-size: 9rem;
+  }
+
+  .auth-panel__titulo {
+    font-size: var(--texto-4xl, 2.25rem);
+  }
+
+  .auth-panel__descripcion {
+    font-size: var(--texto-base);
+  }
+
+  /* La escena queda a la izquierda, debajo del título, con bordes suaves. */
+  .auth-panel__ilustracion {
+    grid-area: ilustracion;
+    align-self: start;
+    inline-size: 100%;
+    margin: var(--espacio-2) 0 0;
+    border-radius: 1.5rem;
+    mask-image: linear-gradient(to bottom, transparent, #000 18%);
+    mask-composite: add;
+  }
+
+  .auth-panel__tarjeta {
+    grid-area: tarjeta;
+    align-self: center;
+    padding: var(--espacio-6);
+  }
+
+  .auth-panel__pie {
+    grid-area: pie;
+  }
+}
+
+/* Sin ilustración, la marca se centra en la columna izquierda. */
+@container auth-columna (inline-size > 46rem) {
+  .auth-panel:not(:has(.auth-panel__ilustracion)) .auth-panel__encabezado {
+    grid-row: 1 / 3;
+    align-self: center;
+    padding-block-start: 0;
+  }
+}
+
+/* ---------- Habitación de fondo (pantallas con formulario) ----------
+   La habitación de la ilustración, desenfocada, para que el panel se vea como
+   en la referencia. Las montañas quedan para la pantalla inicial. */
+
+.auth--formulario {
+  background-color: #c4aee6;
+}
+
+.dark .auth--formulario {
+  background-color: #2a2450;
+}
+
+.auth--formulario::after {
+  display: none;
+}
+
+.auth__sala {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  /* Costados de la habitación (lámpara, ventana, plantas, libros) y en el
+     centro la pared lavanda que baja al piso claro */
+  background:
+    url("/ilustraciones/sala-izq.webp") left bottom / auto 100% no-repeat,
+    url("/ilustraciones/sala-der.webp") right bottom / auto 100% no-repeat,
+    linear-gradient(in oklab to bottom, #b597e0 0%, #c3a9e8 55%, #e4d6f3 82%, #f1eaf8 100%);
+}
+
+/* Velo: suaviza el fondo en claro y lo lleva a la noche índigo en oscuro */
+.auth__sala::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgb(247 241 243 / 0.18);
+}
+
+.dark .auth__sala::after {
+  background-color: rgb(17 15 38 / 0.62);
+}
+
+/* "Volver" sobre la habitación: el texto de la marca ya no va sobre el cielo */
+.auth--formulario {
+  --auth-texto-marca: #3f2f7a;
+}
+
+/* Pedestal lavanda donde se apoya el panel */
+.auth-pedestal {
+  position: relative;
+  z-index: 0;
+  inline-size: calc(100% + var(--espacio-6));
+  block-size: 2.75rem;
+  margin-block-start: calc(var(--espacio-6) * -1 - 1.75rem);
+  border-radius: 50%;
+  background: linear-gradient(in oklab to bottom, #d9c9f3, #a98fdc);
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.5),
+    0 4px 0 #8c72c9,
+    0 12px 24px rgb(29 33 50 / 0.25);
+}
+
+.dark .auth-pedestal {
+  background: linear-gradient(in oklab to bottom, #4a3f8c, #2e2763);
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.12),
+    0 4px 0 #1f1a47,
+    0 12px 24px rgb(0 0 0 / 0.4);
+}
+
+/* ---------- Panel con escena (como la referencia) ----------
+   La ilustración llena el panel de borde a borde desde arriba, el título va
+   encima, sobre la pared crema, y la tarjeta del formulario tapa la parte de
+   abajo. Encabezado e ilustración comparten la celda "escena" de la grilla. */
+
+.auth-panel:has(.auth-panel__ilustracion) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "escena"
+    "tarjeta"
+    "pie";
+  padding-block-start: 0;
+  overflow: clip;
+}
+
+.auth-panel:has(.auth-panel__ilustracion) .auth-panel__encabezado {
+  grid-area: escena;
+  align-self: start;
+  z-index: 1;
+  padding-block-start: var(--espacio-5, 1.25rem);
+  /* La pared de la ilustración es crema en los dos temas: texto oscuro siempre */
+  --auth-titulo: #3f2f7a;
+  text-shadow: 0 0 12px rgb(247 241 243 / 0.9);
+}
+
+.auth-panel:has(.auth-panel__ilustracion) .auth-panel__descripcion {
+  color: #4f4868;
+}
+
+.auth-panel:has(.auth-panel__ilustracion) .auth-panel__ilustracion {
+  grid-area: escena;
+  aspect-ratio: 960 / 936;
+  /* Llega a los bordes del panel; abajo la tapa la tarjeta */
+  margin: 0 calc(var(--espacio-4) * -1) -5rem;
+  inline-size: calc(100% + var(--espacio-4) * 2);
+  border-radius: 0;
+  /* Solo se desvanece abajo, a los costados de la tarjeta */
+  mask-image: linear-gradient(to bottom, #000 78%, transparent);
+  mask-composite: add;
+}
+
+/* Formulario un poco más ancho */
+.auth--formulario .auth__columna {
+  max-inline-size: 30rem;
+  padding-inline: max(var(--espacio-3), env(safe-area-inset-left, 0px))
+    max(var(--espacio-3), env(safe-area-inset-right, 0px));
+}
+
+@media (width >= 56rem) {
+  .auth--formulario .auth__columna {
+    max-inline-size: 64rem;
+  }
+}
+
+/* Pantallas grandes: la escena (con el título encima) a la izquierda */
+@container auth-columna (inline-size > 46rem) {
+  .auth-panel:has(.auth-panel__ilustracion) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "escena tarjeta"
+      "escena pie";
+    grid-template-rows: 1fr auto;
+    padding: var(--espacio-4);
+  }
+
+  .auth-panel:has(.auth-panel__ilustracion) .auth-panel__encabezado {
+    padding-block-start: var(--espacio-8, 2rem);
+  }
+
+  .auth-panel:has(.auth-panel__ilustracion) .auth-panel__ilustracion {
+    align-self: stretch;
+    inline-size: 100%;
+    block-size: 100%;
+    margin: 0;
+    border-radius: 1.75rem;
+    mask-image: none;
+  }
+}
+
+/* Más pared arriba del personaje para que el título no lo pise: un espacio
+   arriba de la imagen pintado con el mismo color de la pared (medido en cada
+   ilustración). */
+.auth-panel:has(.auth-panel__ilustracion) .auth-panel__ilustracion {
+  aspect-ratio: auto;
+  padding-block-start: 4.75rem;
+  object-fit: contain;
+  object-position: center bottom;
+  /* Cada ilustración pasa el color de su pared (prop `wall` de AuthShell) */
+  background: var(--auth-pared, #efdcd5);
+}
+
+@container auth-columna (inline-size > 46rem) {
+  .auth-panel:has(.auth-panel__ilustracion) .auth-panel__ilustracion {
+    aspect-ratio: auto;
+  }
+}
+
+/* Escritorio: franja de pared arriba (padding pintado con el mismo degradado)
+   y la imagen cubre el resto, anclada abajo. */
+@container auth-columna (inline-size > 46rem) {
+  .auth-panel:has(.auth-panel__ilustracion) .auth-panel__ilustracion {
+    padding-block-start: 6.5rem;
+    object-fit: cover;
+    object-position: center bottom;
+  }
+}

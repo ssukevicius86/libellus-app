@@ -24,7 +24,8 @@
     z-index: 50;
     gap: var(--espacio-4);
     background-color: var(--background);
-    box-shadow: 0 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;
+    background-image: var(--volumen);
+    box-shadow: var(--relieve-elevado);
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
     transition-timing-function: var(--transicion-curva);
     transition-duration: var(--tw-duration, .15s);

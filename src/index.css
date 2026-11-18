@@ -88,11 +88,12 @@
   /* Tarjeta con filete dorado interior */
   .deco-card {
     position: relative;
-    border: 1px solid var(--border);
     border-radius: var(--radio-xl);
     background-color: var(--tarjeta-velada);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    background-image: var(--volumen);
+    box-shadow: var(--relieve-elevado);
+    -webkit-backdrop-filter: var(--vidrio);
+    backdrop-filter: var(--vidrio);
   }
   .deco-card::after {
     content: "";

@@ -216,6 +216,44 @@
     width: 2.5rem;
     height: 2.5rem;
   }
+
+  /* Relieve 3D: los botones con fondo parecen piezas físicas.
+     ghost y link quedan planos. */
+  .ui-button--variant-default,
+  .ui-button--variant-secondary,
+  .ui-button--variant-outline,
+  .ui-button--variant-destructive {
+    background-image: var(--volumen);
+    box-shadow: var(--relieve-boton);
+  }
+
+  .ui-button--variant-outline {
+    border-color: transparent;
+    background-color: var(--card);
+  }
+
+  @media (hover: hover) {
+    .ui-button--variant-default:hover,
+    .ui-button--variant-secondary:hover,
+    .ui-button--variant-outline:hover,
+    .ui-button--variant-destructive:hover {
+      box-shadow: var(--relieve-flotante);
+    }
+  }
+
+  .ui-button--variant-default:active,
+  .ui-button--variant-secondary:active,
+  .ui-button--variant-outline:active,
+  .ui-button--variant-destructive:active {
+    box-shadow: var(--relieve-presionado);
+  }
+
+  .ui-button--variant-default:focus-visible,
+  .ui-button--variant-secondary:focus-visible,
+  .ui-button--variant-outline:focus-visible,
+  .ui-button--variant-destructive:focus-visible {
+    box-shadow: 0 0 0 3px var(--tw-ring-color, currentcolor), var(--relieve-boton);
+  }
 }
 
 @property --tw-shadow {

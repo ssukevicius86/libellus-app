@@ -22,5 +22,7 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig)
 export const auth = getAuth(app)
+// Emails de Firebase (verificación, recuperar contraseña) en español
+auth.languageCode = 'es'
 export const db = getFirestore(app)
 export const googleProvider = new GoogleAuthProvider()

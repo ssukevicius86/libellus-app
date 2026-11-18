@@ -37,9 +37,9 @@ export function MoodPicker({
             aria-checked={selected}
             onClick={() => onChange(m)}
             className={cn(
-              'flex flex-col items-center gap-1.5 rounded-lg border px-1 py-3 text-muted-foreground transition-all outline-none',
-              'hover:border-gold/50 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring',
-              selected && 'border-gold bg-gold/10 text-gold',
+              'relieve flex flex-col items-center gap-1.5 rounded-lg border px-1 py-3 text-muted-foreground outline-none',
+              'hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring',
+              selected && 'chip--activo',
               compact && 'py-2',
             )}
           >

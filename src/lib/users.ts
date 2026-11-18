@@ -9,7 +9,14 @@ import {
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 
-export interface UserProfile {
+/** Datos que se piden al crear una cuenta Libellus (email y contraseña). */
+export interface ProfileExtras {
+  firstName: string
+  lastName: string
+  age: number
+}
+
+export interface UserProfile extends Partial<ProfileExtras> {
   displayName: string | null
   email: string | null
   photoURL: string | null
@@ -21,8 +28,11 @@ export interface UserProfile {
 
 export const userDoc = (uid: string) => doc(db, 'users', uid)
 
-/** Crea users/{uid} en el primer login; en los siguientes solo actualiza lastLoginAt. */
-export async function ensureUserProfile(user: User): Promise<void> {
+/**
+ * Crea users/{uid} en el primer login; en los siguientes solo actualiza lastLoginAt.
+ * `extras` llega solo cuando la cuenta se acaba de crear con el formulario de registro.
+ */
+export async function ensureUserProfile(user: User, extras?: ProfileExtras): Promise<void> {
   const ref = userDoc(user.uid)
   const snap = await getDoc(ref)
 
@@ -32,9 +42,10 @@ export async function ensureUserProfile(user: User): Promise<void> {
   }
 
   await setDoc(ref, {
-    displayName: user.displayName,
+    displayName: extras ? `${extras.firstName} ${extras.lastName}` : user.displayName,
     email: user.email,
     photoURL: user.photoURL,
+    ...extras,
     createdAt: serverTimestamp(),
     lastLoginAt: serverTimestamp(),
   })

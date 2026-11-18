@@ -1,0 +1,2067 @@
+<!doctype html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#27344a" />
+    <meta name="description" content="Libellus, tu santuario digital de lectura: Focus Timer, microambientes sonoros, registro del ánimo y tu biblioteca personal." />
+    <title>Libellus · Santuario de lectura</title>
+    <link rel="icon" href="isotipo.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amarante&family=Montserrat:wght@300;400;500;600&display=swap" />
+    <script>
+        // Respeta el tema guardado por la app (mismo localStorage si comparten dominio)
+        try {
+            var prefs = JSON.parse(localStorage.getItem('libellus:prefs') || '{}')
+            if (prefs.theme === 'light') document.documentElement.classList.remove('dark')
+        } catch (e) {}
+    </script>
+    <style>
+        /* ===============================================
+           PALETA DE MARCA
+           Midnight Blue #27344A · Brand Gold #C19D5F
+           Twilight Blue #626B91 · Dusty Lavender #A99BB8
+           Moon Cream #F0E6D8
+           =============================================== */
+
+        /* Modo claro: fondo Moon Cream, tarjetas en Twilight Blue.
+           El dorado de los textos se oscurece para que se lea sobre el crema;
+           --gold-relleno es el dorado de marca para botones y superficies. */
+        :root {
+            --background: #f0e6d8;
+            --foreground: #27344a;
+            --muted: #e4d8c8;
+            --muted-foreground: #626b91;
+            --primary: #27344a;
+            --primary-foreground: #f0e6d8;
+            --gold: #7d5e2a;
+            --gold-relleno: #c19d5f;
+            --gold-foreground: #27344a;
+            --border: rgb(193 157 95 / 0.4);
+            --neu-luz: rgb(255 255 255 / 0.8);
+            --neu-sombra: rgb(176 156 128 / 0.5);
+            --neu-sombra-fuerte: rgb(160 138 108 / 0.6);
+        }
+
+        /* Modo oscuro: fondo Midnight Blue, textos secundarios en Dusty Lavender */
+        .dark {
+            --background: #27344a;
+            --foreground: #f0e6d8;
+            --muted: #212c40;
+            --muted-foreground: #a99bb8;
+            --primary: #a99bb8;
+            --primary-foreground: #27344a;
+            --gold: #c19d5f;
+            --gold-relleno: #c19d5f;
+            --gold-foreground: #27344a;
+            --border: rgb(193 157 95 / 0.25);
+            --neu-luz: rgb(98 107 145 / 0.22);
+            --neu-sombra: rgb(14 20 32 / 0.65);
+            --neu-sombra-fuerte: rgb(10 15 26 / 0.75);
+        }
+
+        :root {
+            --relieve-elevado: -8px -8px 18px var(--neu-luz), 8px 8px 18px var(--neu-sombra);
+            --relieve-boton: -4px -4px 10px var(--neu-luz), 4px 4px 10px var(--neu-sombra);
+            --relieve-flotante: -6px -6px 14px var(--neu-luz), 6px 6px 14px var(--neu-sombra-fuerte);
+            --relieve-presionado: inset 3px 3px 7px var(--neu-sombra), inset -3px -3px 7px var(--neu-luz);
+            --relieve-hundido: inset 4px 4px 9px var(--neu-sombra), inset -4px -4px 9px var(--neu-luz);
+            /* Sombra de los dispositivos, que flotan sobre la página */
+            --sombra-dispositivo: 0 30px 60px -20px rgb(12 17 28 / 0.55), 0 12px 24px -12px rgb(12 17 28 / 0.4);
+
+            /* Colores fijos de las ilustraciones (no cambian con el tema) */
+            --noche: #27344a;
+            --noche-media: #34405c;
+            --marco: #161e2c;
+            --celeste: #f0e6d8;
+            --lavanda: #626b91;
+
+            --fuente-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+            --fuente-serif: "Amarante", ui-serif, Georgia, serif;
+
+            --radio-md: 1rem;
+            --radio-lg: 1.25rem;
+            --radio-xl: 1.75rem;
+            --radio-pildora: 9999px;
+
+            --transicion: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --contenedor: 76rem;
+        }
+
+        /* ===============================================
+           BASE
+           =============================================== */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--foreground);
+            font-family: var(--fuente-sans);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            transition: background-color 300ms, color 300ms;
+        }
+
+        svg { display: block; }
+        a { color: inherit; }
+        p { margin: 0; }
+
+        h1, h2, h3 {
+            font-family: var(--fuente-serif);
+            font-weight: 400;
+            line-height: 1.12;
+            margin: 0;
+            text-wrap: balance;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: var(--contenedor);
+            margin-inline: auto;
+            padding-inline: 1rem;
+        }
+
+        @media (min-width: 40rem) {
+            .contenedor { padding-inline: 2rem; }
+        }
+
+        .eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .texto-secundario { color: var(--muted-foreground); }
+        .dorado { color: var(--gold); }
+
+        /* Escena ilustrada que cubre su contenedor */
+        .escena {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ===============================================
+           PIEZAS NEUMÓRFICAS
+           =============================================== */
+        .tarjeta {
+            background: var(--background);
+            border-radius: var(--radio-xl);
+            box-shadow: var(--relieve-elevado);
+        }
+
+        .boton {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-height: 3rem;
+            padding: 0 1.5rem;
+            border: 0;
+            border-radius: var(--radio-pildora);
+            font: 600 0.9375rem var(--fuente-sans);
+            text-decoration: none;
+            cursor: pointer;
+            background: var(--background);
+            color: var(--foreground);
+            box-shadow: var(--relieve-boton);
+            transition: box-shadow var(--transicion), transform var(--transicion);
+        }
+
+        .boton:hover { box-shadow: var(--relieve-flotante); transform: translateY(-1px); }
+        .boton:active { box-shadow: var(--relieve-presionado); transform: none; }
+        .boton svg { width: 1.125rem; height: 1.125rem; }
+
+        .boton--dorado {
+            background: var(--gold-relleno);
+            color: var(--gold-foreground);
+        }
+
+        .boton:focus-visible,
+        .icono-boton:focus-visible,
+        .opcion:focus-visible,
+        .reproducir:focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 3px;
+        }
+
+        .icono-boton {
+            display: grid;
+            place-items: center;
+            width: 2.75rem;
+            height: 2.75rem;
+            border: 0;
+            border-radius: var(--radio-pildora);
+            background: var(--background);
+            color: var(--gold);
+            cursor: pointer;
+            box-shadow: var(--relieve-boton);
+            transition: box-shadow var(--transicion);
+        }
+
+        .icono-boton:hover { box-shadow: var(--relieve-flotante); }
+        .icono-boton:active { box-shadow: var(--relieve-presionado); }
+        .icono-boton svg { width: 1.25rem; height: 1.25rem; }
+
+        /* Filete art déco: línea – rombo – línea */
+        .filete {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gold);
+            max-width: 14rem;
+            margin-inline: auto;
+        }
+
+        .filete::before, .filete::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, currentColor);
+        }
+
+        .filete::after { transform: scaleX(-1); }
+
+        .filete span {
+            width: 0.5rem;
+            height: 0.5rem;
+            border: 1px solid currentColor;
+            transform: rotate(45deg);
+        }
+
+        /* ===============================================
+           CABECERA
+           =============================================== */
+        .cabecera {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: color-mix(in oklab, var(--background) 88%, transparent);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .cabecera .contenedor {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            min-height: 4.5rem;
+        }
+
+        .marca {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .marca-sello {
+            display: grid;
+            place-items: center;
+            width: 55px;
+            height: 55px;
+            border-radius: 0.875rem;
+            color: var(--gold);
+            box-shadow: var(--relieve-boton);
+        }
+
+        .marca-sello svg { width: 48px; height: 48px; }
+
+        .marca-nombre {
+            display: block;
+            font-family: var(--fuente-serif);
+            font-size: 1.25rem;
+            line-height: 1.1;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+        }
+
+        .marca-lema {
+            display: block;
+            font-size: 0.6875rem;
+            color: var(--muted-foreground);
+        }
+
+        .nav {
+            display: none;
+            gap: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--muted-foreground);
+            transition: color var(--transicion);
+        }
+
+        .nav a:hover { color: var(--gold); }
+
+        .cabecera-acciones { display: flex; align-items: center; gap: 0.75rem; }
+        .cabecera-acciones .boton { min-height: 2.75rem; padding: 0 1.125rem; font-size: 0.875rem; }
+
+        @media (min-width: 56rem) {
+            .nav { display: flex; }
+        }
+
+        @media (max-width: 26rem) {
+            .marca-lema, .cabecera-acciones .boton { display: none; }
+        }
+
+        .icono-sol { display: none; }
+        .dark .icono-sol { display: block; }
+        .dark .icono-luna { display: none; }
+
+        /* ===============================================
+           HERO: texto + escenario con pantallas flotantes
+           =============================================== */
+        .hero { padding-block: 2.5rem 5rem; }
+
+        .hero .contenedor {
+            display: grid;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.75rem, 7.5vw, 5rem);
+            margin-block: 1rem 1.5rem;
+        }
+
+        .hero h1 .dorado { display: block; }
+
+        .hero-bajada {
+            font-size: 1.0625rem;
+            font-weight: 300;
+            max-width: 30rem;
+            color: var(--muted-foreground);
+        }
+
+        .hero-botones {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .hero-datos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+            margin-top: 2.5rem;
+            padding: 0;
+            list-style: none;
+        }
+
+        .hero-datos strong {
+            display: block;
+            font-family: var(--fuente-serif);
+            font-weight: 400;
+            font-size: 1.75rem;
+            line-height: 1;
+            color: var(--gold);
+        }
+
+        .hero-datos span { font-size: 0.8125rem; color: var(--muted-foreground); }
+
+        @media (min-width: 64rem) {
+            .hero .contenedor { grid-template-columns: 0.85fr 1.15fr; gap: 2rem; }
+        }
+
+        /* El escenario escala todo su interior con su ancho (unidades cqw) */
+        .escenario {
+            container-type: inline-size;
+            width: 100%;
+            max-width: 40rem;
+            margin-inline: auto;
+        }
+
+        .lienzo {
+            position: relative;
+            aspect-ratio: 1 / 0.98;
+            font-size: 2.6cqw;
+        }
+
+        .arco {
+            position: absolute;
+            left: 24%;
+            right: 0;
+            top: 0;
+            bottom: 12%;
+            border-radius: 999em 999em 2em 2em;
+            overflow: hidden;
+            box-shadow: var(--relieve-elevado);
+        }
+
+        /* Marco dorado interior del arco */
+        .arco::after {
+            content: "";
+            position: absolute;
+            inset: 0.9em;
+            border: 1px solid rgb(193 157 95 / 0.45);
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        /* Teléfonos */
+        .telefono {
+            position: absolute;
+            padding: 0.45em;
+            border-radius: 2.2em;
+            background: var(--marco);
+            box-shadow: var(--sombra-dispositivo);
+        }
+
+        .pantalla {
+            position: relative;
+            height: 100%;
+            border-radius: 1.8em;
+            background: var(--background);
+            overflow: hidden;
+            transition: background-color 300ms;
+        }
+
+        .telefono--entrar { left: 0; top: 18%; width: 14em; height: 26em; z-index: 1; }
+        .telefono--santuario { left: 33%; top: 6%; width: 15em; height: 31em; z-index: 2; }
+
+        .flotante {
+            position: absolute;
+            right: 0;
+            bottom: 3%;
+            width: 13em;
+            padding: 1.2em;
+            border-radius: 1.6em;
+            z-index: 3;
+            background: var(--noche);
+            color: #f0e6d8;
+            box-shadow: var(--sombra-dispositivo);
+        }
+
+        /* Contenido de la pantalla "Entrar" */
+        .entrar {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 2.2em 1.3em 1.4em;
+        }
+
+        .entrar-logo { width: 4.2em; height: 2.7em; color: var(--gold); margin-bottom: 1.4em; }
+        .entrar small { font-size: 0.7em; color: var(--muted-foreground); }
+        .entrar h3 { font-size: 1.9em; margin-block: 0.2em 1em; }
+
+        .campo {
+            display: flex;
+            align-items: center;
+            gap: 0.6em;
+            height: 2.6em;
+            padding-inline: 1em;
+            margin-bottom: 0.7em;
+            border-radius: 0.9em;
+            font-size: 0.75em;
+            color: var(--muted-foreground);
+            box-shadow: var(--relieve-hundido);
+        }
+
+        .campo svg { width: 1.2em; height: 1.2em; }
+
+        .boton-maqueta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+            height: 2.6em;
+            margin-top: 0.4em;
+            border-radius: var(--radio-pildora);
+            font-size: 0.8em;
+            font-weight: 600;
+            background: var(--gold-relleno);
+            color: var(--gold-foreground);
+        }
+
+        .boton-maqueta svg { width: 1.1em; height: 1.1em; }
+
+        .entrar-pie {
+            margin-top: auto;
+            text-align: center;
+            font-size: 0.65em;
+            color: var(--muted-foreground);
+        }
+
+        /* Contenido de la pantalla "Santuario" */
+        .santuario { padding: 1.6em 1.2em 0; }
+
+        .santuario-cabeza {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .santuario-cabeza small { font-size: 0.68em; color: var(--muted-foreground); }
+        .santuario-cabeza h3 { font-size: 1.45em; }
+
+        .avatar {
+            display: grid;
+            place-items: center;
+            width: 2.2em;
+            height: 2.2em;
+            border-radius: var(--radio-pildora);
+            font-family: var(--fuente-serif);
+            color: var(--gold);
+            box-shadow: var(--relieve-boton);
+        }
+
+        .portal {
+            position: relative;
+            width: 9.5em;
+            height: 9.5em;
+            margin: 1.2em auto 1em;
+            border-radius: var(--radio-pildora);
+            overflow: hidden;
+            box-shadow: var(--relieve-elevado);
+        }
+
+        .portal-texto {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-content: center;
+            text-align: center;
+            font-family: var(--fuente-serif);
+            font-size: 1.05em;
+            line-height: 1.2;
+            color: #f0e6d8;
+            text-shadow: 0 1px 8px rgb(0 0 0 / 0.4);
+        }
+
+        .portal-texto small {
+            display: block;
+            margin-top: 0.35em;
+            font-family: var(--fuente-sans);
+            font-size: 0.55em;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+
+        .santuario .boton-maqueta { width: 10em; margin: 0 auto 1.3em; }
+
+        .lista-cabeza {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.68em;
+            font-weight: 600;
+            margin-bottom: 0.6em;
+        }
+
+        .lista-cabeza span:last-child { color: var(--muted-foreground); font-weight: 400; }
+
+        .fila-libro {
+            display: flex;
+            align-items: center;
+            gap: 0.7em;
+            padding: 0.6em;
+            margin-bottom: 0.6em;
+            border-radius: 0.9em;
+            box-shadow: var(--relieve-boton);
+        }
+
+        .fila-libro .portada { width: 1.9em; height: 2.6em; border-radius: 0.3em; flex-shrink: 0; }
+        .fila-libro > div { flex: 1; min-width: 0; }
+        .fila-libro p { font-size: 0.65em; font-weight: 600; }
+        .fila-libro small { display: block; font-size: 0.55em; color: var(--muted-foreground); }
+
+        .barrita {
+            height: 0.3em;
+            margin-top: 0.35em;
+            border-radius: var(--radio-pildora);
+            background: var(--muted);
+            overflow: hidden;
+        }
+
+        .barrita i { display: block; height: 100%; background: var(--gold-relleno); border-radius: inherit; }
+
+        .barra-nav {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: 0.8em 0.6em 1em;
+            background: var(--background);
+            color: var(--muted-foreground);
+            box-shadow: 0 -1px 0 var(--border);
+        }
+
+        .barra-nav svg { width: 1.15em; height: 1.15em; }
+        .barra-nav .activo { color: var(--gold); }
+
+        /* Tarjeta flotante de racha */
+        .flotante-cabeza {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7em;
+            color: #a99bb8;
+        }
+
+        .flotante-cabeza span:last-child {
+            padding: 0.25em 0.8em;
+            border: 1px solid rgb(193 157 95 / 0.35);
+            border-radius: var(--radio-pildora);
+            color: #c19d5f;
+        }
+
+        .racha {
+            display: flex;
+            align-items: baseline;
+            gap: 0.4em;
+            margin-block: 0.5em 0.9em;
+        }
+
+        .racha strong {
+            font-family: var(--fuente-serif);
+            font-weight: 400;
+            font-size: 2.8em;
+            line-height: 1;
+            color: #c19d5f;
+        }
+
+        .racha span { font-size: 0.7em; line-height: 1.3; color: #a99bb8; }
+
+        .columnas {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.45em;
+            align-items: end;
+            height: 5em;
+        }
+
+        .columnas i {
+            display: block;
+            border-radius: var(--radio-pildora);
+            background: rgb(169 155 184 / 0.25);
+        }
+
+        .columnas i.hoy { background: #c19d5f; }
+
+        .dias {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.45em;
+            margin-top: 0.4em;
+            font-size: 0.55em;
+            text-align: center;
+            color: #a99bb8;
+        }
+
+        /* ===============================================
+           SECCIONES
+           =============================================== */
+        .seccion { padding-block: 5rem; }
+
+        .seccion-cabeza {
+            text-align: center;
+            max-width: 42rem;
+            margin: 0 auto 3.5rem;
+        }
+
+        .seccion-cabeza h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-block: 0.75rem 1rem;
+        }
+
+        /* ===============================================
+           TABLETA: la app completa
+           =============================================== */
+        .tableta {
+            container-type: inline-size;
+            max-width: 66rem;
+            margin-inline: auto;
+            padding: 1.1%;
+            border-radius: 2.2rem;
+            background: var(--marco);
+            box-shadow: var(--sombra-dispositivo);
+        }
+
+        .tableta-pantalla {
+            display: grid;
+            grid-template-columns: 7em 1fr;
+            font-size: 1.45cqw;
+            border-radius: 1.6rem;
+            background: var(--background);
+            overflow: hidden;
+            transition: background-color 300ms;
+        }
+
+        @media (max-width: 40rem) {
+            .tableta { border-radius: 1.1rem; padding: 1.6%; }
+            .tableta-pantalla { border-radius: 0.8rem; }
+        }
+
+        .lateral {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.1em;
+            padding: 1.8em 0.6em;
+            box-shadow: 1px 0 0 var(--border);
+        }
+
+        .lateral-logo { width: 3.4em; height: 2.2em; color: var(--gold); margin-bottom: 0.8em; }
+
+        .lateral-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35em;
+            width: 5em;
+            padding: 0.7em 0;
+            border-radius: 1em;
+            font-size: 0.75em;
+            color: var(--muted-foreground);
+        }
+
+        .lateral-item svg { width: 1.7em; height: 1.7em; }
+
+        .lateral-item.activo {
+            color: var(--gold);
+            box-shadow: var(--relieve-hundido);
+        }
+
+        .principal {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8em;
+            padding: 1.6em 2.2em 2.2em;
+            min-width: 0;
+        }
+
+        .barra-superior {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1em;
+            color: var(--muted-foreground);
+        }
+
+        .barra-superior svg { width: 1.4em; height: 1.4em; }
+        .barra-superior .avatar { width: 2.6em; height: 2.6em; }
+
+        .banner {
+            position: relative;
+            min-height: 17em;
+            padding: 2.4em 2.6em;
+            border-radius: 1.8em;
+            overflow: hidden;
+            color: #27344a;
+        }
+
+        .banner > *:not(.escena) { position: relative; }
+        .banner small { font-size: 0.9em; font-weight: 500; }
+
+        .banner h3 {
+            font-size: 2.8em;
+            max-width: 9em;
+            margin-block: 0.2em 0.3em;
+        }
+
+        .banner p { font-size: 0.95em; max-width: 20em; }
+
+        .banner .boton-maqueta {
+            display: inline-flex;
+            width: auto;
+            padding-inline: 1.5em;
+            margin-top: 1.3em;
+            font-size: 0.95em;
+            background: #27344a;
+            color: var(--celeste);
+        }
+
+        .banner-lema {
+            position: absolute !important;
+            right: 2.4em;
+            top: 2em;
+            font-family: var(--fuente-serif);
+            font-size: 1.3em;
+            line-height: 1.5;
+            text-align: right;
+            color: #626b91;
+        }
+
+        .bloque-cabeza {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1em;
+        }
+
+        .bloque-cabeza h4 {
+            margin: 0;
+            font-family: var(--fuente-serif);
+            font-weight: 400;
+            font-size: 1.5em;
+        }
+
+        .bloque-cabeza span { font-size: 0.8em; color: var(--gold); }
+
+        .ambientes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2em;
+        }
+
+        .ambiente {
+            position: relative;
+            aspect-ratio: 1 / 1.05;
+            padding: 1em 1.1em;
+            border-radius: 1.4em;
+            overflow: hidden;
+            color: #f0e6d8;
+            box-shadow: var(--relieve-boton);
+        }
+
+        .ambiente > *:not(.escena) { position: relative; }
+
+        .ambiente strong {
+            display: block;
+            font-family: var(--fuente-serif);
+            font-weight: 400;
+            font-size: 1.35em;
+            line-height: 1.1;
+        }
+
+        .ambiente small { font-size: 0.75em; opacity: 0.85; }
+        .ambiente--claro { color: #27344a; }
+
+        .fila-doble {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2em;
+        }
+
+        .progreso {
+            display: flex;
+            align-items: center;
+            gap: 1.6em;
+            padding: 1.5em 1.8em;
+            border-radius: 1.6em;
+            box-shadow: var(--relieve-elevado);
+        }
+
+        .progreso h4 {
+            margin: 0 0 0.8em;
+            font-family: var(--fuente-serif);
+            font-weight: 400;
+            font-size: 1.35em;
+        }
+
+        .anillo { position: relative; width: 7.5em; height: 7.5em; flex-shrink: 0; }
+        .anillo svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+        .anillo circle { fill: none; stroke-width: 9; }
+        .anillo .pista { stroke: var(--muted); }
+        .anillo .valor { stroke: var(--gold-relleno); stroke-linecap: round; stroke-dasharray: 251.3; stroke-dashoffset: 62.8; }
+
+        .anillo span {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            font-family: var(--fuente-serif);
+            font-size: 1.6em;
+        }
+
+        .leyenda { display: grid; gap: 0.6em; margin: 0; padding: 0; list-style: none; font-size: 0.8em; }
+        .leyenda li { display: flex; align-items: center; gap: 0.6em; }
+        .leyenda li span { margin-left: auto; padding-left: 1em; color: var(--muted-foreground); }
+        .leyenda i { width: 0.7em; height: 0.7em; border-radius: var(--radio-pildora); }
+
+        .cita {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 1.6em 2em;
+            border-radius: 1.6em;
+            overflow: hidden;
+            color: #27344a;
+        }
+
+        .cita > *:not(.escena) { position: relative; }
+
+        .cita blockquote {
+            margin: 0;
+            max-width: 11em;
+            font-family: var(--fuente-serif);
+            font-size: 1.45em;
+            line-height: 1.3;
+        }
+
+        .cita blockquote::before {
+            content: "“";
+            display: block;
+            font-size: 1.8em;
+            line-height: 0.6;
+            color: #7d5e2a;
+        }
+
+        .cita cite { margin-top: 0.8em; font-size: 0.75em; font-style: normal; color: #626b91; }
+
+        .libros {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2em;
+        }
+
+        .libro {
+            display: flex;
+            gap: 1em;
+            padding: 1em;
+            border-radius: 1.4em;
+            box-shadow: var(--relieve-boton);
+        }
+
+        .libro .portada { width: 4.4em; height: 6.2em; border-radius: 0.4em; flex-shrink: 0; }
+
+        .libro > div { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+        .libro strong { font-family: var(--fuente-serif); font-weight: 400; font-size: 1.1em; line-height: 1.2; }
+        .libro small { font-size: 0.72em; color: var(--muted-foreground); }
+        .libro .barrita { margin-top: auto; }
+        .libro .pagina { margin-top: 0.4em; font-size: 0.68em; color: var(--gold); }
+
+        /* Portadas ilustradas con CSS */
+        .portada {
+            position: relative;
+            box-shadow: 2px 3px 8px rgb(12 17 28 / 0.35);
+        }
+
+        .portada::before {
+            content: "";
+            position: absolute;
+            inset: 12% 14%;
+            border: 1px solid rgb(232 211 166 / 0.6);
+        }
+
+        .portada::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 22%;
+            aspect-ratio: 1;
+            border: 1px solid rgb(232 211 166 / 0.8);
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .portada--1 { background: linear-gradient(160deg, #4a5478, #27344a); }
+        .portada--2 { background: linear-gradient(160deg, #8a86a8, #4a5478); }
+        .portada--3 { background: linear-gradient(160deg, #a99bb8, #5a5478); }
+
+        /* ===============================================
+           MOSAICO: piezas de la interfaz
+           =============================================== */
+        .mosaico {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 44rem) {
+            .mosaico { grid-template-columns: repeat(2, 1fr); }
+            .pieza--ancha, .pieza--ilustraciones { grid-column: span 2; }
+        }
+
+        @media (min-width: 68rem) {
+            .mosaico { grid-template-columns: repeat(4, 1fr); }
+            .pieza--ilustraciones { grid-column: 1 / -1; }
+        }
+
+        .pieza { padding: 1.75rem; }
+
+        .pieza-titulo {
+            margin-bottom: 1.25rem;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--muted-foreground);
+        }
+
+        .pieza h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .pieza > p { font-size: 0.875rem; color: var(--muted-foreground); }
+
+        /* Identidad: paleta y tipografía */
+        .muestras {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .muestra { text-align: center; font-size: 0.625rem; line-height: 1.4; color: var(--muted-foreground); }
+        .muestra strong { display: block; font-weight: 600; color: var(--foreground); }
+
+        .muestra i {
+            display: block;
+            aspect-ratio: 1;
+            margin-bottom: 0.5rem;
+            border-radius: var(--radio-pildora);
+            box-shadow: var(--relieve-boton);
+        }
+
+        .tipos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .tipo-nombre { font-size: 2rem; line-height: 1.1; }
+        .tipo-nombre--serif { font-family: var(--fuente-serif); }
+        .tipo-nombre--sans { font-weight: 500; }
+        .tipo small { display: block; margin-block: 0.25rem 0.75rem; font-size: 0.75rem; color: var(--muted-foreground); }
+        .tipo p { font-size: 0.8125rem; color: var(--muted-foreground); line-height: 1.5; }
+        .tipo p:first-of-type { font-weight: 600; color: var(--foreground); }
+
+        /* Ánimo */
+        .climas {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-top: 1.25rem;
+        }
+
+        .opcion {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 0.125rem;
+            border: 0;
+            border-radius: var(--radio-md);
+            background: var(--background);
+            color: var(--muted-foreground);
+            font: 500 0.625rem var(--fuente-sans);
+            cursor: pointer;
+            box-shadow: var(--relieve-boton);
+            transition: box-shadow var(--transicion), color var(--transicion);
+        }
+
+        .opcion svg { width: 1.5rem; height: 1.5rem; }
+        .opcion:hover { color: var(--foreground); }
+
+        .opcion[aria-checked="true"] {
+            color: var(--gold);
+            box-shadow: var(--relieve-hundido);
+        }
+
+        @media (min-width: 30rem) {
+            .opcion { font-size: 0.75rem; }
+        }
+
+        .animo-respuesta {
+            margin-top: 1.25rem;
+            font-size: 0.875rem;
+            text-align: center;
+            color: var(--muted-foreground);
+        }
+
+        .animo-respuesta strong { font-family: var(--fuente-serif); font-weight: 400; font-size: 1.125rem; color: var(--gold); }
+
+        /* Reproductor de ambiente (tarjeta oscura) */
+        .pieza--oscura {
+            background: var(--noche);
+            color: #f0e6d8;
+        }
+
+        .pieza--oscura .pieza-titulo { color: #a99bb8; }
+
+        .reproductor {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .reproductor h3 { margin: 0; }
+        .reproductor small { font-size: 0.75rem; color: #a99bb8; }
+
+        .reproducir {
+            display: grid;
+            place-items: center;
+            width: 3rem;
+            height: 3rem;
+            flex-shrink: 0;
+            border: 0;
+            border-radius: var(--radio-pildora);
+            background: #c19d5f;
+            color: #27344a;
+            cursor: pointer;
+        }
+
+        .reproducir svg { width: 1.125rem; height: 1.125rem; }
+        .reproducir .icono-pausa { display: none; }
+        .reproducir[aria-pressed="true"] .icono-pausa { display: block; }
+        .reproducir[aria-pressed="true"] .icono-play { display: none; }
+
+        .onda {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            height: 3rem;
+            margin-top: 1.5rem;
+        }
+
+        .onda i {
+            flex: 1;
+            height: var(--h);
+            border-radius: var(--radio-pildora);
+            background: rgb(193 157 95 / 0.35);
+        }
+
+        .sonando .onda i {
+            background: #c19d5f;
+            animation: latido 1.2s ease-in-out infinite alternate;
+            animation-delay: calc(var(--i) * -0.13s);
+        }
+
+        @keyframes latido {
+            to { transform: scaleY(0.35); }
+        }
+
+        /* Atenuación */
+        .vista-atenuada {
+            position: relative;
+            height: 6rem;
+            margin-block: 1.25rem;
+            border-radius: var(--radio-md);
+            overflow: hidden;
+            box-shadow: var(--relieve-hundido);
+        }
+
+        .vista-atenuada::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: #05040f;
+            opacity: var(--atenuacion, 0.3);
+            transition: opacity 200ms;
+        }
+
+        .deslizador {
+            width: 100%;
+            height: 0.5rem;
+            border-radius: var(--radio-pildora);
+            background: var(--background);
+            box-shadow: var(--relieve-hundido);
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .deslizador::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 1.375rem;
+            height: 1.375rem;
+            border-radius: var(--radio-pildora);
+            background: var(--gold-relleno);
+            box-shadow: var(--relieve-boton);
+        }
+
+        .deslizador::-moz-range-thumb {
+            width: 1.375rem;
+            height: 1.375rem;
+            border: 0;
+            border-radius: var(--radio-pildora);
+            background: var(--gold-relleno);
+            box-shadow: var(--relieve-boton);
+        }
+
+        .deslizador:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+        /* Duración del timer */
+        .duraciones {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-top: 1.25rem;
+        }
+
+        .duraciones .opcion { font-size: 0.875rem; font-weight: 600; padding-block: 0.75rem; }
+
+        .reloj-mini {
+            margin-top: 1.25rem;
+            font-family: var(--fuente-serif);
+            font-size: 3rem;
+            line-height: 1;
+            text-align: center;
+            color: var(--gold);
+        }
+
+        /* Cita */
+        .pieza--cita {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            color: #27344a;
+            min-height: 14rem;
+        }
+
+        .pieza--cita > *:not(.escena) { position: relative; }
+        .pieza--cita blockquote { margin: 0; font-family: var(--fuente-serif); font-size: 1.375rem; line-height: 1.3; }
+        .pieza--cita cite { display: block; margin-top: 0.75rem; font-size: 0.75rem; font-style: normal; color: #626b91; }
+
+        /* Ilustraciones */
+        .ilustraciones {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (min-width: 44rem) {
+            .ilustraciones { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .ilustracion {
+            position: relative;
+            aspect-ratio: 1 / 1.1;
+            border-radius: var(--radio-lg);
+            overflow: hidden;
+            box-shadow: var(--relieve-boton);
+        }
+
+        .ilustracion figcaption {
+            position: absolute;
+            left: 0.875rem;
+            bottom: 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #f0e6d8;
+            text-shadow: 0 1px 6px rgb(0 0 0 / 0.45);
+        }
+
+        /* ===============================================
+           FRANJA DE VALORES
+           =============================================== */
+        .valores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+            gap: 1.5rem;
+            padding: 1.75rem;
+        }
+
+        .valor { display: flex; align-items: center; gap: 0.875rem; }
+
+        .valor-icono {
+            display: grid;
+            place-items: center;
+            width: 2.75rem;
+            height: 2.75rem;
+            flex-shrink: 0;
+            border-radius: var(--radio-pildora);
+            color: var(--gold);
+            box-shadow: var(--relieve-hundido);
+        }
+
+        .valor-icono svg { width: 1.25rem; height: 1.25rem; }
+        .valor strong { display: block; font-size: 0.8125rem; font-weight: 600; }
+        .valor span { font-size: 0.75rem; color: var(--muted-foreground); }
+
+        /* ===============================================
+           LLAMADO FINAL Y PIE
+           =============================================== */
+        .llamado {
+            position: relative;
+            overflow: hidden;
+            padding: 4.5rem 1.5rem;
+            text-align: center;
+            color: #f0e6d8;
+        }
+
+        .llamado > *:not(.escena) { position: relative; }
+
+        /* Velo para que el texto se lea sobre la luna */
+        .llamado::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgb(22 30 46 / 0.75), rgb(22 30 46 / 0.25) 70%);
+        }
+
+        .llamado-logo { width: 7rem; height: 4.5rem; margin: 0 auto 1.5rem; color: #c19d5f; }
+        .llamado h2 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
+        .llamado p { max-width: 30rem; margin-inline: auto; color: #d8cfdc; }
+        .llamado .hero-botones { justify-content: center; }
+        .llamado .boton--dorado { background: #c19d5f; color: #27344a; box-shadow: 0 8px 24px -8px rgb(193 157 95 / 0.6); }
+
+        .pie {
+            padding-block: 2.5rem 3rem;
+            text-align: center;
+            font-size: 0.8125rem;
+            color: var(--muted-foreground);
+        }
+
+        .pie .marca { justify-content: center; margin-bottom: 0.75rem; }
+
+        /* Aparición al hacer scroll */
+        .aparece {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 700ms ease, transform 700ms ease;
+        }
+
+        .aparece.visible { opacity: 1; transform: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .aparece { opacity: 1; transform: none; transition: none; }
+            .sonando .onda i { animation: none; }
+            .boton:hover { transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===============================================
+         SÍMBOLOS: logo e ilustraciones reutilizables
+         =============================================== -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <linearGradient id="g-cielo-noche" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#182132" />
+                <stop offset="0.55" stop-color="#34405c" />
+                <stop offset="1" stop-color="#3f4a6b" />
+            </linearGradient>
+            <linearGradient id="g-lago-noche" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#2e3a55" />
+                <stop offset="1" stop-color="#182132" />
+            </linearGradient>
+            <radialGradient id="g-halo">
+                <stop offset="0" stop-color="#f0e6d8" stop-opacity="0.55" />
+                <stop offset="1" stop-color="#f0e6d8" stop-opacity="0" />
+            </radialGradient>
+            <linearGradient id="g-cielo-alba" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f0e6d8" />
+                <stop offset="0.6" stop-color="#e8d9d4" />
+                <stop offset="1" stop-color="#cfc4d6" />
+            </linearGradient>
+            <linearGradient id="g-lago-alba" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#cfc4d6" />
+                <stop offset="1" stop-color="#ece2d6" />
+            </linearGradient>
+            <linearGradient id="g-cielo-bosque" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f0e6d8" />
+                <stop offset="1" stop-color="#b9b2cc" />
+            </linearGradient>
+            <linearGradient id="g-cielo-lluvia" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1f2a3d" />
+                <stop offset="1" stop-color="#4a5478" />
+            </linearGradient>
+            <linearGradient id="g-cielo-piano" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#27344a" />
+                <stop offset="1" stop-color="#626b91" />
+            </linearGradient>
+            <linearGradient id="g-hoja-fondo" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#f0e6d8" />
+                <stop offset="1" stop-color="#e2d6c8" />
+            </linearGradient>
+            <path id="pino" d="M0-46 15-16H8l14 22H-22l14-22H-15Z" />
+        </defs>
+
+        <!-- Logo: las dos alas de Libellus -->
+        <symbol id="logo" viewBox="100 20 608 392">
+            <g fill="currentColor" stroke="currentColor" stroke-miterlimit="10">
+                <path d="M337.84,161.08c-5.18,29.18-.78,55.56,6.43,83.56-22.17-21.21-44.21-36.24-72.01-45.54-12.11-29.47-12.48-60.06-7.82-93.1,29.3,13.65,55.13,28.26,73.41,55.08Z"/>
+                <path d="M113.68,371.23h244.13c7.39,12.12,31.36,22.88,45.88,19.94.09,3.3.18,6.61.27,9.91-12.51,2.5-38.04-6.64-46.15-16.59-81.38-.14-162.75-.28-244.13-.42v-12.83Z"/>
+                <path d="M385.42,345.29c-12.94-22.62-49.64-54.34-70.61-63.34,16.07,20.75,47.51,49.14,70.61,63.34Z"/>
+                <path d="M143.01,370.64l-14.21.13c5.52-9.55,13.25-22.96,18.69-32.37,77.47-2.58,160.16-12.36,227.92,34.08-65.5-20.12-156.25-38.64-223.14-17.88-3.09,5.35-6.17,10.69-9.26,16.04Z"/>
+                <path d="M170.91,338.4l18.14-30.82c28.57-4.01,56.9-3.59,85.51-.17,48.77,13.23,92.27,28.25,129.41,63.81v12.42c-60.39-48.98-129.03-77.56-207.78-66.12l-12.11,19.94-13.17.93Z"/>
+                <path d="M230.16,303.82c-26.51-31.16-54.22-73.19-64.04-113.82,3.39-.27,30.88-2.4,34.99-2.72,0,0,29.05,1.67,29.05,1.67,0,0,29.05,6.26,29.05,6.26-6.91-20.35-8.78-51.65-8-73,0,0,5.62-30.72,5.62-30.72,29.35,10.75,61.48,31.94,83.45,54.6,7.85-41.93,35.23-85.99,63.07-117.33l.55,15.24c-50.32,59.03-78.5,151.77-38.54,223.46,18.89,26.64,38.38,59.77,38.47,93.39-31.75-95.25-116.56-176.6-222.85-161.32,12.47,47.22,43.46,95.78,93.56,107.9l-44.39-3.59Z"/>
+                <path d="M470.01,161.08c5.18,29.18.78,55.56-6.43,83.56,22.17-21.21,44.21-36.24,72.01-45.54,12.11-29.47,12.48-60.06,7.82-93.1-29.3,13.65-55.13,28.26-73.41,55.08Z"/>
+                <path d="M694.17,371.23h-244.13c-7.39,12.12-31.36,22.88-45.88,19.94-.09,3.3-.18,6.61-.27,9.91,12.51,2.5,38.04-6.64,46.15-16.59,81.38-.14,162.75-.28,244.13-.42v-12.83Z"/>
+                <path d="M422.43,345.29c12.94-22.62,49.64-54.34,70.61-63.34-16.07,20.75-47.51,49.14-70.61,63.34Z"/>
+                <path d="M664.85,370.64l14.21.13c-5.52-9.55-13.25-22.96-18.69-32.37-77.47-2.58-160.16-12.36-227.92,34.08,65.5-20.12,156.25-38.64,223.14-17.88,3.09,5.35,6.17,10.69,9.26,16.04Z"/>
+                <path d="M635.82,338.32l-17.01-30.74c-28.57-4.01-56.9-3.59-85.51-.17-48.77,13.23-92.27,28.25-129.41,63.81v12.42c60.39-48.98,129.03-77.56,207.78-66.12l11.72,19.92,12.43.88Z"/>
+                <path d="M577.7,303.82c26.51-31.16,54.22-73.19,64.04-113.82-3.39-.27-30.88-2.4-34.99-2.72,0,0-29.05,1.67-29.05,1.67l-29.05,6.26c6.91-20.35,8.78-51.65,8-73,0,0-5.62-30.72-5.62-30.72-29.35,10.75-61.48,31.94-83.45,54.6-8.25-42.38-34.76-86.05-63.65-117.59l.03,15.5c50.32,59.03,78.5,151.77,38.54,223.46-18.89,26.64-38.38,59.77-38.47,93.39,31.75-95.25,116.56-176.6,222.85-161.32-12.47,47.22-43.46,95.78-93.56,107.9l44.39-3.59Z"/>
+            </g>
+        </symbol>
+
+        <!-- Noche: luna dorada sobre montañas y lago -->
+        <symbol id="escena-noche" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="400" fill="url(#g-cielo-noche)" />
+            <g fill="#f0e6d8">
+                <circle cx="48" cy="60" r="1.4" opacity=".8" /><circle cx="110" cy="38" r="1" opacity=".6" />
+                <circle cx="160" cy="92" r="1.2" opacity=".7" /><circle cx="214" cy="46" r="1.6" opacity=".9" />
+                <circle cx="350" cy="58" r="1.1" opacity=".6" /><circle cx="372" cy="128" r="1.3" opacity=".7" />
+                <circle cx="80" cy="140" r="1" opacity=".5" /><circle cx="196" cy="150" r="1" opacity=".5" />
+                <circle cx="30" cy="190" r="1.2" opacity=".6" /><circle cx="250" cy="110" r="0.9" opacity=".5" />
+            </g>
+            <circle cx="282" cy="150" r="95" fill="url(#g-halo)" />
+            <circle cx="282" cy="150" r="42" fill="#f0e6d8" />
+            <circle cx="268" cy="140" r="7" fill="#c19d5f" opacity=".45" />
+            <circle cx="294" cy="166" r="5" fill="#c19d5f" opacity=".4" />
+            <path d="M0 262 58 188l40 40 66-86 58 76 44-44 64 70 32-30 38 34v32H0Z" fill="#4a5478" />
+            <path d="M0 280 46 236l34 26 58-50 66 58 58-40 54 36 40-22 44 26v18H0Z" fill="#34405c" />
+            <path d="M0 296 70 270l60 16 70-24 80 26 60-18 60 22v12H0Z" fill="#222c40" />
+            <rect y="300" width="400" height="100" fill="url(#g-lago-noche)" />
+            <g stroke="#c19d5f" stroke-linecap="round" stroke-width="2.4" opacity=".75">
+                <path d="M254 318h56M262 334h40M270 350h24M276 366h12" />
+            </g>
+            <g stroke="#8a86a8" stroke-linecap="round" stroke-width="1.4" opacity=".35">
+                <path d="M30 326h60M120 344h40M40 362h70M330 378h40M160 386h50" />
+            </g>
+        </symbol>
+
+        <!-- Alba: sol suave, montañas lavanda y lago -->
+        <symbol id="escena-alba" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="url(#g-cielo-alba)" />
+            <circle cx="300" cy="110" r="70" fill="#f3e2c4" opacity=".55" />
+            <circle cx="300" cy="110" r="38" fill="#e6cb98" />
+            <path d="M120 200 190 112l50 54 46-38 64 62 50-26v36H120Z" fill="#a99bb8" />
+            <path d="M80 214 150 158l46 34 60-52 70 62 44-26 30 18v20H80Z" fill="#8a86a8" />
+            <path d="M40 230 120 196l70 22 70-30 80 34 60-14v22H40Z" fill="#626b91" />
+            <rect y="236" width="400" height="64" fill="url(#g-lago-alba)" />
+            <g stroke="#fff" stroke-linecap="round" stroke-width="2" opacity=".6">
+                <path d="M276 250h48M284 264h32M292 278h16M120 256h40M200 284h50" />
+            </g>
+            <g fill="none" stroke="#7d5e2a" stroke-linecap="round" stroke-width="1.3" opacity=".7">
+                <path d="M210 70q6-6 12 0q6-6 12 0" /><path d="M236 52q4-4 8 0q4-4 8 0" />
+            </g>
+        </symbol>
+
+        <!-- Bosque: pinos bajo un cielo celeste -->
+        <symbol id="escena-bosque" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="300" height="300" fill="url(#g-cielo-bosque)" />
+            <circle cx="220" cy="80" r="26" fill="#f0e6d8" opacity=".8" />
+            <path d="M0 200 70 140l60 40 70-60 100 70v110H0Z" fill="#8a86a8" />
+            <g fill="#4a5478">
+                <use href="#pino" x="40" y="220" /><use href="#pino" x="90" y="205" />
+                <use href="#pino" x="200" y="210" /><use href="#pino" x="255" y="222" />
+            </g>
+            <g fill="#34405c">
+                <use href="#pino" x="20" y="268" /><use href="#pino" x="70" y="258" />
+                <use href="#pino" x="130" y="272" /><use href="#pino" x="180" y="262" />
+                <use href="#pino" x="235" y="270" /><use href="#pino" x="285" y="260" />
+            </g>
+            <rect y="268" width="300" height="32" fill="#222c40" />
+        </symbol>
+
+        <!-- Lluvia: nubes y gotas -->
+        <symbol id="escena-lluvia" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="300" height="300" fill="url(#g-cielo-lluvia)" />
+            <g fill="#34405c">
+                <ellipse cx="80" cy="90" rx="70" ry="30" /><ellipse cx="130" cy="70" rx="50" ry="34" />
+                <ellipse cx="230" cy="110" rx="70" ry="26" />
+            </g>
+            <g stroke="#f0e6d8" stroke-linecap="round" stroke-width="2" opacity=".55">
+                <path d="M40 140l-8 22M80 130l-8 22M120 150l-8 22M60 190l-8 22M100 200l-8 22M150 180l-8 22M190 150l-8 22M230 160l-8 22M270 140l-8 22M210 210l-8 22M250 200l-8 22M30 240l-8 22M140 240l-8 22M180 250l-8 22M270 240l-8 22" />
+            </g>
+            <rect y="276" width="300" height="24" fill="#222c40" />
+        </symbol>
+
+        <!-- Piano: ondas doradas y teclas -->
+        <symbol id="escena-piano" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="300" height="300" fill="url(#g-cielo-piano)" />
+            <g fill="none" stroke="#c19d5f" stroke-linecap="round" opacity=".7">
+                <circle cx="150" cy="130" r="30" stroke-width="1.5" opacity=".9" />
+                <circle cx="150" cy="130" r="55" stroke-width="1.2" opacity=".6" />
+                <circle cx="150" cy="130" r="80" stroke-width="1" opacity=".35" />
+            </g>
+            <g transform="translate(0 220)">
+                <rect width="300" height="80" fill="#f0e6d8" />
+                <g stroke="#a99bb8" stroke-width="1">
+                    <path d="M30 0v80M60 0v80M90 0v80M120 0v80M150 0v80M180 0v80M210 0v80M240 0v80M270 0v80" />
+                </g>
+                <g fill="#182132">
+                    <rect x="20" width="18" height="48" rx="2" /><rect x="52" width="18" height="48" rx="2" />
+                    <rect x="112" width="18" height="48" rx="2" /><rect x="142" width="18" height="48" rx="2" />
+                    <rect x="172" width="18" height="48" rx="2" /><rect x="232" width="18" height="48" rx="2" />
+                    <rect x="262" width="18" height="48" rx="2" />
+                </g>
+            </g>
+        </symbol>
+
+        <!-- Hojas: rama lavanda sobre fondo claro -->
+        <symbol id="escena-hojas" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="300" height="300" fill="url(#g-hoja-fondo)" />
+            <path d="M270 30C210 90 160 170 120 300" fill="none" stroke="#5a5478" stroke-width="2.5" />
+            <g fill="#8a86a8">
+                <ellipse cx="240" cy="70" rx="26" ry="10" transform="rotate(-30 240 70)" />
+                <ellipse cx="200" cy="100" rx="30" ry="11" transform="rotate(20 200 100)" />
+                <ellipse cx="205" cy="140" rx="30" ry="11" transform="rotate(-35 205 140)" />
+            </g>
+            <g fill="#a99bb8">
+                <ellipse cx="160" cy="165" rx="32" ry="12" transform="rotate(25 160 165)" />
+                <ellipse cx="170" cy="210" rx="32" ry="12" transform="rotate(-40 170 210)" />
+                <ellipse cx="125" cy="235" rx="30" ry="11" transform="rotate(30 125 235)" />
+            </g>
+        </symbol>
+
+        <!-- Libro abierto bajo las estrellas -->
+        <symbol id="escena-libro" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="300" height="300" fill="#34405c" />
+            <circle cx="150" cy="150" r="110" fill="url(#g-halo)" />
+            <g fill="#f0e6d8" opacity=".7">
+                <circle cx="60" cy="60" r="1.5" /><circle cx="240" cy="50" r="1.2" /><circle cx="250" cy="120" r="1" />
+                <circle cx="40" cy="140" r="1" /><circle cx="110" cy="40" r="1" /><circle cx="200" cy="80" r="1.4" />
+            </g>
+            <g fill="none" stroke="#c19d5f" stroke-width="2.5" stroke-linejoin="round">
+                <path d="M150 200c-26-14-56-18-86-14v-70c30-4 60 0 86 14 26-14 56-18 86-14v70c-30-4-60 0-86 14Z" />
+                <path d="M150 130v70" />
+                <path d="M80 140c20-2 40 1 56 8M80 158c20-2 40 1 56 8M164 148c16-7 36-10 56-8M164 166c16-7 36-10 56-8" stroke-width="1.4" opacity=".6" />
+            </g>
+            <path d="M150 112l6 10-6 10-6-10Z" fill="#c19d5f" />
+        </symbol>
+    </svg>
+
+    <header class="cabecera">
+        <div class="contenedor">
+            <a href="#inicio" class="marca" aria-label="Libellus, inicio">
+                <span class="marca-sello"><svg aria-hidden="true"><use href="#logo" /></svg></span>
+                <span>
+                    <span class="marca-nombre">LIBELLUS</span>
+                    <span class="marca-lema">Santuario digital de lectura</span>
+                </span>
+            </a>
+            <nav class="nav" aria-label="Secciones">
+                <a href="#app">La app</a>
+                <a href="#detalles">Detalles</a>
+                <a href="#valores">Por qué Libellus</a>
+            </nav>
+            <div class="cabecera-acciones">
+                <button type="button" class="icono-boton" id="tema" aria-label="Cambiar tema">
+                    <svg class="icono-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                    <svg class="icono-luna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                </button>
+                <a href="/login" class="boton boton--dorado">Entrar</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="inicio">
+        <!-- ===============================================
+             HERO
+             =============================================== -->
+        <section class="hero">
+            <div class="contenedor">
+                <div class="aparece">
+                    <p class="eyebrow">Lectura · Calma · Ritual</p>
+                    <h1>Encontrá tu <span class="dorado">rincón de lectura</span></h1>
+                    <p class="hero-bajada">
+                        Libellus es una app para leer con calma: un temporizador que cuida tu concentración,
+                        sonidos que te envuelven, tu biblioteca siempre a mano y un registro de cómo te hace
+                        sentir cada página.
+                    </p>
+                    <div class="hero-botones">
+                        <a href="/login" class="boton boton--dorado">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+                            Empezar a leer
+                        </a>
+                        <a href="#app" class="boton">Ver la app</a>
+                    </div>
+                    <ul class="hero-datos">
+                        <li><strong>3</strong><span>ambientes sonoros</span></li>
+                        <li><strong>5</strong><span>climas de ánimo</span></li>
+                        <li><strong>0</strong><span>distracciones</span></li>
+                    </ul>
+                </div>
+
+                <div class="escenario aparece" role="img" aria-label="Pantallas de Libellus: acceso, santuario y racha de lectura">
+                    <div class="lienzo">
+                        <div class="arco">
+                            <svg class="escena" aria-hidden="true"><use href="#escena-noche" /></svg>
+                        </div>
+
+                        <!-- Pantalla de acceso -->
+                        <div class="telefono telefono--entrar">
+                            <div class="pantalla">
+                                <div class="entrar">
+                                    <svg class="entrar-logo" aria-hidden="true"><use href="#logo" /></svg>
+                                    <small>Te damos la bienvenida</small>
+                                    <h3>Entrar</h3>
+                                    <div class="campo">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                                        tu correo
+                                    </div>
+                                    <div class="boton-maqueta">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.35 11.1H12v3.2h5.35c-.5 2.4-2.6 3.7-5.35 3.7a6 6 0 1 1 3.9-10.55l2.4-2.3A9.4 9.4 0 0 0 12 2.6a9.4 9.4 0 1 0 0 18.8c5.4 0 9.5-3.8 9.5-9.4 0-.3 0-.6-.15-.9Z"/></svg>
+                                        Continuar con Google
+                                    </div>
+                                    <p class="entrar-pie">Tu santuario te espera</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pantalla del santuario -->
+                        <div class="telefono telefono--santuario">
+                            <div class="pantalla">
+                                <div class="santuario">
+                                    <div class="santuario-cabeza">
+                                        <div>
+                                            <small>Buenas noches</small>
+                                            <h3>Hola, Sofía</h3>
+                                        </div>
+                                        <span class="avatar">S</span>
+                                    </div>
+                                    <div class="portal">
+                                        <svg class="escena" aria-hidden="true"><use href="#escena-alba" /></svg>
+                                        <p class="portal-texto">Respirá<br />y leé<small>25 minutos</small></p>
+                                    </div>
+                                    <div class="boton-maqueta">Comenzar sesión</div>
+                                    <div class="lista-cabeza"><span>Leyendo ahora</span><span>2 libros</span></div>
+                                    <div class="fila-libro">
+                                        <span class="portada portada--1"></span>
+                                        <div>
+                                            <p>Cien años de soledad</p>
+                                            <small>Página 142 de 471</small>
+                                            <div class="barrita"><i style="width:30%"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="fila-libro">
+                                        <span class="portada portada--3"></span>
+                                        <div>
+                                            <p>Rayuela</p>
+                                            <small>Página 380 de 600</small>
+                                            <div class="barrita"><i style="width:63%"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <nav class="barra-nav" aria-hidden="true">
+                                    <svg class="activo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.2 12 3l9 7.2V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/></svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m16 6 4 14M12 6v14M8 8v12M4 4v16"/></svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M10 2h4"/></svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta de racha -->
+                        <div class="flotante">
+                            <div class="flotante-cabeza"><span>Tu racha</span><span>Semana</span></div>
+                            <div class="racha"><strong>12</strong><span>días<br />seguidos</span></div>
+                            <div class="columnas">
+                                <i style="height:45%"></i><i style="height:70%"></i><i style="height:55%"></i>
+                                <i style="height:80%"></i><i style="height:40%"></i><i style="height:65%"></i>
+                                <i class="hoy" style="height:100%"></i>
+                            </div>
+                            <div class="dias"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="filete" aria-hidden="true"><span></span></div>
+
+        <!-- ===============================================
+             TABLETA: la app completa
+             =============================================== -->
+        <section class="seccion" id="app">
+            <div class="contenedor">
+                <div class="seccion-cabeza aparece">
+                    <p class="eyebrow">Tu santuario</p>
+                    <h2>Todo tu ritual de lectura en una sola pantalla</h2>
+                    <p class="texto-secundario">Elegí un ambiente, mirá cómo avanzás y retomá tu libro justo donde lo dejaste.</p>
+                </div>
+
+                <div class="tableta aparece" role="img" aria-label="Libellus en una tableta: santuario con ambientes, progreso del día y libros en curso">
+                    <div class="tableta-pantalla">
+                        <aside class="lateral">
+                            <svg class="lateral-logo" aria-hidden="true"><use href="#logo" /></svg>
+                            <span class="lateral-item activo">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.2 12 3l9 7.2V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/></svg>
+                                Santuario
+                            </span>
+                            <span class="lateral-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m16 6 4 14M12 6v14M8 8v12M4 4v16"/></svg>
+                                Biblioteca
+                            </span>
+                            <span class="lateral-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M10 2h4"/></svg>
+                                Sesión
+                            </span>
+                            <span class="lateral-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+                                Ánimo
+                            </span>
+                            <span class="lateral-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+                                Perfil
+                            </span>
+                        </aside>
+
+                        <div class="principal">
+                            <div class="barra-superior">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                                <span class="avatar">S</span>
+                            </div>
+
+                            <div class="banner">
+                                <svg class="escena" aria-hidden="true"><use href="#escena-alba" /></svg>
+                                <small>Buenas noches, Sofía</small>
+                                <h3>Un capítulo más, hoy</h3>
+                                <p>Pequeñas páginas, grandes cambios. Respirá, acomodate y dejate llevar.</p>
+                                <span class="boton-maqueta">▶&nbsp; Comenzar sesión</span>
+                                <p class="banner-lema">Respirá<br />Leé<br />Quedate</p>
+                            </div>
+
+                            <div>
+                                <div class="bloque-cabeza"><h4>Ambientes</h4><span>Mezclalos a tu gusto</span></div>
+                                <div class="ambientes">
+                                    <div class="ambiente">
+                                        <svg class="escena" aria-hidden="true"><use href="#escena-lluvia" /></svg>
+                                        <strong>Lluvia</strong><small>Gotas sobre la ventana</small>
+                                    </div>
+                                    <div class="ambiente">
+                                        <svg class="escena" aria-hidden="true"><use href="#escena-piano" /></svg>
+                                        <strong>Piano</strong><small>Arpegios serenos</small>
+                                    </div>
+                                    <div class="ambiente ambiente--claro">
+                                        <svg class="escena" aria-hidden="true"><use href="#escena-bosque" /></svg>
+                                        <strong>Bosque</strong><small>Viento, hojas y pájaros</small>
+                                    </div>
+                                    <div class="ambiente">
+                                        <svg class="escena" aria-hidden="true"><use href="#escena-noche" /></svg>
+                                        <strong>Focus</strong><small>25 min · atenuado</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fila-doble">
+                                <div class="progreso">
+                                    <div class="anillo">
+                                        <svg viewBox="0 0 100 100"><circle class="pista" cx="50" cy="50" r="40" /><circle class="valor" cx="50" cy="50" r="40" /></svg>
+                                        <span>75%</span>
+                                    </div>
+                                    <div>
+                                        <h4>Progreso de hoy</h4>
+                                        <ul class="leyenda">
+                                            <li><i style="background:var(--gold-relleno)"></i>Lectura<span>18 / 25 min</span></li>
+                                            <li><i style="background:var(--lavanda)"></i>Páginas<span>32 / 40</span></li>
+                                            <li><i style="background:#a99bb8"></i>Racha<span>12 días</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cita">
+                                    <svg class="escena" aria-hidden="true"><use href="#escena-hojas" /></svg>
+                                    <blockquote>Un lector vive mil vidas antes de morir.</blockquote>
+                                    <cite>George R. R. Martin</cite>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="bloque-cabeza"><h4>Seguir leyendo</h4><span>Ver biblioteca →</span></div>
+                                <div class="libros">
+                                    <div class="libro">
+                                        <span class="portada portada--1"></span>
+                                        <div>
+                                            <strong>Cien años de soledad</strong><small>G. García Márquez</small>
+                                            <div class="barrita"><i style="width:30%"></i></div>
+                                            <span class="pagina">Pág. 142 de 471</span>
+                                        </div>
+                                    </div>
+                                    <div class="libro">
+                                        <span class="portada portada--2"></span>
+                                        <div>
+                                            <strong>Ficciones</strong><small>Jorge Luis Borges</small>
+                                            <div class="barrita"><i style="width:55%"></i></div>
+                                            <span class="pagina">Pág. 96 de 174</span>
+                                        </div>
+                                    </div>
+                                    <div class="libro">
+                                        <span class="portada portada--3"></span>
+                                        <div>
+                                            <strong>Rayuela</strong><small>Julio Cortázar</small>
+                                            <div class="barrita"><i style="width:63%"></i></div>
+                                            <span class="pagina">Pág. 380 de 600</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===============================================
+             MOSAICO: detalles de la interfaz
+             =============================================== -->
+        <section class="seccion" id="detalles">
+            <div class="contenedor">
+                <div class="seccion-cabeza aparece">
+                    <p class="eyebrow">Cada detalle cuenta</p>
+                    <h2>Diseñada como un objeto querido</h2>
+                    <p class="texto-secundario">Relieves suaves, filetes dorados y una paleta nocturna. Probá algunas piezas acá mismo.</p>
+                </div>
+
+                <div class="mosaico">
+                    <!-- Identidad -->
+                    <article class="tarjeta pieza pieza--ancha aparece">
+                        <p class="pieza-titulo">Paleta y tipografía</p>
+                        <div class="muestras">
+                            <div class="muestra"><i style="background:#27344a"></i><strong>Midnight Blue</strong>#27344A</div>
+                            <div class="muestra"><i style="background:#c19d5f"></i><strong>Brand Gold</strong>#C19D5F</div>
+                            <div class="muestra"><i style="background:#626b91"></i><strong>Twilight Blue</strong>#626B91</div>
+                            <div class="muestra"><i style="background:#a99bb8"></i><strong>Dusty Lavender</strong>#A99BB8</div>
+                            <div class="muestra"><i style="background:#f0e6d8"></i><strong>Moon Cream</strong>#F0E6D8</div>
+                        </div>
+                        <div class="tipos">
+                            <div class="tipo">
+                                <p class="tipo-nombre tipo-nombre--serif">Amarante</p>
+                                <small>Títulos</small>
+                                <p>Aa Bb Cc Dd Ee</p>
+                                <p>0123456789</p>
+                            </div>
+                            <div class="tipo">
+                                <p class="tipo-nombre tipo-nombre--sans">Montserrat</p>
+                                <small>Texto</small>
+                                <p>Aa Bb Cc Dd Ee</p>
+                                <p>0123456789</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Ánimo -->
+                    <article class="tarjeta pieza pieza--ancha aparece">
+                        <p class="pieza-titulo">Registro del ánimo</p>
+                        <h3>¿Cómo te sentís hoy?</h3>
+                        <p>Antes y después de cada sesión. Con el tiempo, tus gráficos muestran cómo la lectura cambia tu clima.</p>
+                        <div class="climas" role="radiogroup" aria-label="Probá el selector de ánimo">
+                            <button type="button" class="opcion" role="radio" aria-checked="false" data-clima="Tormenta">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16.33A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.97"/><path d="m13 12-3 5h4l-3 5"/></svg>
+                                Tormenta
+                            </button>
+                            <button type="button" class="opcion" role="radio" aria-checked="false" data-clima="Nublado">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.9A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 0 1 2.5 8.2"/><path d="M16 14v6M8 14v6M12 16v6"/></svg>
+                                Nublado
+                            </button>
+                            <button type="button" class="opcion" role="radio" aria-checked="false" data-clima="Calma">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+                                Calma
+                            </button>
+                            <button type="button" class="opcion" role="radio" aria-checked="true" data-clima="Luminoso">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v2M4.93 4.93l1.41 1.41M20 12h2M19.07 4.93l-1.41 1.41M15.95 12.65a4 4 0 0 0-5.93-4.61"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/></svg>
+                                Luminoso
+                            </button>
+                            <button type="button" class="opcion" role="radio" aria-checked="false" data-clima="Radiante">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                                Radiante
+                            </button>
+                        </div>
+                        <p class="animo-respuesta" aria-live="polite">Hoy te sentís <strong id="clima-elegido">Luminoso</strong></p>
+                    </article>
+
+                    <!-- Reproductor de ambiente -->
+                    <article class="tarjeta pieza pieza--oscura aparece" id="reproductor">
+                        <p class="pieza-titulo">Microambientes</p>
+                        <div class="reproductor">
+                            <div>
+                                <h3>Lluvia</h3>
+                                <small>Gotas sobre la ventana</small>
+                            </div>
+                            <button type="button" class="reproducir" aria-pressed="false" aria-label="Reproducir ambiente de lluvia (demostración visual)">
+                                <svg class="icono-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5Z"/></svg>
+                                <svg class="icono-pausa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+                            </button>
+                        </div>
+                        <div class="onda" aria-hidden="true"></div>
+                    </article>
+
+                    <!-- Atenuación -->
+                    <article class="tarjeta pieza aparece">
+                        <p class="pieza-titulo">Atenuación</p>
+                        <h3>Descanso visual</h3>
+                        <div class="vista-atenuada" id="vista-atenuada">
+                            <svg class="escena" aria-hidden="true"><use href="#escena-libro" /></svg>
+                        </div>
+                        <label for="atenuacion" class="texto-secundario" style="font-size:0.75rem">Brillo durante la sesión</label>
+                        <input type="range" class="deslizador" id="atenuacion" min="0" max="80" value="30" />
+                    </article>
+
+                    <!-- Duración -->
+                    <article class="tarjeta pieza aparece">
+                        <p class="pieza-titulo">Focus Timer</p>
+                        <h3>¿Cuánto vas a leer?</h3>
+                        <div class="duraciones" role="radiogroup" aria-label="Duración de la sesión">
+                            <button type="button" class="opcion" role="radio" aria-checked="false" data-min="15">15</button>
+                            <button type="button" class="opcion" role="radio" aria-checked="true" data-min="25">25</button>
+                            <button type="button" class="opcion" role="radio" aria-checked="false" data-min="45">45</button>
+                            <button type="button" class="opcion" role="radio" aria-checked="false" data-min="60">60</button>
+                        </div>
+                        <p class="reloj-mini" id="reloj-mini" aria-live="polite">25:00</p>
+                    </article>
+
+                    <!-- Cita -->
+                    <article class="tarjeta pieza pieza--cita aparece">
+                        <svg class="escena" aria-hidden="true"><use href="#escena-hojas" /></svg>
+                        <blockquote>Siempre imaginé que el Paraíso sería algún tipo de biblioteca.</blockquote>
+                        <cite>Jorge Luis Borges</cite>
+                    </article>
+
+                    <!-- Ilustraciones -->
+                    <article class="tarjeta pieza pieza--ilustraciones aparece">
+                        <p class="pieza-titulo">Ilustraciones</p>
+                        <div class="ilustraciones">
+                            <figure class="ilustracion" style="margin:0">
+                                <svg class="escena" aria-hidden="true"><use href="#escena-noche" /></svg>
+                                <figcaption>Noche</figcaption>
+                            </figure>
+                            <figure class="ilustracion" style="margin:0">
+                                <svg class="escena" aria-hidden="true"><use href="#escena-alba" /></svg>
+                                <figcaption style="color:#27344a;text-shadow:none">Alba</figcaption>
+                            </figure>
+                            <figure class="ilustracion" style="margin:0">
+                                <svg class="escena" aria-hidden="true"><use href="#escena-bosque" /></svg>
+                                <figcaption>Bosque</figcaption>
+                            </figure>
+                            <figure class="ilustracion" style="margin:0">
+                                <svg class="escena" aria-hidden="true"><use href="#escena-libro" /></svg>
+                                <figcaption>Lectura</figcaption>
+                            </figure>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===============================================
+             FRANJA DE VALORES
+             =============================================== -->
+        <section class="contenedor" id="valores" aria-label="Por qué Libellus">
+            <div class="tarjeta valores aparece">
+                <div class="valor">
+                    <span class="valor-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span>
+                    <div><strong>Calma</strong><span>Lectura sin apuro</span></div>
+                </div>
+                <div class="valor">
+                    <span class="valor-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>
+                    <div><strong>Concentración</strong><span>Focus Timer y atenuación</span></div>
+                </div>
+                <div class="valor">
+                    <span class="valor-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/></svg></span>
+                    <div><strong>Bienestar</strong><span>Tu ánimo, día a día</span></div>
+                </div>
+                <div class="valor">
+                    <span class="valor-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 12l10 10 10-10Z"/></svg></span>
+                    <div><strong>Simplicidad</strong><span>Solo lo esencial</span></div>
+                </div>
+                <div class="valor">
+                    <span class="valor-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></span>
+                    <div><strong>Sin conexión</strong><span>Se instala como app</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===============================================
+             LLAMADO FINAL
+             =============================================== -->
+        <section class="seccion">
+            <div class="contenedor">
+                <div class="tarjeta llamado aparece">
+                    <svg class="escena" aria-hidden="true" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice"><use href="#escena-noche" /></svg>
+                    <svg class="llamado-logo" aria-hidden="true"><use href="#logo" /></svg>
+                    <h2>Tu próximo capítulo te espera</h2>
+                    <p>Entrá con tu cuenta de Google y armá tu santuario en un minuto. Es gratis.</p>
+                    <div class="hero-botones">
+                        <a href="/login" class="boton boton--dorado">Crear mi santuario</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pie">
+        <div class="contenedor">
+            <a href="#inicio" class="marca">
+                <span class="marca-sello"><svg aria-hidden="true"><use href="#logo" /></svg></span>
+                <span class="marca-nombre">Libellus</span>
+            </a>
+            <p>Santuario digital de lectura · © <span id="anio">2026</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Cambio de tema, guardado con la misma clave que usa la app
+        document.getElementById('tema').addEventListener('click', function () {
+            var oscuro = document.documentElement.classList.toggle('dark')
+            try {
+                var prefs = JSON.parse(localStorage.getItem('libellus:prefs') || '{}')
+                prefs.theme = oscuro ? 'dark' : 'light'
+                localStorage.setItem('libellus:prefs', JSON.stringify(prefs))
+            } catch (e) {}
+        })
+
+        // Grupos de opciones (ánimo y duración): marca la elegida
+        function grupo(selector, alElegir) {
+            var opciones = document.querySelectorAll(selector)
+            opciones.forEach(function (opcion) {
+                opcion.addEventListener('click', function () {
+                    opciones.forEach(function (o) { o.setAttribute('aria-checked', String(o === opcion)) })
+                    alElegir(opcion)
+                })
+            })
+        }
+
+        grupo('.climas .opcion', function (o) {
+            document.getElementById('clima-elegido').textContent = o.dataset.clima
+        })
+
+        grupo('.duraciones .opcion', function (o) {
+            document.getElementById('reloj-mini').textContent = o.dataset.min + ':00'
+        })
+
+        // Onda del reproductor
+        var onda = document.querySelector('.onda')
+        for (var i = 0; i < 32; i++) {
+            var barra = document.createElement('i')
+            barra.style.setProperty('--h', (25 + Math.abs(Math.sin(i * 0.7)) * 75) + '%')
+            barra.style.setProperty('--i', i)
+            onda.appendChild(barra)
+        }
+
+        var reproducir = document.querySelector('.reproducir')
+        reproducir.addEventListener('click', function () {
+            var sonando = reproducir.getAttribute('aria-pressed') !== 'true'
+            reproducir.setAttribute('aria-pressed', String(sonando))
+            document.getElementById('reproductor').classList.toggle('sonando', sonando)
+        })
+
+        // Atenuación: oscurece la vista previa
+        var atenuacion = document.getElementById('atenuacion')
+        var vista = document.getElementById('vista-atenuada')
+        atenuacion.addEventListener('input', function () {
+            vista.style.setProperty('--atenuacion', atenuacion.value / 100)
+        })
+
+        document.getElementById('anio').textContent = new Date().getFullYear()
+
+        // Aparición suave de las secciones al hacer scroll
+        var elementos = document.querySelectorAll('.aparece')
+        if ('IntersectionObserver' in window) {
+            var observador = new IntersectionObserver(function (entradas) {
+                entradas.forEach(function (e) {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible')
+                        observador.unobserve(e.target)
+                    }
+                })
+            }, { threshold: 0.1 })
+            elementos.forEach(function (el) { observador.observe(el) })
+        } else {
+            elementos.forEach(function (el) { el.classList.add('visible') })
+        }
+    </script>
+</body>
+</html>

@@ -55,15 +55,40 @@
     border-radius: var(--radio-pildora);
     font-size: var(--texto-sm);
     line-height: var(--texto-sm-interlineado);
-    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke;
+}
+
+/* Pieza en relieve 3D: chips y botones seleccionables de las páginas.
+   Se combina con .chip--activo para el estado "presionado". */
+.chip,
+.relieve {
+    border-color: transparent;
+    background-color: var(--card);
+    background-image: var(--volumen);
+    box-shadow: var(--relieve-boton);
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, box-shadow, transform;
     transition-duration: var(--transicion-duracion);
     transition-timing-function: var(--transicion-curva);
 }
 
-/* Chip (o cualquier botón) seleccionado */
-.chip--activo {
-    border-color: var(--gold);
+@media (hover: hover) {
+    .chip:hover,
+    .relieve:hover {
+        box-shadow: var(--relieve-flotante);
+    }
+}
+
+.chip:active,
+.relieve:active {
+    box-shadow: var(--relieve-presionado);
+}
+
+/* Chip (o cualquier botón) seleccionado: queda "presionado" */
+.chip--activo,
+.chip--activo:hover {
+    border-color: color-mix(in oklab, var(--gold) 40%, transparent);
     background-color: var(--dorado-suave);
+    background-image: none;
+    box-shadow: var(--relieve-hundido);
     color: var(--gold);
 }
 
@@ -77,6 +102,7 @@
     border-style: solid;
     border-radius: var(--radio-lg);
     background-color: var(--tarjeta-translucida);
+    box-shadow: var(--relieve-hundido);
 }
 
 /* Línea separadora entre los elementos de la lista */
@@ -106,4 +132,96 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+/* =========================================
+   FORMAS ORGÁNICAS DEL FONDO
+   =========================================
+   Manchas suaves con relieve, fijas detrás del contenido
+   (ver AppLayout.tsx). Solo decoran: aria-hidden y sin clics. */
+
+.formas-fondo {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.forma {
+    position: absolute;
+    display: block;
+    background-color: var(--background);
+    background-image: var(--volumen);
+    box-shadow:
+        -14px -14px 30px var(--neu-luz),
+        14px 14px 30px var(--neu-sombra);
+    animation: forma-respirar 18s ease-in-out infinite alternate;
+}
+
+/* Las formas grandes salen del fondo; la chica está hundida */
+.forma--1 {
+    top: -8rem;
+    right: -6rem;
+    width: 26rem;
+    height: 22rem;
+    border-radius: 62% 38% 55% 45% / 48% 60% 40% 52%;
+}
+
+.forma--2 {
+    bottom: -10rem;
+    left: -8rem;
+    width: 30rem;
+    height: 24rem;
+    border-radius: 45% 55% 40% 60% / 60% 45% 55% 40%;
+    animation-delay: -6s;
+}
+
+.forma--3 {
+    top: 40%;
+    right: -9rem;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 50%;
+    animation-delay: -12s;
+}
+
+.forma--4 {
+    bottom: 12%;
+    left: 30%;
+    width: 9rem;
+    height: 9rem;
+    border-radius: 50%;
+    background-image: none;
+    box-shadow:
+        inset 8px 8px 16px var(--neu-sombra),
+        inset -8px -8px 16px var(--neu-luz);
+    animation-delay: -3s;
+}
+
+@keyframes forma-respirar {
+    to {
+        transform: translate(1.5rem, -1rem) rotate(8deg) scale(1.05);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .forma {
+        animation: none;
+    }
+}
+
+/* =========================================
+   PANEL FLOTANTE
+   =========================================
+   Placa en relieve separada del borde de la pantalla:
+   menú lateral y barra inferior (ver AppLayout.tsx). */
+
+.panel-flotante {
+    border-radius: var(--radio-xl);
+    background-color: var(--sidebar);
+    background-image: var(--volumen);
+    box-shadow: var(--relieve-elevado);
+    -webkit-backdrop-filter: var(--vidrio);
+    backdrop-filter: var(--vidrio);
 }

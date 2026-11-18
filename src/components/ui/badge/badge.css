@@ -118,6 +118,15 @@
       text-decoration-line: underline;
     }
   }
+
+  /* Relieve 3D en los badges con fondo */
+  .ui-badge--variant-default,
+  .ui-badge--variant-secondary,
+  .ui-badge--variant-destructive,
+  .ui-badge--variant-outline {
+    background-image: var(--volumen);
+    box-shadow: var(--relieve-boton);
+  }
 }
 
 @property --tw-ring-color {

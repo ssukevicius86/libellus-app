@@ -48,6 +48,32 @@ export function readingStreak(sessions: ReadingSession[]): number {
   return streak
 }
 
+/** La racha más larga de días seguidos con lectura. */
+export function longestStreak(sessions: ReadingSession[]): number {
+  const days = [...minutesByDay(sessions).keys()].sort()
+  let best = 0
+  let current = 0
+  let prev: Date | null = null
+  for (const key of days) {
+    const [y, m, d] = key.split('-').map(Number)
+    const date = new Date(y, m - 1, d)
+    const next = prev && new Date(prev.getFullYear(), prev.getMonth(), prev.getDate() + 1)
+    current = next && dayKey(next) === key ? current + 1 : 1
+    best = Math.max(best, current)
+    prev = date
+  }
+  return best
+}
+
+/** Ánimo promedio antes y después de leer, solo en sesiones que registraron ambos. */
+export function moodShift(sessions: ReadingSession[]) {
+  const both = sessions.filter((s) => s.moodBefore != null && s.moodAfter != null)
+  if (!both.length) return null
+  const avg = (key: 'moodBefore' | 'moodAfter') =>
+    both.reduce((sum, s) => sum + (s[key] as number), 0) / both.length
+  return { before: avg('moodBefore'), after: avg('moodAfter'), count: both.length }
+}
+
 export function minutesLastDays(sessions: ReadingSession[], n = 7): number {
   const minutes = minutesByDay(sessions)
   return lastDays(n).reduce((sum, d) => sum + (minutes.get(dayKey(d)) ?? 0), 0)

@@ -30,7 +30,8 @@
     border-style: solid;
     background-color: var(--background);
     padding: var(--espacio-6);
-    box-shadow: 0 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;
+    background-image: var(--volumen);
+    box-shadow: var(--relieve-elevado);
     border-width: 1px;
     outline-style: none;
     transition-duration: .2s;

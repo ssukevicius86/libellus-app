@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { Link } from 'react-router'
 import { authorsLabel, bookProgress, STATUS_LABELS, type Book } from '@/lib/books'
 import { cn } from '@/lib/utils'
-import { LotusIcon } from '@/components/deco'
+import { Isotipo } from '@/components/brand'
 import { Progress } from '@/components/ui/progress/progress'
 
 type CoverBook = Pick<Book, 'title' | 'authors' | 'coverUrl'>
@@ -27,7 +27,7 @@ export function BookCover({ book, className }: { book: CoverBook; className?: st
       ) : (
         <div className="flex size-full flex-col items-center justify-center gap-2 bg-gradient-to-b from-accent to-secondary p-2 text-center">
           <div className="absolute inset-1.5 rounded-sm border border-gold/40" />
-          <LotusIcon className="h-5 text-gold" />
+          <Isotipo label="" className="h-5" />
           <span className="line-clamp-4 font-serif text-sm leading-tight">{book.title}</span>
         </div>
       )}
